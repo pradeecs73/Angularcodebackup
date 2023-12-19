@@ -1,0 +1,66 @@
+
+<div class="ui-g table-wrapper" *ngIf="tabView === 'importFromFile'">
+    <table aria-describedby="uploadedXmlList" class="custom-table" >
+      <colgroup>
+        <col class="status-col">
+        <col class="device-name-col">
+        <col class="address-co">
+        <col class="file-col">
+        <col class="delete-col">
+      </colgroup>
+
+      <tr class="device-grid-header">
+        <!-- List of table cols -->
+        <ng-container *ngFor="let col of uploadFileTableColumns">
+          <th scope="col">{{col | translate}}</th>
+        </ng-container>
+      </tr>
+      <tr *ngFor="let device of deviceListInGrid;let i = index;" class="device-grid-body">
+
+        <!-- Show if fileList is empty with entire cols -->
+        <ng-container *ngIf="showNoDeviceData">
+          <td class="center" colspan="5">{{ i=== 0 ? ('devices.messages.emptyUploadFileList' | translate) : ''}}</td>
+        </ng-container>
+
+        <!-- Show if fileList is having data -->
+        <ng-container *ngIf="!showNoDeviceData">
+          <td [ngClass]="{'non-editable':  device && device?.deviceName}">
+            <span class="hide-ele">{{i}}</span>
+        
+            <i aria-hidden="true" *ngIf="device != null && !showNoDeviceData && device.isValid"
+              class="fa fa-check-circle device-grid-circle">
+            </i>
+            <!-- Show error-icon if xml file is corrupted -->
+            <i aria-hidden="true" *ngIf="device != null && !showNoDeviceData && !(device?.isValid)" 
+              class="show-error-icon fas fa-times-circle">
+            </i>
+          </td>
+          <!-- deviceName -->
+          <td>
+            <input type="text" [readonly]="(device === null)" aria-label="deviceName" class="no-outline"
+              [ngModel]="device?.deviceName" (ngModelChange)="device.deviceName=$event" />
+          </td>
+          <!-- device address -->
+          <td>
+            <input type="text" [readonly]="(device === null)" aria-label="deviceAddress" class="no-outline"
+              [ngModel]="device?.address" (change)="customValidationForAddress($event,i)"
+              (ngModelChange)="device.address=$event" />
+          </td>
+          <td [ngClass]="{'non-editable':  device && device?.deviceName}">
+            {{ device?.fileName ? device?.fileName:''}}
+          </td>
+          <!-- show delete icon if device data is present -->
+          <td class="center">
+            <i aria-hidden="true" 
+              *ngIf="device != null && !showNoDeviceData" 
+              class="fas fa-trash-alt device-grid-delete-icon"
+              (click)="deleteDeviceFromGrid(device)" 
+              onKeyDown="deleteDeviceFromGrid(device)">
+            </i>
+          </td>
+        
+        </ng-container>
+      </tr>
+
+    </table>
+  </div>

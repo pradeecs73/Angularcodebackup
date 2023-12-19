@@ -1,0 +1,62 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+
+
+<div class="interface-panel-sidebar">
+    <div class="interface-panel" [ngSwitch]="viewType">
+        <!-- Interface collapsed view -->
+        <div class="interface-panel--full" [hidden]="viewType===collapsedViewType">
+            <div class="interface-view-header">
+                <span class="interface-header-text">{{headerKey | translate}}</span>
+                <span class="interface-header-icon fas"
+                    [ngClass]="{'fa-chevron-left': (from === 'server'), 'fa-chevron-right': from === 'client'}"
+                    (click)="removeWidth(collapsedViewType)" (keydown)="viewType=collapsedViewType"></span>
+            </div>
+            <!-- Grid View -->
+
+
+            <div class="interface-panel-container">
+                <div class="p-g-12" id="interface-side-panel">
+                    <div class="grid-container-interface">
+                        <p-table id="p-custom-table" [value]="interfaceArray" class="grid-table" [columns]="cols"
+                            [reorderableColumns]="true">
+                            <ng-template pTemplate="header" let-columns>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
+                              <tr
+                              class="grid-item-interface"
+                              [pReorderableRow]="index"
+                              [disableIfUnauthorized]="accessControl.CAN_PROJECT_UPDATE"
+                              >
+                                    <td class="custom-grid"
+                                        [ngClass]="rowData && rowData !== interfaceLabel  ? 'bg-grey' : 'bg-white'"
+                                        *ngFor="let col of columns">
+                                        <span class="interface-label"
+                                            [ngClass]="(from === 'client') ? 'interface-client' : 'interface-server'"
+                                            pReorderableRowHandle>{{rowData
+                                            ?rowData[col.field] || rowData:''}}
+                                            <ng-container *ngIf="rowData && rowData !== interfaceLabel">
+                                                [{{generateDeviceName(rowData,from)}}]</ng-container>
+                                        </span>
+                                        <span
+                                            [ngClass]="(from === 'client')
+                                            ? 'interface-label-client' : 'interface-label-server'"
+                                            *ngIf="rowData" id="anchorID"></span>
+                                    </td>
+
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="interface-panel--collapsed" *ngSwitchCase="collapsedViewType">
+            <span class="interface-panel-collapsed-icon fas"
+                [ngClass]="{'fa-chevron-right': (from === 'server'), 'fa-chevron-left': from === 'client'}"
+                (click)="removeWidth(expandedViewType)" (keydown)="viewType=expandedViewType;"></span>
+            <div class="interface-panel-collapsed-text">
+                <div>{{headerKey | translate}}</div>
+            </div>
+        </div>
+    </div>
+</div>

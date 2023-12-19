@@ -1,0 +1,30 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+<div class="device-panel">
+    <div class="device-panel--bar">
+        <!-- Conditional Showing the device detail based on user Selection -->
+        <span *ngIf="!selectedDeviceData">{{'devices.messages.noDevicesSelected' | translate}}</span>
+        <span *ngIf="selectedDeviceData">{{'devices.messages.selectedDeviceInfo' | translate}}</span>
+
+    </div>
+    <!-- Device property based on user selection on right sidebar column -->
+    <span *ngIf="selectedDeviceData">
+        <div class="device-panel--body">
+            <!-- Table which is used to display deviceset data -->
+            <p-table [value]="deviceData">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th id="property">{{'devices.titles.property' | translate}}</th>
+                        <th id="value">{{'devices.titles.value' | translate}}</th>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-device>
+                    <tr>
+                        <td>{{device.property}}</td>
+                        <td title="{{device.value}}">{{device.value  | ellipsis : twenty}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </span>
+</div>

@@ -1,0 +1,113 @@
+
+
+<form>
+    <div class="security-settings-main">
+      <div class="outerdivsecurity">
+        <div class="grid">
+             <div class="col-12 pageheader">
+                <span>{{'setting.securitySetting.message.accessProtection' | translate}}</span>
+              </div>
+
+             <div class="col-4">
+             </div>
+             <div class="col-8 pb-5">
+              <input
+                type="checkbox"
+                class="checkProtection"
+                id="checkProtection"
+                [disableIfUnauthorized]="accessControl.CAN_PROJECT_UPDATE"
+                name="checkProtection"
+                [(ngModel)]="checkProtection"
+                (ngModelChange)="openWritePasswordPopup()"
+              />
+              <label for="checkProtection"
+                >{{'setting.securitySetting.message.enableAccessProtection' |
+                translate}}</label
+              >
+            </div>
+              <div class="col-4">
+                <label for="writepassoword">{{'setting.securitySetting.titles.passwordwriteAccess' | translate}}</label>
+              </div>
+              <div class="col-8 pb-2 textInputDiv">
+                <input class="textInput form-control" id="writepassoword" [(ngModel)]="writePassword" type="password"
+                name="writePassword" disabled/>
+              </div>
+              <div class="col-offset-8">
+              </div>
+              <div class="col-4 writePasswordBtn pb-5">
+                <button
+                  type="button"
+                  class="disable_writePasswordBtn"
+                  *ngIf="!writePassword"
+                  [disableIfUnauthorized]="accessControl.CAN_PROJECT_UPDATE"
+                >
+                  {{'setting.securitySetting.buttons.setupwritePassword' | translate}}
+                </button>
+                <button
+                  type="button"
+                  class="btn"
+                  (click)="openChangeWritePasswordPopup()"
+                  [disableIfUnauthorized]="accessControl.CAN_PROJECT_UPDATE"
+                  *ngIf="writePassword"
+                >
+                  {{'setting.securitySetting.buttons.changewritePassword' |
+                  translate}}
+                </button>
+              </div>
+
+              <div class="col-4">
+                <label for="readPassword">{{'setting.securitySetting.titles.passwordreadAccess' | translate}}</label>
+              </div>
+              <div class="col-8 pb-2 textInputDiv">
+                <input class="textInput form-control" id="readPassword" [(ngModel)]="readPassword" type="password"
+                name="readPassword" disabled/>
+              </div>
+              <div class="col-offset-4">
+              </div>
+              <div class="col-8 readPasswordBtn">
+                <button
+                  type="button"
+                  [ngClass]="readPassword== ''?'disable_writePasswordBtn':'btn'"
+                  (click)="removePassword('removeReadPassword')"
+                  [disableIfUnauthorized]="accessControl.CAN_PROJECT_UPDATE"
+                >
+                  {{'setting.securitySetting.buttons.removeReadPassword' | translate}}</button
+                >&nbsp;&nbsp;
+                <button
+                  type="button"
+                  (click)="openReadPasswordPopup()"
+                  [ngClass]="writePassword == ''?'disable_writePasswordBtn':'btn'"
+                  *ngIf="!readPassword"
+                  [disableIfUnauthorized]="accessControl.CAN_PROJECT_UPDATE"
+                >
+                  {{'setting.securitySetting.buttons.setupreadPassword' | translate}}</button
+                >&nbsp;&nbsp;
+                <button
+                  type="button"
+                  class="btn"
+                  (click)="openChangeReadPasswordPopup()"
+                  *ngIf="readPassword"
+                  [disableIfUnauthorized]="accessControl.CAN_PROJECT_UPDATE"
+                >
+                  {{'setting.securitySetting.buttons.changereadPassword' | translate}}
+                </button>
+              </div>
+
+          </div>
+          <app-form-dialog
+          *ngIf="passwordValidationModalDisplay"
+          id="passwordValidationModal"
+          [show]="passwordValidationModalDisplay"
+          (onHide)="passwordValidationModalDisplay = false;clear()"
+          [component]="'password-validation'"
+          (onEventSucess)="passwordValidationModalDisplay = false"
+          (onCustomEvent)="removePasswordProtect($event.value.passwordText)"
+          [inputs]="openRemovePasswordInput"></app-form-dialog>
+            <app-form-dialog id="securitydialogue" *ngIf="passwordModalDisplay" [show]="passwordModalDisplay"
+            (onHide)="close()" [component]="'write-password'" [inputs]="passwordType"
+            (onEventSucess)="setPassword($event)" #fdComponent></app-form-dialog>
+
+        </div>
+      </div>
+
+   </form>

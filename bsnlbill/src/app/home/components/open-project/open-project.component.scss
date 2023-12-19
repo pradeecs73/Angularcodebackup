@@ -1,0 +1,267 @@
+/* ------------------------------------------------------------------------ */
+/* Copyright © Siemens AG 2021-2021. All rights reserved. Confidential.     */
+/* ------------------------------------------------------------------------ */
+@import "variables";
+@import "icon";
+
+.open-project {
+  &__container {
+    display: flex;
+    justify-content: flex-start;
+
+    .projectCard {
+      position: relative;
+      display: inline-block;
+      padding: 1.6rem;
+
+      .selected {
+        .card {
+          color: #333333;
+          box-shadow: 0 1px 3px 0 rgb(50, 92, 122),
+            0 1px 1px 0 rgb(50, 92, 122),
+            0 2px 1px -1px rgb(50, 92, 122);
+        }
+      }
+    }
+    .p-menu{
+      width: 16.5rem;
+      font-size: 14px;
+    }
+  }
+}
+
+$card-padding: 1.5rem;
+
+body .card {
+  width: 36rem;
+  background-color: #f1f1f1;
+  font-family: "Siemens Sans Global";
+
+  .p-card-body {
+    padding: 0;
+  }
+
+  //card header
+  &__header {
+    font-size: 1.6rem;
+    display: flex;
+    padding: $card-padding;
+    background-color: #fff;
+
+    span {
+      padding: 0 .5rem;
+    }
+    &--icon{
+       width :10%;
+    }
+    & .fa-pen {
+      &.disabled {
+         cursor: not-allowed;
+         opacity: 0.5;
+      }
+    }
+    &--title
+    {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      width: 70%;
+    }
+
+    &--controls {
+      display: inline-block;
+      margin-left: auto;
+      width: 20%;
+    }
+
+  }
+
+  //card body
+  &__body {
+
+    padding: $card-padding;
+    height: 110px;
+    &.protected {
+      background-color: $color-bg-light-gray;
+      color:$color-bg-white;
+    }
+    ul {
+      list-style: none;
+
+      li {
+        text-decoration: none;
+        font-size: 14px;
+
+        .card-item {
+          display: flex;
+          text-align:left ;
+        }
+        .label{
+           width:40%;
+           text-overflow: ellipsis;
+           overflow: hidden;
+           font-weight: 100;
+        }
+        .value{
+          width:60%;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+
+  //card footer
+  &__footer {
+    padding: $card-padding;
+    background-color: #fff;
+    font-size: 1.6rem;
+    display: flex;
+
+    .save__project {
+      margin-left: auto;
+      &.disabled{
+        @include disabled-save-button
+      }
+    }
+
+    .outline-btn {
+      text-decoration: none;
+      color :#ffffff;
+      background-color: $color-interaction-blue;
+      padding: .5rem 1rem;
+      border: solid .1rem;
+      border-radius: 5%;
+
+      .text {
+        margin-left: .5rem;
+        margin-left: 0.6rem;
+        margin-top: 0.1rem;
+        font-size: 1.6rem;
+      }
+
+      &:focus {
+        outline: 0 none;
+        outline-offset: 0;
+        box-shadow: 0 0 0 0.2rem #a6d5fa;
+      }
+
+      .save-project{
+        
+        &::before {
+          content: url("/../../../assets/icons/SaveScreen_16er.svg");
+          filter: invert(1);
+          margin-left: 1.9rem;
+          height: 2.4rem;
+        }
+    }
+  }
+  }
+  .disabled-save-button
+  {
+     @include disabled-save-button;
+  }
+}
+
+.p-card .p-card-content{
+  padding : 0;
+}
+
+.p-card .p-card-footer{
+  padding : 0;
+}
+
+@media only screen and (min-width:565px){
+  .menu-class
+  {
+      position: inherit;
+      left: -5px;
+      top: 0px;
+  }
+  }
+
+@media only screen and (max-width: 565px) and (min-width: 500px)  {
+  .menu-class
+  {
+    position: inherit;
+    left: -5px;
+    top: 0px;
+  }
+}
+
+.export-icon {
+  &::before {
+    // content: url("/../../../assets/icons/online.svg");
+    content: url("/../../../assets/icons/ExportProject_16er.svg");
+  }
+}
+
+.dot {
+  color: $color-interaction-blue;
+}
+
+.dot:hover{
+
+  background-color: $color-interaction-blue;
+  color: #ffffff;
+  cursor: pointer;
+
+}
+
+.pen {
+  color: $color-interaction-blue;
+}
+
+.pen:hover{
+
+  background-color: $color-interaction-blue;
+  color: #ffffff;
+  cursor: pointer;
+
+}
+
+
+.close-icon {
+    &::before {
+      // content: url("/../../../assets/icons/online.svg");
+      content: url("/../../../assets/icons/CloseProject_16er.svg");
+    }
+  }
+
+  .saveas-icon {
+    &::before {
+      // content: url("/../../../assets/icons/online.svg");
+      content: url("/../../../assets/icons/SaveScreen_16er.svg");
+    }
+  }
+
+body .p-dialog .p-dialog-titlebar,
+body .p-dialog .p-dialog-footer {
+    background: $color-colarea1-gray;
+}
+
+body .p-dialog .p-dialog-content {
+    i {
+        color: $color-warning;
+    }
+}
+
+body .p-dialog .p-dialog-footer {
+    .p-confirmdialog-rejectbutton,
+    .p-confirmdialog-acceptbutton {
+        background: $color-interaction-blue;
+        color: #fff;
+
+        &:hover {
+            background: $color-interaction-blue-hover;
+            color: #fff;
+        }
+
+        &:focus {
+            box-shadow: none;
+        }
+    }
+}
+
+.download-icon{
+  display:none;
+}

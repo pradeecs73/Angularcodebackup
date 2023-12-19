@@ -1,0 +1,35 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+
+
+<app-layout></app-layout>
+
+<app-overlay *ngIf="showOverlayDialog"
+[message]="facadeService.overlayService.message"
+[header]="facadeService.overlayService.header"
+[type]="facadeService.overlayService.type"
+[successLabel]="facadeService.overlayService.successLabel"
+[optionalLabel]="facadeService.overlayService.optionalLabel"
+[cancelLabel]="facadeService.overlayService.cancelLabel"
+[acceptCallBack]="facadeService.overlayService.acceptCallBack"
+[closeCallBack]="facadeService.overlayService.closeCallBack"
+[optionalCallBack]="facadeService.overlayService.optionalCallBack"
+[cancelCallBack]="facadeService.overlayService.cancelCallBack"
+[enableCancelButton]="facadeService.overlayService.enableCancelButton"
+[enableCloseButton]="facadeService.overlayService.enableCloseButton"
+[prolongedText]="facadeService.overlayService.prolongedText"
+>
+</app-overlay>
+
+<p-toast position="top-right" styleClass="custom-toast" key="errBrowseDevices"></p-toast>
+<p-toast position="top-right" styleClass="custom-toast" key="errNodeServer"></p-toast>
+<p-toast position="top-right" styleClass="custom-toast" key="genericExceptionHandling"></p-toast>
+<p-toast position="top-right" styleClass="custom-toast" key="proposedConSelectValidation"></p-toast>
+<p-toast position="top-right" styleClass="custom-toast" key="noProposedConnectionPossibility"></p-toast>
+<p-toast position="top-right" styleClass="custom-toast" key="errProjectLoad"></p-toast>
+<p-toast position="top-right" key="saveSettings"></p-toast>
+<p-toast position="top-right" key="saveProject"></p-toast>
+<p-toast position="top-right" key="commonError"></p-toast>
+<p-toast position="top-right" key="updateProject"></p-toast>
+<p-toast position="top-right" key="closeProject"></p-toast>
+<p-toast position="top-right" key="closeConnection"></p-toast>
+<p-toast position="top-right" key="commonError"></p-toast>

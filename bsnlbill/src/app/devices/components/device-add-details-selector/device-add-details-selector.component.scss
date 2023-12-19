@@ -1,0 +1,177 @@
+/* ------------------------------------------------------------------------ */
+/* Copyright © Siemens AG 2021-2021. All rights reserved. Confidential.     */
+/* ------------------------------------------------------------------------ */
+@import "variables";
+.add-details-string {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.label {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.err-span
+{
+    border: 1px solid $color-cell-error;
+    background-color: $color-cell-error2;
+    width: max-content;
+    display: inline-flex;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 14px;
+    font-size: 13px;
+    border-radius: 5px;
+    margin-top: 3px;
+    span
+    {
+        &:first-child
+        {
+            line-height: 3;
+            i{
+                color: $color-cell-error;
+                font-size: 15px;
+            }
+        }
+        &:nth-child(2)
+        {
+            padding-left: 10px;
+            p {
+                &:first-child
+                {
+                    font-weight: bold;
+                }
+                &:nth-child(2)
+                {
+                    font-weight: 400;
+                }
+            }
+        }
+        &:nth-child(3)
+        {
+            float: right;
+            &:hover
+            {
+                cursor: pointer;
+            }
+            i {
+                font-size: 14px;
+            }
+        }
+    }
+
+}
+
+.error-cursor
+{
+    cursor :not-allowed;
+}
+
+.button-inline-display {
+    display: inline;
+
+    .button-next-container {
+        padding-right: 43rem;
+
+        .button-next {
+            font-size: 14px;
+            border: #2782a1;
+            background-color: #2782a1;
+            width: 100px;
+            height: 30px;
+            text-align: center;
+            padding-top: 7px;
+            color: white;
+            border-radius: 2.5px;
+
+        }
+        .button-next:hover {
+            cursor: pointer;
+        }
+        .button-disable{
+            background-color: #a6aeb1;
+        }
+    }
+}
+
+.device-grid-body {
+
+    //Styling for the grid where the device data will be displayed (Address, Name, Vendor)
+    .grid-container-device {
+        display: grid;
+        grid-template-rows: 25px;
+        grid-template-columns: 7.14% 85.72% 7.14%;
+        background-color: white;
+    }
+
+    //Styling for the device description
+    .device-description {
+        padding-bottom: 10px;
+    }
+
+    .grid-item-device {
+        border-bottom: 2px solid rgb(228, 228, 235);
+        //padding-bottom: 20px;
+        align-items: center;
+        align-content: center;
+        padding-top: 8px;
+        font-size: 11px;
+    }
+
+    .grid-item-device-icon {
+        border-bottom: 2px solid rgb(228, 228, 235);
+        border-left: 2px solid rgb(228, 228, 235);
+        padding-left: 5px;
+        padding-top: 7px;
+        font-size: 12px;
+    }
+    .padding-0 {
+        padding: 0;
+    }
+    .grid-item-device-delete {
+        border-bottom: 2px solid rgb(228, 228, 235);
+        border-right: 2px solid rgb(228, 228, 235);
+        padding-left: 5px;
+        padding-top: 8px;
+        font-size: 11px;
+    }
+    .grid-item-device-delete:hover {
+        cursor: pointer;
+    }
+}
+
+.device-grid-header {
+    background-color: #e8f1f1;
+    width: 100%;
+    border: 2px solid rgb(228, 228, 235);
+    height: 25px;
+    padding-top: 5px;
+    padding-left: 30px;
+    font-weight: bold;
+}
+
+.device-grid-circle{
+    color:$color-success;
+    .circle{
+        margin-left: 14px;
+    }
+}
+.device-grid-delete-icon{
+    color:$color-trash;
+}
+
+.hide-grid {
+    visibility: hidden;
+}
+
+.locked {
+    content: url("../../../../assets/icons/LockLocked.svg");
+    filter: invert(49%) sepia(9%) saturate(3557%) hue-rotate(149deg) brightness(87%) contrast(83%);
+}
+
+.disabled-row {
+    padding: 2px 0 0 4px;
+    content: url('../../../../assets/icons/Warning_16er.svg');
+    filter: invert(70%) sepia(85%) saturate(1869%) hue-rotate(0deg) brightness(104%) contrast(105%);
+}

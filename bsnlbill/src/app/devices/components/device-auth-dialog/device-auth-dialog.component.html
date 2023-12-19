@@ -1,0 +1,84 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+<div id="device-login-auth">
+    <div class="ui-g outerdiv">
+        <div class="grid p-20">
+            <div class="col-1" *ngIf="deviceDetails?.multipleDevices">
+                <div class="icon-info">
+                    <span class="info-content h-30"></span>
+                </div>
+            </div>
+            <div class="col-11" *ngIf="deviceDetails?.multipleDevices">
+                <div class="sub-info">
+                    {{'devices.messages.deviceAuthentication.addingDevice' 
+                    | translate : 
+                    {index: deviceDetails.index, noOfProtectedDevices: deviceDetails.noOfProtectedDevices} }}
+                </div>
+                <div class="sub-info-1">
+                    {{'devices.messages.deviceAuthentication.addedDevice' 
+                    | translate : 
+                    {authenticatedCount: deviceDetails.authenticatedCount, 
+                    noOfProtectedDevices: deviceDetails.noOfProtectedDevices} }}
+                </div>
+            </div>
+            <div class="ui-g-12">
+                <form [formGroup]="loginForm">
+                    <div class="grid outerdiv p-10">
+                        <div class="col-12">
+                            <div>
+                                <p class="info-label"> 
+                                {{'devices.messages.deviceAuthentication.needsAuthentication' 
+                                | translate : {deviceName:deviceName, ipAddr: ipAddr} }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="grid pb-4">
+                                <label class="col-5" for="username">{{'common.titles.userName' | translate}}</label>
+                                <div class="col-7">
+                                    <input class="textInput form-control" formControlName="userName" id="username"
+                                        type="text" name="username" (keyup.enter)="loginForm.valid ? loginAuth(): ''" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="grid pb-4">
+                                <label class="col-5" for="password">{{'common.titles.password' | translate}}</label>
+                                <div class="col-7">
+                                    <input class="textInput form-control" formControlName="password" id="password"
+                                        type="password" name="password"  
+                                        (keyup.enter)="loginForm.valid ? loginAuth(): ''"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="footer-buttons">
+                                <button type="button" 
+                                class="btn ski" 
+                                (click)="skipDeviceEmitter();" 
+                                *ngIf="deviceDetails?.multipleDevices">
+                                   {{'common.buttons.skipDevice' | translate}}
+                                </button>
+                                <button type="button" class="btn login" id="login"
+                                    (click)="loginAuth()" [disabled]="loginForm.invalid"
+                                    [ngClass]="loginForm.invalid ? 'login-disabled':''">
+                                    {{'common.buttons.login' | translate}}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <p-footer>
+        <div class="footer-toolbar">
+            <ng-container>
+                <p-toolbar styleClass="footer">
+                    <button type="button" class="btn-cancel" id="cancel" (click)="cancel();">
+                        {{'common.buttons.cancel' | translate}}
+                    </button>
+                </p-toolbar>
+            </ng-container>
+        </div>
+    </p-footer>
+</div>

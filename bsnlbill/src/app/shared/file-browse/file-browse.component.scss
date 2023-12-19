@@ -1,0 +1,109 @@
+/* ------------------------------------------------------------------------ */
+/* Copyright © Siemens AG 2021-2021. All rights reserved. Confidential.     */
+/* ------------------------------------------------------------------------ */
+.file-browse-container {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    border-radius: 4px;
+}
+.file-browse-container > div{
+    display: inline-flex;
+    width: -webkit-fill-available;
+}
+input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: black;
+    opacity: .2; /* Firefox */
+  }
+
+.file-browser-zero-width {
+    height: 0px;
+    width: 0px;
+    visibility: hidden;
+}
+
+// .fullWidth {
+//     width: 100%;
+// }
+
+// .file-browser-field {
+//     width: 75%;
+// }
+
+// .file-browser-button {
+//     widows: 25%;
+// }
+
+// th {
+//     padding: 0;
+// }
+
+// .browse-input-text:disabled , .browse-input-text:read-only /* For Chrome, Edge*/
+// {
+//   white-space: nowrap;
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+// }
+// .browse-input-text:disabled ,.browse-input-text:-moz-read-only /* For Mozilla */
+// {
+//   white-space: nowrap;
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+// }
+// .text-enabled-background {
+//     background-color: white !important;
+// }
+.textInput
+{
+    border: #0F789B 1.5px solid;
+    border-radius: 1.4px;
+    outline: none;
+    cursor: pointer;
+}
+.browse-btn {
+    background-color: white;
+    padding-left: 3px;
+    padding-right: 3px;
+    text-align: center;
+    display: inline-flex;
+    align-content: center;
+    width: max-content;
+    height: 100%;
+    -webkit-text-security: disc;
+    color: #0F789B;
+    border: #0F789B 1.4px solid;
+    border-radius: 1px;
+    border-left-style: unset;
+    outline: none;
+    cursor: pointer;
+}
+// .browse-btn:hover
+// {
+//     background-color: #ebf0f5;
+// }
+
+// .browse-btn:disabled
+// {
+//     background-color: #becdd7;
+//     pointer-events: none !important;
+// }
+
+// div[tabindex]:focus {
+//     outline: 0px solid transparent;
+//     box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);/* #697882;*/
+//     border-color: #80bdff;
+// }
+// .div-border:hover,.div-border:focus
+// {
+//   box-shadow: 0 0 0 0.17rem #879baa !important;/* #697882;*/
+//   cursor: text !important;
+//   border: none !important;
+//   outline: none !important;
+//   cursor: text !important;
+// }
+// .browse-btn:focus,.browse-input-text:focus
+// {
+//     border: 1px solid #ced4da !important;
+//     outline: 0px solid transparent !important;
+//     box-shadow: none !important;
+// }

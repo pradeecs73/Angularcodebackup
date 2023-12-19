@@ -1,0 +1,49 @@
+<div id="add-project-protection-container">
+    <div class="ui-g outerdiv">
+        <div class="grid pad-5">
+            <div class="col-1">
+                <div class="icon-info">
+                    <span class="info-content h-30"></span>
+                </div>
+            </div>
+            <div class="col-11">
+                <div class="sub-info">
+                    {{'devices.messages.protectProject.protectedProject' | translate}}
+                </div>
+                <div class="sub-info-1">
+                    {{'devices.messages.protectProject.addDevices' | translate}}
+                </div>
+            </div>
+            <div class="ui-g-12">
+                <div class="grid outerdiv p-10">
+                    <div class="col-12">
+                        <div>
+                            <p class="info-label">{{'devices.messages.protectProject.writeAccess' | translate}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <app-password-popup [isFromProtectProject]="true" [mode]="writeAccess"
+                            (formValueChanges)="formEvent($event, writeAccess)">
+                        </app-password-popup>
+                    </div>
+                </div>
+                <div>
+                    <p-accordion>
+                        <p-accordionTab header="{{'devices.messages.protectProject.readAccess' | translate}}">
+                            <app-password-popup [isFromProtectProject]="true" [mode]="readAccess"
+                                (formValueChanges)="formEvent($event, readAccess)"></app-password-popup>
+                        </p-accordionTab>
+                    </p-accordion>
+                </div>
+                <div *ngIf="errorMessage" class="err-msg">
+                    <i aria-hidden="true" class="fas fa-times-circle"></i>
+                     {{ errorMessage }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <app-settings-popup-footer [formgroups]="passwordFormGroups" (formSubmit)="protectProject($event)"
+        (closePopup)="cancel()"></app-settings-popup-footer>
+</div>

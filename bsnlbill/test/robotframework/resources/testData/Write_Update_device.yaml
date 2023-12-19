@@ -1,0 +1,167 @@
+project:
+  id: ljiiuelg
+  name: Write_Update_Device
+  comment: ''
+  author: ''
+  created: 6/30/2023, 5:29:13 PM
+  modified: 6/30/2023, 5:30:34 PM
+  modifiedby: ''
+  isProtected: true
+  AppVersion: '1.0'
+tree:
+  devices:
+    - name: BottleFilling
+      uid: 7b6c1224-2aaf-42b8-bd30-b4b6cb820e48
+      address: opc.tcp://192.168.2.101:4840
+      isDeviceAuthRequired: false
+      isProtected: false
+      automationComponents:
+        - name: BottleFilling
+          clientInterfaces:
+            - name: FillingToMixing
+              type: FillToMix_Type
+              properties:
+                - name: InputData
+                  type: ''
+                  children:
+                    - name: Start
+                      type: Boolean
+                    - name: Stop
+                      type: Boolean
+                    - name: Hold
+                      type: Boolean
+                    - name: AmountLiquid
+                      type: Double
+                    - name: Error
+                      type: Boolean
+                    - name: Status
+                      type: UInt16
+                - name: OutputData
+                  type: ''
+                  children:
+                    - name: Running
+                      type: Boolean
+                    - name: Stopped
+                      type: Boolean
+                    - name: Held
+                      type: Boolean
+                    - name: Error
+                      type: Boolean
+                    - name: Status
+                      type: UInt16
+                    - name: FaultyBottles
+                      type: UInt32
+              isClientInterface: true
+              connectionEndPointDetails:
+                detailStatus:
+                  name: DetailedStatus
+                  value: ' '
+                  type: ''
+                relatedEndpoints:
+                  name: RelatedEndpoint
+                  value:
+                    address: ''
+                    functionalEntity: ''
+                    automationComponent: ''
+                  type: ''
+                status:
+                  name: Status
+                  value: false
+                  type: ''
+              id: clientInf_ljiivu0f
+            - name: FillingToWashing2
+              type: FillToWash2_Type
+              properties:
+                - name: InputData
+                  type: ''
+                  children:
+                    - name: Start
+                      type: Boolean
+                    - name: Hold
+                      type: Boolean
+                    - name: Stop
+                      type: Boolean
+                    - name: Speed
+                      type: UInt32
+                    - name: NumberBottles
+                      type: UInt32
+                    - name: FaultyBottles
+                      type: UInt32
+                    - name: Error
+                      type: Boolean
+                    - name: Status
+                      type: Boolean
+                - name: OutputData
+                  type: ''
+                  children:
+                    - name: Running
+                      type: Boolean
+                    - name: Stopped
+                      type: Boolean
+                    - name: Held
+                      type: Boolean
+                    - name: Error
+                      type: Boolean
+                    - name: Status
+                      type: UInt16
+              isClientInterface: true
+              connectionEndPointDetails:
+                detailStatus:
+                  name: DetailedStatus
+                  value: ' '
+                  type: ''
+                relatedEndpoints:
+                  name: RelatedEndpoint
+                  value:
+                    address: ''
+                    functionalEntity: ''
+                    automationComponent: ''
+                  type: ''
+                status:
+                  name: Status
+                  value: false
+                  type: ''
+              id: clientInf_ljiivu0g
+          serverInterfaces: []
+          address: opc.tcp://192.168.2.101:4840
+          deviceId: 7b6c1224-2aaf-42b8-bd30-b4b6cb820e48
+          deviceName: BottleFilling
+          id: 7b6c1224-2aaf-42b8-bd30-b4b6cb820e48_Qm90dGxlRmlsbGluZw==
+      deviceSet:
+        - name: DeviceRevision
+          type: String
+          value: 6ES7 511-1AK02-0AB0  V02.09.00
+        - name: EngineeringRevision
+          type: String
+          value: V17
+        - name: HardwareRevision
+          type: String
+          value: '0'
+        - name: Manufacturer
+          type: LocalizedText
+          value: locale=null text=Siemens AG
+        - name: Model
+          type: LocalizedText
+          value: locale=null text=CPU 1511-1 PN
+        - name: OrderNumber
+          type: String
+          value: '6ES7 511-1AK02-0AB0 '
+        - name: RevisionCounter
+          type: Int32
+          value: -1
+        - name: SerialNumber
+          type: String
+          value: 10S C-0KR5537410
+      adapterType: Plant Object
+      status: SUCCESS
+      error: false
+      isNew: false
+      isSelected: false
+      isUpdated: true
+editor: {}
+scanSettings: {}
+zoomSettings:
+  zoomPercent: 100
+userPasswordDetails:
+  - password: $2a$10$hD/IWnEbvBj0HaRAmc99zuEFuS8tyeGmphSlEn.lcHyaxycoaNJ9W
+    accessType: write

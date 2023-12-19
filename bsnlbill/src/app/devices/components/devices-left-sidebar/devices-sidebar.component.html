@@ -1,0 +1,59 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+<!--
+  -This class holds the complete responsibility of displaying the added devices in the devices-side bar
+  -Updates the list of devices for every addition of new devices
+  -->
+<div class="devices-sidebar">
+
+    <!--
+    -This class holds the complete responsibility of devices menu view
+    -Handles two types of views: Full and collapsed
+    -->
+    <div class="devices-menu-view" [ngSwitch]="viewType">
+
+        <!--
+        -This class holds the complete responsibility of devices menu in full/ expanded view
+        -It supports the click which can toggle between expanded and collapsed
+        -->
+        <div class="devices-menu-view--full" [hidden]="viewType==='collapsed'">
+
+            <div class="devices-view-header">
+                <span class="devices-header-text">{{'devices.titles.deviceTree' | translate}}</span>
+                <span class="devices-header-icon fas fa-chevron-left"
+                 (click)="removeWidth('collapsed')" onkeydown="viewType='collapsed';"></span>
+            </div>
+
+            <div class="devices-fillingLine-container">
+
+                <div class="devices-save-icon" >
+                    <span 
+                    [ngClass]="{'disabled-save-icon' : facadeService.commonService.isOnline}" 
+                    [disableIfUnauthorized]="accessControl.CAN_PROJECT_UPDATE" 
+                     title="{{'home.titles.saveProject' | translate}}" 
+                     (click)="saveCurrentProject()" 
+                    onkeydown="saveCurrentProject()">
+                        <img width="" height="" src="../assets/icons/SaveScreen_16er.svg" alt="">
+                    </span>
+                </div>
+
+                <!--
+                -Panel menu is a prime ng control holds the complete responsibility of displaying the devices items
+                -->
+                <p-panelMenu [model]="devicesItems"></p-panelMenu>
+            </div>
+
+        </div>
+
+        <!--
+        -This class holds the complete responsibility of devices menu in collapsed view
+        -It supports the click which can toggle between expanded and collapsed
+        -->
+        <div class="devices-menu-view--collapsed" *ngSwitchCase="'collapsed'">
+            <span class="devices-collapsed-icon fas fa-chevron-right"
+            (click)="removeWidth('full')" onkeydown="viewType='full';"></span>
+            <div class="devices-collapsed-text">
+                <div>{{'devices.titles.deviceTree' | translate}}</div>
+            </div>
+        </div>
+    </div>
+</div>

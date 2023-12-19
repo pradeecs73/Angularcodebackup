@@ -1,0 +1,71 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+<div class="editor-right-sidebar" [ngSwitch]="viewType">
+    <div class="full" *ngSwitchCase="'full'">
+        <p-toolbar styleClass="{{common.isOnline === false ? 'toolbar-offline' : 'toolbar-online'}}">
+            <span class="header-text">{{'editor.titles.deviceAndProperties' | translate}}</span>
+            <span class="header-icon" (click)="removeWidth('collapsed')" onkeydown="viewType='collapsed';">
+                <i aria-hidden="true" class="fas fa-chevron-right"></i></span>
+        </p-toolbar>
+        <p-tabView>
+            <p-tabPanel header="{{'editor.titles.projectDevices' | translate}}">
+                <div>
+
+                    <div id="tree">
+                        <app-device-tree-right-sidebar></app-device-tree-right-sidebar>
+                    </div>
+                </div>
+            </p-tabPanel>
+            <p-tabPanel header="{{'devices.titles.properties' | translate}}">
+                <div>
+                    <ng-container *ngIf="(selectedConnection$ | async) && common.isOnline">
+                        <app-connection-properties-panel></app-connection-properties-panel>
+                    </ng-container>
+                    <ng-container *ngIf="!(selectedConnection$ | async) || !common.isOnline" >
+                        <app-node-properties-panel></app-node-properties-panel>
+                    </ng-container>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+    </div>
+
+    <div class="collapsed" *ngSwitchCase="'collapsed'">
+        <span class="collapsed-icon fas fa-chevron-left" (click)="removeWidth('full')"
+        onkeydown="viewType='full';"></span>
+        <div class="collapsed-text">
+            <div>{{'editor.titles.projectDeviceProperties' | translate}}</div>
+        </div>
+    </div>
+
+    <div class="full" *ngSwitchDefault>
+        <p-toolbar styleClass="toolbar">
+            <span class="header-icon" (click)="viewType='collapsed';" onkeydown="viewType='collapsed';">
+                <i aria-hidden="true" class="fas fa-chevron-right"></i></span>
+            <span class="header-text">{{'editor.titles.deviceAndProperties' | translate}}</span>
+        </p-toolbar>
+
+        <p-tabView>
+            <p-tabPanel header="{{'editor.titles.projectDevices' | translate}}">
+                <div>
+                    <div class="centered-btn">
+                        <p-button label="Update accessible devices" styleClass="pbtn-update"></p-button>
+                    </div>
+                    <div id="tree">
+                        <app-device-tree-right-sidebar></app-device-tree-right-sidebar>
+                    </div>
+                </div>
+            </p-tabPanel>
+            <p-tabPanel header="{{'devices.titles.properties' | translate}}">
+                <div>
+                    <div *ngIf="((selectedConnection$ | async) && common.isOnline); else nodeProperties">
+                        <app-connection-properties-panel></app-connection-properties-panel>
+                    </div>
+                    <ng-template #nodeProperties>
+                        <app-node-properties-panel></app-node-properties-panel>
+                    </ng-template>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+@import 'variables';
+@import '../../../styles/partials/ptab.scss';
+.general-settings-main{
+    @include p-tab;
+    
+    .outerdivsettings
+  {
+    text-align: left;
+    padding-left: 1rem;
+    width:550px;
+    .col-8{
+      height: 200px;
+    }
+    .select-langugage{
+      font-size: 14px;
+    }
+    .pageheader {
+        padding:30px 0 25px 0;
+        font-weight:bold;
+        font-size:14px;
+     }
+     ::ng-deep .p-dropdown{
+      width: 80%;
+      border: none;
+      .p-dropdown-panel .p-dropdown-items .p-dropdown-item{
+            font-size:13px;
+            &.p-highlight{
+              font-size:13px;
+              background: $color-nav-background;
+            }
+      }
+      .p-dropdown-trigger{
+        border: 1.7px solid $color-interaction-blue-hover;
+      }
+      .p-dropdown-label{
+        font-size : 14px;
+        border-left: 1.7px solid $color-interaction-blue-hover;
+        border-top: 1.7px solid $color-interaction-blue-hover;
+        border-bottom: 1.7px solid $color-interaction-blue-hover;
+        border-radius: 0px;
+        box-shadow: none;
+      }
+      .pi-chevron-down:before {
+        color : $color-interaction-blue-hover;
+      }
+    }
+  }
+}

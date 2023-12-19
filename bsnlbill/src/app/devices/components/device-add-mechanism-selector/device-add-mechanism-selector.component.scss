@@ -1,0 +1,47 @@
+/* ------------------------------------------------------------------------ */
+/* Copyright © Siemens AG 2021-2021. All rights reserved. Confidential.     */
+/* ------------------------------------------------------------------------ */
+@import "variables";
+
+.add-string{
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 0px 0px 3px 9px;
+}
+
+.row{
+    padding: 0.5rem;
+}
+
+.radio{
+    margin-bottom: 20px;
+}
+
+.button-next-container{
+    padding-left: 76%;
+
+    .button-next{
+        border: #2782a1;
+        background-color: #2782a1;
+        width: 100px;
+        height: 30px;
+        text-align: center;
+        padding-top: 7px;
+        color: white;
+        border-radius: 2.5px;
+    }
+    .button-next:hover{
+        cursor: pointer;
+    }
+    .button-disable{
+        background-color: #a6aeb1;
+    }
+}
+
+.p-card .p-card-content {
+    padding: 1rem 0 0 0;
+}
+
+
+

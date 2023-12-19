@@ -1,0 +1,19 @@
+project:
+  id: livcq26a
+  name: writeAccess
+  comment: ''
+  author: ''
+  created: 6/14/2023, 12:19:10 PM
+  modified: 6/14/2023, 12:19:39 PM
+  modifiedby: ''
+  isProtected: true
+  AppVersion: '1.0'
+tree:
+  devices: []
+editor: {}
+scanSettings: {}
+zoomSettings:
+  zoomPercent: 100
+userPasswordDetails:
+  - password: $2a$10$Ho/e8X./WKyxIiLatZ6PsO9WqUp8MZirEb.tBQXwE3dTzb9NI5B9S
+    accessType: write

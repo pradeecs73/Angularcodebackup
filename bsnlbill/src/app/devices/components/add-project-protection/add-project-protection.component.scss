@@ -1,0 +1,71 @@
+@import "variables";
+#add-project-protection-container {
+    .col-7 {
+        padding: 0.15rem !important;
+    }
+
+    .p-10 {
+        padding: 10px;
+    }
+
+    .info-label {
+        font-weight: bold;
+        font-size: 13px;
+        padding-bottom: 10px
+    }
+
+    .btn {
+        border: $color-btn-blue;
+        background-color: $color-btn-blue;
+        width: 100px;
+        height: 30px;
+        text-align: center;
+        color: white;
+        border-radius: 2.5px;
+        cursor: pointer;
+    }
+
+    .btn-cancel {
+        background: #fff;
+        color: #3296b9;
+        border: 1px solid #3296b9;
+        border-radius: 3px;
+        width: 80px;
+        height: 25px;
+        cursor: pointer;
+    }
+
+    .pad-5 {
+        padding: 5px;
+    }
+
+    .icon-info {
+        margin-top: 15px;
+    }
+
+    .info-content {
+        content: url("../../../../assets/icons/Warning_16er.svg");
+        filter: invert(70%) sepia(85%) saturate(1869%) hue-rotate(0deg) brightness(104%) contrast(105%);
+    }
+
+    .h-30 {
+        height: 30px;
+    }
+
+    .sub-info {
+        font-weight: 600;
+        font-size: 12px;
+        padding-bottom: 15px;
+        padding-top: 10px;
+    }
+
+    .sub-info-1 {
+        font-size: 12px;
+    }
+    .err-msg {
+        padding-top: 10px;
+        color: $color-fault;
+        float: right;
+        font-size: 12px;
+    }
+}

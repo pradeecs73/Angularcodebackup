@@ -1,0 +1,13 @@
+<div class="add-string">{{'devices.titles.selectOnlineDevices' | translate}}</div>
+<div class="browse-select-tab">
+  <p-tabView>
+    <p-tabPanel header="{{'devices.addDeviceMethod.scanForDevice' | translate}}">
+      <app-devices-scan [deviceInGrid]="devicesAddedToGrid"
+        (onDevicesAdded)="onDevicesAdded($event)"></app-devices-scan>
+    </p-tabPanel>
+    <p-tabPanel header="{{'devices.addDeviceMethod.manualAdd' | translate}}">
+      <device-add-details-selector (onDeviceAltered)="addDeviceToList($event)"
+        [devicesAddedToGrid]="devicesAddedToGrid"></device-add-details-selector>
+    </p-tabPanel>
+  </p-tabView>
+</div>

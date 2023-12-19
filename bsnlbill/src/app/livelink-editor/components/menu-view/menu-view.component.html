@@ -1,0 +1,25 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+<div class="menu-view" [ngSwitch]="viewType">
+    <div class="menu-view--full" *ngSwitchCase="'full'" (click)="stopEventsTriggerFromMenuView($event)"
+        onKeyPress="stopEventsTriggerFromMenuView($event)">
+        <div class="view-header">
+            <span class="header-text">{{'editor.titles.plantView' | translate}}</span>
+            <span class="header-icon fas fa-chevron-left" (click)="removeWidth('collapsed');"
+                onkeydown="viewType='collapsed';"></span>
+        </div>
+        <div class="fillingLine-container">
+             <app-tree-menu [deviceEntities] = "entities" 
+             (renameArea)="updateAreaName($event)"
+             ></app-tree-menu>
+        </div>
+    </div>
+
+    <div class="menu-view--collapsed" *ngSwitchCase="'collapsed'">
+        <span class="collapsed-icon fas fa-chevron-right" (click)="removeWidth('full');"
+            onkeydown="viewType='full';"></span>
+        <div class="collapsed-text">
+            <div>{{'devices.titles.deviceTree' | translate}}</div>
+        </div>
+    </div>
+
+</div>

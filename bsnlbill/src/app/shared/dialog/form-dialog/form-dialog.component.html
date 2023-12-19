@@ -1,0 +1,20 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+<div id="overlay">
+    <div>
+        <div class="form-box-2">
+            <p-card>
+                <p-header>
+                    <div class="header-toolbar">
+                        <p-toolbar styleClass="header">
+                            <span class="header-text">{{title}}</span>
+                            <span  class="close-dialog" (click)="cancel()" onKeyDown="cancel()">
+                                <i aria-hidden="true" class="fas fa-times"></i>
+                            </span>
+                        </p-toolbar>
+                    </div>
+                </p-header>
+                <ng-template dynamicDialog></ng-template>
+            </p-card>
+        </div>
+    </div>
+</div>

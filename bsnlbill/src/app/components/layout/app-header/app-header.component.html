@@ -1,0 +1,38 @@
+<div class="menu-bar">
+    <div class="menus">
+        <div>
+            <a class="menu-bar--logo">
+                <img width="" height="" class="menu-bar--logo__image" src="../assets/Siemens-Logo.svg" alt="">
+            </a>
+        </div>
+        <div><span class="menu-bar--title">{{'projectName' | translate}}</span></div>
+        <div class="notification-icons">
+            <div class="info" [ngClass]="getClassDetails('info')?'show--info':''" (click)="handleInfoIconClick()"
+                onkeydown="handleInfoIconClick()" title="{{'common.titles.info' | translate}}" #errorIcon>
+                <span class="info-content">
+                </span>
+                <span class="info-count">{{facadeService.commonService.noOfInfoMsgs}}</span>
+            </div>
+            <div class="warning" [ngClass]="getClassDetails('warning')?'show--warning':''"
+                (click)="handleWarningIconClick()" 
+                onkeydown="handleWarningIconClick()" 
+                title="{{'common.titles.warning' | translate}}" #errorIcon>
+                <span class="warning-content">
+                </span>
+                <span class="warning-count">{{facadeService.commonService.noOfWarningMsgs}}</span>
+            </div>
+
+            <div class="error" [ngClass]="getClassDetails('error')?'show--error':''" (click)="handleErrorIconClick()"
+                onkeydown="handleErrorIconClick()" title="{{'common.titles.error' | translate}}" #errorIcon>
+                <span>
+                    <i aria-hidden="true" class="error-icon fas fa-times-circle"></i>
+                </span>
+                <span class="error-count">{{facadeService.commonService.noOfErrorMsgs}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="popover-container">
+        <app-popover #pop (appClickOutside)="hidePopover()"></app-popover>
+    </div>
+</div>

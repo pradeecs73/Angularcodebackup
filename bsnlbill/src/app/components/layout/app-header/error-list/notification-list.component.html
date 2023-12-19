@@ -1,0 +1,76 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+<div class="error-container">
+    <table class="error-list" aria-describedby="Notification list will be displayed based on the type of notification">
+        <thead>
+            <tr>
+                <th id="description">{{'common.titles.description' | translate}}</th>
+                <th id="dateAndTime">{{'common.titles.dateAndTime' | translate}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr 
+            *ngFor="let error of notificationMsgList;let i=index" 
+            (click)="readMessage(i)" onkeyDown="readMessage(i)">
+            <ng-container *ngIf="error.type === notificationType">
+                <td>
+                    <div class="error-coloumn">
+                        <div 
+                        [ngClass]="(error.isRead?'message-read':'message-unread') 
+                        +' '+
+                        (!error.showMore?'container':'show')"
+                            class="error-detail " title=" {{error.message.content | translate : error.message.params}}">
+                            {{error.message.content | translate : error.message.params}}
+                        </div>
+                        <div>
+                            <span class="showmore-icon" 
+                            onkeyDown="error.showMore=!error.showMore;"
+                            (click)="error.showMore=!error.showMore;">
+                                <i *ngIf="showArrow(error)" aria-hidden="true"
+                                    [ngClass]="!error.showMore?'fas fa-chevron-down':'fas fa-chevron-up'"></i>
+                            </span>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span [ngClass]="error.isRead?'message-read':'message-unread'" class="error-date"
+                        title=" {{error.errorDate | formatDate : facadeService.translateService.currentLang}},
+                        {{error.errorDate | date : 'shortTime'}}">
+                        {{error.errorDate | formatDate : facadeService.translateService.currentLang}},
+                        {{error.errorDate | date : 'shortTime'}}
+                    </span>
+                </td>
+            </ng-container>
+            </tr>
+             <ng-container *ngIf="7-notificationMsgList.length > 0">
+                <tr *ngFor="let item of [].constructor(7-notificationMsgList.length)" class="empty-records" >
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+        <tfoot class="errorfooter">
+            <tr>   
+                <td colspan="2">
+                    <p-button 
+                    iconPos="left"
+                    icon="clearAllIcon" 
+                    (click)="clearErrorMessages(facadeService.commonService.notificationType)"
+                    label="{{'common.buttons.clearAll' | translate}}"
+                    onkeyDown="clearErrorMessages(facadeService.commonService.notificationType)">
+                    </p-button>
+                    <p-button 
+                    iconPos="left"
+                    icon="markAllIcon"
+                    (click)="markAllRead()"
+                    label="{{'common.buttons.markAllAsRead' | translate}}"
+                    onkeyDown="markAllRead()">
+                    </p-button>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

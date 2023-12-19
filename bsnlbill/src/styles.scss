@@ -1,0 +1,738 @@
+/* ------------------------------------------------------------------------ */
+/* Copyright © Siemens AG 2021-2021. All rights reserved. Confidential.     */
+/* ------------------------------------------------------------------------ */
+/* You can add global styles to this file, and also import other style files */
+@import "variables";
+@import  "~primeicons/primeicons.css";
+
+
+@mixin noselect {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
+
+@mixin dotted-connection-style {
+  stroke-width: 2;
+  fill: none;
+  stroke-dasharray: 1, 6;
+  stroke-linecap: round;
+}
+
+@mixin selected-pathoutline-style {
+  stroke-width: 5px;
+  fill: none;
+}
+
+@mixin selected-path-style {
+  stroke: #fff;
+  stroke-width: 2;
+  fill: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  @include noselect;
+}
+
+@font-face {
+  font-family: "Siemens Sans Global";
+  src:
+    url("../node_modules/@di-fa-hmi-oi/siemens-global-font/SiemensSans_Global_Roman.woff2") format("woff2"),
+    url("../node_modules/@di-fa-hmi-oi/siemens-global-font/SiemensSans_Global_Roman.woff") format("woff"),
+    url("../node_modules/@di-fa-hmi-oi/siemens-global-font/SiemensSans_Global_Roman.ttf") format("truetype");
+}
+
+html {
+  font-size: 62.5%;
+  font-family: "Siemens Sans Global";
+  height: 100%;
+}
+
+body {
+  font-size: 1.8rem;
+  //font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
+  //  "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: "Siemens Sans Global";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+  height: 100%;
+  background-color: $color-bg-default;
+}
+
+* {
+  font-family: "Siemens Sans Global";
+}
+
+//drag drop styles
+
+.no-drop {
+  border: solid 3px $color-fault;
+  opacity: 0.6;
+  z-index:10;
+}
+
+.can-drop {
+  border: dashed 3px $color-success;
+  opacity: 1;
+  z-index:10;
+}
+
+$test-color: #e88802;
+$test-bg: #000;
+$path-color: $color-standard;
+$bg-color: #fff;
+
+.bg-rect {
+  fill: $bg-color;
+}
+
+// path styles
+$outline-width: 8;
+$path-width: 5;
+
+.connector-handle {
+  fill: $color-black;
+}
+
+// path
+
+.connector {
+  &:hover {
+    cursor: pointer;
+
+  }
+}
+
+.connector-handle {
+  fill: $color-black;
+}
+
+// path
+.connector-path {
+  stroke: $color-standard;
+  stroke-width: 2;
+  fill: none;
+}
+
+.connect-path-success {
+  stroke: $color-connection-success;
+  stroke-width: 2;
+  fill: none;
+}
+
+.connector-path-fail {
+  stroke: $color-fault;
+  stroke-width: 2;
+  fill: none;
+}
+
+.connect-path-online{
+  stroke: $color-online;
+  @include dotted-connection-style;
+}
+
+.connect-path-online-error{
+  stroke: $color-fault;
+  @include dotted-connection-style;
+}
+
+// .connect-path-online-fail{
+//   stroke: $color-online;
+//   @include dotted-connection-style;
+// }
+
+//This is a general connector path outline
+//where-in the width stroke-width: 7; mainly helps to differentiate the connections at intersection of connection lines
+
+.connector-path-outline {
+  stroke: #fff; //$color-standard;
+  stroke-width: 7;
+  fill: none;
+}
+
+//This special styling is done for "No connection" scenarios
+//Connections should not be shown to the end user hence stroke-width was configured to 0
+.connector-path-outline-no-connection{
+  stroke-width: 0;
+  fill: none;
+}
+
+.connecting-path-outline {
+  stroke: #2387aa;
+  stroke-width: 5;
+  fill: none;
+  stroke-dasharray: 10px;
+  animation: line-anim 1s ease forwards infinite;
+}
+.con-hovered {
+  stroke: $color-interaction-hover2 !important;
+  stroke-width: 7px;
+  fill: none;
+}
+
+.con-path-selected {
+  @include selected-path-style;
+}
+
+.con-path-outline-selected {
+  stroke: $color-interaction-active;
+  @include selected-pathoutline-style;
+}
+
+//selected green
+.con-path-outline-success-selected {
+  stroke: $color-connection-success;
+  @include selected-pathoutline-style;
+}
+
+.con-path-outline-fail-selected {
+  stroke: $color-fault;
+  @include selected-pathoutline-style;
+}
+
+//orange selected
+.con-path-online-selected {
+  @include selected-path-style;
+}
+
+//orange selected
+.con-path-outline-online-selected {
+  stroke: $color-online;
+  @include selected-pathoutline-style;
+}
+
+//red selected
+.con-path-outline-online-error-selected {
+  stroke: $color-fault;
+  @include selected-pathoutline-style;
+}
+
+//dotted proposed
+.connector-path-proposed {
+  stroke: $color-colarea3;
+  @include dotted-connection-style;
+}
+
+//dotted proposed
+.connector-path-outline-proposed {
+  stroke: #fff; //$color-colarea3;
+  stroke-width: 7;
+  fill: none;
+  stroke-dasharray: 1, 6;
+  stroke-linecap: round;
+}
+
+//selected proposed by user
+.connection-path-outline-select-proposed {
+  stroke: #fff; //#879baa;
+  stroke-width: 7px;
+  fill: none;
+  // stroke-dasharray: 0.8rem;
+}
+
+//selected proposed by user
+.connector-path-select-proposed {
+  stroke: $color-colarea3;
+  stroke-width: 2px;
+  fill: none;
+  // stroke-dasharray: 0.8rem;
+}
+
+//proposed hover
+.connector-path-proposed-hover {
+  stroke: $color-interaction-blue-hover;
+  @include dotted-connection-style;
+}
+
+//proposed hover
+.connector-path-outline-proposed-hover {
+  stroke: $color-interaction-blue-hover;
+  @include dotted-connection-style;
+}
+
+//selected by user hovered
+.connector-path-outline-select-proposed-hovered {
+  stroke: $color-interaction-blue-hover;
+  stroke-width: 2px;
+  fill: none;
+}
+
+//selected by user hovered
+.connector-path-select-proposed-hovered {
+  stroke: $color-interaction-blue-hover;
+  stroke-width: 2px;
+  fill: none;
+}
+
+//row select of proposed
+.connector-path-row-select {
+  stroke: $color-interaction-active;
+  @include dotted-connection-style;
+}
+
+//row select for user selected
+.connector-path-select-proposed-row-select {
+  stroke: $color-interaction-active; //#879baa;
+  stroke-width: 2px;
+  fill: none;
+}
+
+@keyframes line-anim {
+  from {
+    stroke-dashoffset: 10px;
+  }
+
+  to {
+    stroke-dashoffset: 100px;
+  }
+}
+
+// anchor styles
+
+.scrim {
+  fill: transparent;
+}
+
+.outer-circle {
+  fill: $color-interaction-active;
+}
+
+.outer-circle-actual-con {
+  stroke-width: 3px;
+  stroke: $color-standard;
+}
+
+.outer-actual-con-hover {
+  // stroke-width: 1px;
+
+  stroke: $color-standard;
+}
+
+.actual-connect-scrim {
+  fill: $color-colarea3 !important;
+}
+
+.actual-scrim-selected {
+  fill: $color-interaction-active !important;
+}
+
+.actual-inner-circle {
+  stroke: #fff;
+  stroke-width: 8px;
+}
+
+//selected normal
+.actual-outer-circle {
+  stroke-width: 8px;
+  stroke: $color-interaction-active;
+}
+
+//selected success
+.actual-success-outer-circle {
+  stroke-width: 7px;
+  stroke: $color-connection-success;
+}
+
+//selected failure
+.actual-fail-outer-circle {
+  stroke-width: 7px;
+  stroke: $color-fault
+}
+
+.online-outer-circle {
+  stroke-width: 7px;
+  stroke: $color-online;
+}
+
+.success-scrim {
+  fill: #fff !important;
+}
+
+.outer-success-scrim {
+  stroke-width: 3px;
+  stroke: $color-connection-success;
+}
+
+.outer-online-success-scrim {
+  stroke-width: 3px;
+  stroke: $color-online;
+}
+
+.outer-online-error-scrim {
+  stroke-width: 3px;
+  stroke: $color-fault;
+}
+
+
+.outer-online-failure-scrim {
+  stroke-width: 3px;
+  stroke: $color-fault;
+}
+
+//Styling for no-connection connector anchors
+.outer-no-connection{
+  stroke: lightgray;
+}
+
+//Styling for no-connection
+.no-connection{
+  fill: transparent;
+}
+
+//Styling for the connector for no connection scenario
+.connect-path-no-connection{
+  stroke: transparent;
+  fill: none;
+}
+
+.fail-scrim {
+  fill: #fff !important;
+}
+
+.outer-fail-circle {
+  stroke-width: 3px;
+  stroke: $color-fault;
+}
+
+.outer {
+  fill: $color-bg-white;
+}
+
+.inner {
+  // fill: #363636;
+}
+
+.cls-2-selected {
+  fill: $color-bg-white;
+  stroke: $color-interaction-blue !important;
+  stroke-width: 3px;
+}
+
+.plant-view-workspace.large {
+  -webkit-transform: scale(1.25);
+  transform: scale(1.25);
+}
+
+
+.hover-scrim,
+.hover-rect {
+  fill: $color-interaction-hover2 !important;
+  // fill-opacity: 0.2;
+}
+
+.hover-outer-circle {
+  fill: $color-interaction-hover2 !important;
+  stroke-width: 3px;
+  stroke : inherit;
+}
+
+.hover-inner-circle {
+  fill: $color-interaction-hover2;
+}
+// GRID
+$grid-width: 100%; //114rem;
+$gutter-vertical: 0rem;
+$gutter-vertical-small: 6rem;
+$gutter-horizontal: 6rem;
+
+/* scrollbar stylings */
+
+// //1st
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+::-webkit-scrollbar:hover {
+  cursor: pointer !important;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: $color-colarea1-gray;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $color-area4; //#babac0;
+  border: 3px solid transparent;
+  background-clip: content-box;
+
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $color-colarea3; //#a0a0a5;
+  cursor: pointer !important;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: $color-colarea3 !important;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+//buttons
+::-webkit-scrollbar-button {
+  background-color: $color-colarea1-gray;
+  background-size: 10px 10px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 16px;
+  width: 16px;
+}
+
+::-webkit-scrollbar-button:vertical:end:increment {
+  background-image: url('./assets/scrollbar/down-arrow.svg');
+  background-size: 120% 120%;
+}
+
+
+::-webkit-scrollbar-button:vertical:start:decrement {
+  background-image: url('./assets/scrollbar/up-arrow.svg');
+  background-size: 120% 120%;
+}
+
+::-webkit-scrollbar-button:horizontal:end:increment {
+
+  background-image: url('./assets/scrollbar/right-arrow.svg');
+  background-size: 120% 120%;
+}
+
+::-webkit-scrollbar-button:horizontal:start:decrement {
+
+  background-image: url('./assets/scrollbar/left-arrow.svg');
+  background-size: 120% 120%;
+}
+
+//button hover
+::-webkit-scrollbar-button:vertical:end:increment:hover {
+  background-image: url('./assets/scrollbar/down-arrow-hover.svg');
+  background-size: 120% 120%;
+  cursor: pointer !important;
+}
+
+::-webkit-scrollbar-button:vertical:start:decrement:hover {
+  background-image: url('./assets/scrollbar/up-arrow-hover.svg');
+  background-size: 120% 120%;
+  cursor: pointer !important;
+}
+
+::-webkit-scrollbar-button:horizontal:end:increment:hover {
+  background-image: url('./assets/scrollbar/right-arrow-hover.svg');
+  background-size: 120% 120%;
+}
+
+::-webkit-scrollbar-button:horizontal:start:decrement:hover {
+  background-image: url('./assets/scrollbar/left-arrow-hover.svg');
+  background-size: 120% 120%;
+}
+
+//button active
+::-webkit-scrollbar-button:horizontal:start:decrement:active {
+  background-image: url('./assets//scrollbar/left-arrow-active.svg');
+  background-size: 120% 120%;
+  cursor: pointer !important;
+}
+
+::-webkit-scrollbar-button:horizontal:end:increment:active {
+  background-image: url('./assets//scrollbar/right-arrow-active.svg');
+  background-size: 120% 120%;
+  cursor: pointer !important;
+}
+
+::-webkit-scrollbar-button:vertical:start:decrement:active {
+  background-image: url('./assets/scrollbar/up-arrow-active.svg');
+  background-size: 120% 120%;
+  cursor: pointer !important;
+}
+
+::-webkit-scrollbar-button:vertical:end:increment:active {
+  background-image: url('./assets/scrollbar/down-arrow-active.svg');
+  background-size: 120% 120%;
+  cursor: pointer !important;
+}
+
+::-webkit-scrollbar-corner {
+  background: $color-colarea1-gray;
+}
+.cls-2-online {
+  fill: white;
+  stroke: $color-online !important;
+  stroke-width: 2.5px;
+}
+.node-header-online{
+  fill: $color-online;
+  stroke: $color-online-border !important;
+  stroke-width: 2.5px;
+}
+
+.node-header-offline{
+  fill: $color-colarea5;
+  stroke: $color-colarea3 !important;
+  // stroke-width: 2.5px;
+}
+.node-header-unavailable{
+  fill: $color-col-accent4b;
+  stroke: $color-col-accent4 !important;
+  stroke-width: 2.5px;
+}
+// Styling for the header box of the device in the plant-view tab
+.cls-2-unavailable {
+  fill: white;
+  stroke: $color-col-accent4 !important;
+  stroke-width: 2.5px;
+}
+
+//2nd
+// *::-webkit-scrollbar,
+// *::-webkit-scrollbar-thumb {
+//   width: 26px;
+//   border-radius: 13px;
+//   background-clip: padding-box;
+//   border: 10px solid transparent;
+// }
+
+// *::-webkit-scrollbar-thumb {
+//   box-shadow: inset 0 0 0 10px;
+// }
+
+//3rd
+// * {
+
+//   // FireFox
+//   scrollbar-width: thin;
+//   scrollbar-color: #a0a0a5 transparent;
+
+//   // Chrome, Safari, Opera
+//   ::-webkit-scrollbar-thumb {
+//         width: 6px;
+//         border-radius: 3px;
+//         background-color: #a0a0a5;
+//     }
+
+//   ::-webkit-scrollbar-track {
+//       background-color: transparent;
+//   }
+
+//   ::-webkit-scrollbar {
+//       width: 6px;
+//   }
+// }
+
+//4th
+// *::-webkit-scrollbar {
+//     background-color:$color-bg-white;
+//     width:16px;
+// }
+
+// /* background of the scrollbar except button or resizer */
+// *::-webkit-scrollbar-track {
+//     background-color:$color-bg-white
+// }
+// *::-webkit-scrollbar-track:hover {
+//     background-color:#f4f4f4
+// }
+
+/* scrollbar itself */
+// *::-webkit-scrollbar-thumb {
+//     background-color:#babac0;
+//     border-radius:16px;
+//     border:5px solid $color-bg-white
+// }
+// *::-webkit-scrollbar-thumb:hover {
+//     background-color:#a0a0a5;
+//     border:4px solid #f4f4f4
+// }
+
+// /* set button(top and bottom of the scrollbar) */
+// *::-webkit-scrollbar-button {display:none}
+.highlighted {
+  filter:drop-shadow( 3px 3px 2px rgba(0, 0, 0, .5));
+  cursor:normal !important;
+}
+
+.haveconnection{
+  cursor:not-allowed !important;
+}
+
+.matchinginterface{
+  cursor:move !important;
+}
+
+.head-offline{
+    fill :$color-col-standard;
+}
+.head-online{
+  fill :$color-bg-white;
+}
+.can-drop-highlight {
+  background-color: #eaeaea;
+  color: $color-collight2-gray
+}
+#add-project-protection-container {
+  .col-7 {
+    padding: 0.15rem;
+  }
+
+  .p-accordion .p-accordion-header:not(.p-disabled).p-highlight .p-accordion-header-link {
+    background-color: rgb(255 255 255 / 41%);
+    border-bottom: #fff;
+  }
+
+  .p-accordion .p-accordion-header:not(.p-disabled).p-highlight a .p-accordion-toggle-icon {
+    color: $color-interaction-blue;
+  }
+
+  .p-accordion .p-accordion-header .p-accordion-header-link .p-accordion-toggle-icon {
+    color: $color-interaction-blue
+  }
+
+  .p-accordion .p-accordion-header .p-accordion-header-link {
+    background: #fffcfc;
+  }
+
+  .write-password {
+    padding: 5px;
+
+    .writeouterdiv {
+      text-align: left;
+      padding: 0.625rem 0rem 0.625rem 0rem;
+    }
+  }
+}
+
+#left-menu-content :hover {
+  cursor: unset !important;
+  .icon-div, .p-tree-toggler-icon {
+    cursor: pointer !important;
+  }
+  .drag-dragging {
+    cursor: move !important;
+  }
+}
+
+.drag-move {
+  box-shadow: 0 5px 5px -5px #333;
+  font-size: 15px;
+}
+
+.translate-with-line-break{
+  white-space: pre-wrap;
+}

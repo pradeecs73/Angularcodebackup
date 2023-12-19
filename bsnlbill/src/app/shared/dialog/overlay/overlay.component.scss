@@ -1,0 +1,303 @@
+/* ------------------------------------------------------------------------ */
+/* Copyright © Siemens AG 2021-2021. All rights reserved. Confidential.     */
+/* ------------------------------------------------------------------------ */
+@import 'variables';
+@import 'overlay';
+
+//spinner var
+$speed: 1;
+$circleSize: 6;
+$circleUnits: "px";
+$circleColor: $color-interaction-blue;
+$containerSize: 30px;
+
+#overlay {
+  @include overlay();
+
+  #spinner {
+    // margin: 0 auto;
+    margin-right: 1.1rem;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    width: #{$containerSize};
+    height: #{$containerSize};
+
+    .circle-container {
+      position: absolute;
+      width: #{$circleSize}#{$circleUnits};
+      height: 100%;
+      left: 50%;
+      margin-left: -#{$circleSize / 2}#{$circleUnits};
+
+      .circle {
+        width: #{$circleSize}#{$circleUnits};
+        height: #{$circleSize}#{$circleUnits};
+        background-color: #{$circleColor};
+        border-radius: #{$circleSize}#{$circleUnits};
+      }
+    }
+
+    @for $i from 1 through 8 {
+      .circle-container:nth-child(#{$i}) {
+        transform: rotate(-#{$i * 360 / 8}deg);
+        opacity: #{($i - 1) / 7};
+        animation: spin#{$i} 1s infinite;
+        animation-fill-mode: forwards;
+        animation-timing-function: steps(8, end);
+      }
+
+      @keyframes spin#{$i} {
+        @for $q from 0 through 7 {
+          #{12.5 * $q}% {
+            opacity: #{(($i - 1) / 7 + $q / 7) % 1.000001};
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.box-2 {
+  @include box-2();
+  .dialog-content {
+    padding: 1rem 0rem;
+    text-align: justify;
+    margin-left: 1.7rem;
+    margin-right: 1.7rem;
+    font-size: 1.8rem;
+    line-height: 3rem;
+    display: flex;
+
+    &-heading {
+      margin-bottom: 1rem;
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 1.8em;
+      .warning-icon {
+        font-size: 1.3em;
+        color: $color-warning;
+        vertical-align: middle;
+      }
+      .confirm-icon
+      {
+        font-size: 1.3em;
+        color: $color-warning;
+        vertical-align: middle;
+        .pi{
+          font-size: 1.3em;
+        }
+      }
+    }
+
+    &-message {
+      font-size: 0.65em;
+      // margin-right: 0.6em;
+      line-height: 1.2em;
+      margin-left: 1.2rem;//3.8rem;
+      // width: 85%;
+      word-break: break-word;
+      text-align: left;
+
+      &-title{
+        font-size: 1.8rem;
+        line-height: 3rem;
+        display: inline-block;
+      }
+
+      &-description{
+          display: block;
+      }
+
+      .prolonged-text{
+
+        &-title{
+        font-size: 1.25rem;
+        line-height: 1.8rem;
+        font-weight: bold;
+        }
+
+        &-description{
+          margin : 15px 0 15px 0;
+          line-height: 1.4em;
+        }
+        &-content{
+          margin-bottom : 18px;
+        }
+
+        
+      }
+
+      .confirm-message
+      {
+        font-size: 14px;
+        line-height: 2;
+        display: inline-block;
+        //padding-top: 1.5rem;
+      }
+    }
+
+    .success {
+      font-size: 1.8rem;
+      line-height: 3rem;
+
+      &-icon {
+        color: $color-success;
+        margin-right: 1.1rem;
+        font-size: 2.6rem;
+        vertical-align: middle;
+      }
+    }
+
+    .loader {
+      font-size: 1.8rem;
+      line-height: 3rem;
+      display: -webkit-inline-box;
+
+      &-message {
+        display: inline-block;
+      }
+
+      &-description {
+        margin-left: 0.5rem;
+      }
+    }
+
+    .error {
+      margin-right: 1.1em;
+      padding-bottom: 1.5rem;
+      padding-top: 0.5rem;
+
+      .dialog-content-message-title {
+        font-size: 1.4rem;
+        line-height: 1.6rem;
+        font-weight: bold;
+      }
+
+      .dialog-content-message-description {
+        padding-top: 1.5rem;
+      }
+
+      &-icon {
+        color: $color-fault;
+        margin-right: 1.2rem;
+        font-size: 2.6rem;
+        vertical-align: middle;
+        display: block;
+        float: left;
+        line-height: 1.8em;
+      }
+    }
+  }
+  .footer-toolbar {
+    .footer {
+      background-color: $color-colarea5 !important;
+      // height: 64px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      float: right;
+      width: -webkit-fill-available;
+      justify-content:  flex-end;
+      min-height: 30px;
+
+      p-button[label="Cancel"] {
+        float: right;
+      }
+
+      .btn-cancel-label {
+        @include btn-common();
+        background: $color-bg-white;
+        color: $color-interaction-blue;
+        margin-left: 0.35rem;
+        outline: none;
+
+
+        &:hover {
+          background: $color-colarea5;
+        }
+
+        &:focus {
+          box-shadow: none;
+        }
+      }
+
+      .btn-optional-label {
+        @include btn-common();
+        background: $color-bg-white;
+        color: $color-interaction-blue;
+        margin-left: 0.35rem;
+        outline: none;
+
+
+        &:hover {
+          background: $color-colarea5;
+        }
+
+        &:focus {
+          box-shadow: none;
+        }
+      }
+
+      .btn-cancel {
+        background: $color-bg-white;
+        color: $color-interaction-blue;
+        margin-left: 0.25rem;
+        outline: none;
+
+        &:hover {
+          background: $color-colarea5;
+        }
+      }
+
+      .disabled-btn {
+        opacity: 0.5;
+        cursor: not-allowed;
+
+        &:hover {
+          background: $color-bg-white;
+        }
+      }
+
+      .btn-action {
+        @include btn-common();
+        background: $color-interaction-blue;
+        min-width: 60px;
+        outline: none;
+
+        &:hover {
+          background: $color-interaction-blue-hover;
+        }
+
+        &:focus {
+          box-shadow: none;
+          border: 0;
+        }
+      }
+
+      .p-button {
+        margin-right: 0.25rem;
+        margin-left: 0.25rem;
+        border: 1px solid $color-interaction-blue;
+
+        &:focus {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+.warning-triangle{
+  content: url("/../../../assets/icons/Warning_16er.svg");
+  filter: invert(70%) sepia(88%) saturate(1452%) hue-rotate(358deg) brightness(101%) contrast(104%);
+}
+
+}

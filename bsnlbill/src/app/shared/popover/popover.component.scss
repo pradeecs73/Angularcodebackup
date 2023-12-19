@@ -1,0 +1,52 @@
+/* ------------------------------------------------------------------------ */
+/* Copyright © Siemens AG 2021-2021. All rights reserved. Confidential.     */
+/* ------------------------------------------------------------------------ */
+@import 'variables';
+
+#tooltip {
+    background: $color-bg-white;
+    color: black;
+    font-weight: normal;
+    display: none;
+    font-size: 11px;
+  }
+
+  #tooltip[data-show] {
+    display: block;
+    z-index: 5;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+    top:0% !important;
+    left:-1.5rem !important;
+  }
+
+  #arrow,
+  #arrow::before {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    z-index: -1;
+    left: 27px !important;
+  }
+
+  #arrow::before {
+    content: '';
+    transform: rotate(45deg);
+    background:$color-colarea1-gray;
+    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  #tooltip[data-popper-placement^='top'] > #arrow {
+    bottom: -4px;
+  }
+
+  #tooltip[data-popper-placement^='bottom'] > #arrow {
+    top: -4px;
+  }
+
+  #tooltip[data-popper-placement^='left'] > #arrow {
+    right: -4px;
+  }
+
+  #tooltip[data-popper-placement^='right'] > #arrow {
+    left: -4px;
+  }

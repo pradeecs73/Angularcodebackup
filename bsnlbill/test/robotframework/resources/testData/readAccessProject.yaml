@@ -1,0 +1,22 @@
+project:
+  id: llki06pd
+  name: readAccess
+  comment: ''
+  author: ''
+  created: 8/21/2023, 12:00:40 PM
+  modified: 8/21/2023, 12:05:24 PM
+  modifiedby: ''
+  isProtected: true
+  AppVersion: 1.0.1
+  projectVersion: '1'
+tree:
+  devices: []
+editor: {}
+scanSettings: {}
+zoomSettings:
+  zoomPercent: 100
+userPasswordDetails:
+  - password: $2a$10$3Rco1x3Jt/owdy7xuhA1n.gQd3clQA66bdPRqz.0jT819g2x3UYR6
+    accessType: write
+  - password: $2a$10$vJ28N.u/OerRw6zdmweG4es9G9ROFkmDcyW8M1oWgXcwiOa9/QJ52
+    accessType: read

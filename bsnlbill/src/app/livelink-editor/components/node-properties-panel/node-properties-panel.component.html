@@ -1,0 +1,30 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+<div class="panel">
+    <div class="panel--bar">
+        <!-- Properties Panel  -->
+        <span *ngIf="!panelData">{{'editor.messages.noInterfaceSelected' | translate}}</span>
+        <span *ngIf="panelData">
+            {{ translateName(panelData.interfaceType)}} :
+            <div>{{panelData.deviceName }}>{{ panelData.name}}</div>
+        </span>
+    </div>
+    <!-- Shows when the device unavailable -->
+    <div class="no-Interface-container" *ngIf="showDeviceUnavailable">
+        <div class="bulb-icon"><em class="fas fa-lightbulb"></em></div>
+        <div class="no-device-available">
+            <p><strong>{{'editor.messages.deviceUnavailable' | translate}}</strong></p>
+            <p>{{'editor.messages.selectedDeviceUnavailable' | translate : {deviceName : panelData.deviceName} }} </p>
+        </div>
+    </div>
+   
+    <app-properties-panel 
+        [panelType]="propertyPanelType"
+        [accordionIndex]="facadeService.commonService.interfacePropertyAccordion"
+        [cols]="cols"
+        [showDeviceUnavailable]="showDeviceUnavailable"
+        [innerHeightInterface]="innerHeightInterface"
+        [treeData]="treeData">
+    </app-properties-panel>
+    <!-- Shows always in offline and shows device available in online -->
+
+</div>

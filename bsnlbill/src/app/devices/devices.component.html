@@ -1,0 +1,21 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+<div class="pv-g-device">
+    <div class="pv-g-device-2 l-sidebar container__left" id="device__left__side"
+        [ngClass]="{'iFrame-content': isIframe === true}">
+        <!-- Left side bar -->
+        <devices-left-sidebar (removeElementWidth)="removeElementWidth($event)"></devices-left-sidebar>
+    </div>
+    <div class="resizer" appResizable="appResizable" data-direction="horizontal" id="device__resize__left"></div>
+    <div class="container__right flex">
+        <div class="pv-g-device-8" id="device__middle__side">
+            <!-- Main component/Editor view -->
+            <devices-main-view (onDeviceSelected)="displayDeviceProperties($event)"></devices-main-view>
+        </div>
+        <div class="resizer" appResizable="appResizable" data-direction="horizontal" id="device__resize__right"></div>
+        <div class="pv-g-device-2 container__right min__width__right" id="device__right__side">
+            <!-- Right side bar/properties panel -->
+            <devices-right-sidebar [selectedDeviceData]="selectedDeviceData"
+                (removeElementWidth)="removeElementWidth($event)"></devices-right-sidebar>
+        </div>
+    </div>
+</div>

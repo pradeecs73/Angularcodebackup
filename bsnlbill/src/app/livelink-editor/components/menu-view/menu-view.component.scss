@@ -1,0 +1,310 @@
+/* ------------------------------------------------------------------------ */
+/* Copyright © Siemens AG 2021-2021. All rights reserved. Confidential.     */
+/* ------------------------------------------------------------------------ */
+@import 'variables';
+@import 'icon';
+
+$full-width: 20rem;
+$font-size: 1.2rem;
+$min-width:20px;
+$col_light2: $color-collight2-gray;
+
+.menu-view {
+    height: 100%;
+     &--full {
+        height: inherit;
+        min-width: $min-width;
+        .view-header {
+            padding: 1rem;
+            display: block;
+            font-weight: 400;
+            background-color: $color-colarea5;
+            height: 44.15px;
+            border: 1px solid $color-colarea2;
+            margin-right: -0.8%;
+
+            .header {
+                &-text {
+                    flex: 12;
+                    color: $col_light2;
+                    // margin-right: 56%;
+                    margin-left:2%;
+                }
+
+                &-icon {
+                    flex: 1;
+                    color: $color-interaction-blue;
+                    font-size: $font-size;
+                    float: right;
+                    line-height: 2rem;
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+        .fillingLine-container {
+            .header{
+                .icon-div{
+                   left: 190px !important;
+                }
+              }
+            .icon-div {
+                @include panel-icon-div;
+                &.disabled {
+                 cursor: not-allowed;
+                }
+                left: 150px;
+                .new-area-icon {
+                    &::before {
+                        content: url('/../assets/icons/Folder-new.svg');
+                    }
+                    &.disabled {
+                        pointer-events: none;
+                        opacity: 0.5;
+                    }
+                }
+        
+                .disabled-icon {
+                    @include disabled-icon;
+                }
+                .save-btn {
+                    padding: 5px;
+                    &::before {
+                        content: url('/../assets/icons/SaveScreen_16er.svg');
+                    }
+                    &.disabled {
+                        pointer-events: none;
+                        opacity: 0.5;
+                    }
+                }
+                .ungroup-area-icon {
+                    &::before {
+                        content: url('/../assets/icons/difa_ungroup.svg');
+                    }
+                    &.disabled {
+                        pointer-events: none;
+                        opacity: 0.5;
+                    }
+                }
+             
+                .delete-btn {
+                    padding: 5px;
+                    &::before {
+                        content: url('/../assets/icons/DeleteProject_16er.svg');
+                    }
+                    &.disabled{
+                        pointer-events: none;
+                        opacity: 0.5;
+                    }
+                }
+            }
+            .hide-id, .hide-icon{
+                display:none;
+            }
+            .area-icons{
+                display: flex;
+                flex-direction: row;
+            }
+           
+
+        }
+    }
+
+    &--collapsed {
+        height: inherit;
+        text-align: center;
+        background-color: $color-bg-default;
+
+        .collapsed {
+            &-icon {
+                padding: 0.5rem;
+                color: $color-interaction-blue;
+                font-size: $font-size;
+                width: 2.4rem;
+                height: 2.4rem;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            &-text {
+                width: 2.4rem;
+                overflow: hidden;
+                height: 20rem;
+                margin-top: 30rem;
+                font-size: $font-size;
+
+                &>div {
+                    width: 20rem;
+                    transform: rotate(90deg);
+                    transform-origin: top left;
+                    margin-left: 2.4rem;
+                    padding: 0.5rem;
+                }
+            }
+        }
+    }
+}
+
+body .menu-view .p-tree {
+    padding: 0px;
+    border: 0px;
+    width: auto;
+
+    & .p-tree-container {
+        & .p-treenode{
+              padding: 0px;
+            }
+        overflow: hidden;
+        &  .p-treenode-content.p-treenode-selectable.p-highlight{
+            background-color:  $color-interaction-blue-hover;
+            &:hover {
+                background-color: $color-interaction-blue-hover;   
+            }  
+            
+            & .plcicon.p-treenode-icon{
+                &::before {
+                    filter: $color-white-seletcted;
+                    }
+            
+            }
+
+            & .areaicon.p-treenode-icon{
+                &::before {
+                    filter: $color-white-seletcted;
+                    }
+            
+            }
+            & .p-treenode-label {
+                color:#ffffff;;
+            }
+           
+        }
+        & .areaicon.p-treenode-icon{
+            color: white
+        }    
+
+        & .p-treenode-content {
+            display: inline-flex;
+            width: -webkit-fill-available;
+            padding: 5px;
+            position: static;
+            font-size: 14px;
+            border: 0px;
+            border-radius: 0px;
+            position: relative;
+            & .p-tree-toggler {
+                margin-top: 5px;
+                font-size: 12px;
+            }
+
+            & .pi-caret-down::before {
+                content: '\e902';
+            }
+
+            & .pi-caret-right:before {
+                content: '\e901';
+            }
+
+            & .p-treenode-icon {
+                margin-top: 5px;
+                margin-left: 0.5rem;
+                margin-right: 0.25em;
+            }
+
+            & .areaicon.p-treenode-icon {
+                margin-top: 0px;
+            }
+
+            &:focus {
+                box-shadow: none;
+            }
+            &  .no-outline {
+                &.disabled{
+                  pointer-events: none;
+                }
+                background-color: transparent;
+                border: none;
+                color:$col_light2;
+
+                &:focus-visible {
+                    outline: none;
+                }
+            }
+        }
+
+        & .p-treenode-content.p-treenode-selectable {
+            &:hover {
+                padding-left: 2px !important;
+                background-color: #eaeaea;
+                color:$col_light2;
+                 width: 100%;
+                 .hide-icon {
+                    display: block;
+                }
+            }
+        }
+
+        & .p-treenode-content.p-treenode-selectable .p-treenode-label:not(.p-highlight):hover {
+            background-color: transparent;
+            color: inherit;
+        }
+
+        & .p-treenode-content.p-highlight,.p-treenode.p-highlight {
+            background-color: $color-interaction-blue-hover;
+            color: $color-bg-white;
+
+            & .p-treenode-icon,
+            .p-tree-toggler,
+            .p-treenode-label , .p-treenode-label.p-highlight {
+                color: $color-bg-white;
+                background-color:inherit;
+
+                &:hover {
+                    color: $color-bg-white;
+                }
+            }
+
+            &:hover {
+                background-color: $color-interaction-blue-hover;
+            }
+        }
+        & .p-treenode-label.p-corner-all.p-highlight{
+            background-color: $color-interaction-blue-hover;
+        }
+
+        
+    }
+
+    & .p-treenode-droppoint {
+        height: 0px;
+    }
+
+}
+
+
+.plcicon {
+    &::before {
+        // content: url('/../../../assets/icons/plc.svg');
+        content: url('/../../../assets/icons/PlantObjects_16er.svg');
+        vertical-align: middle;
+    }
+}
+
+.areaicon {
+    &::before {
+        content: url("/../../../assets/icons/Folder.svg");
+        vertical-align: middle;
+        filter:$color-area-icon;
+    }
+}
+
+body .p-panelmenu .p-panelmenu-header>a {
+    .selectedFillingLine {
+        content: url('/../../../assets/icons/PlantObjects_16er.svg');
+        vertical-align: middle;
+    }
+}
+

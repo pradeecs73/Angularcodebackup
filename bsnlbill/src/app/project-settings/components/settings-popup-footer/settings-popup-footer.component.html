@@ -1,0 +1,23 @@
+<div class="footer-main">
+    <p-footer>
+        <div class="grid p-0">
+          <div class="col-12">
+            <div class="footer-toolbar">
+              <p-toolbar styleclass="footer">
+                <div>
+                  <button type="submit" id="setuppassword" class="passwordSetupBtn" (click)="onSubmit()"
+                  [ngClass]="(!passwordForminvalid && passwordsIdentity)?'passwordSetupBtn':'disable_passwordSetupBtn'">
+                    {{ formgroups ? ('setting.securitySetting.buttons.protectProject' | translate) : submitButtonText }}
+                  </button>
+                </div>&nbsp;&nbsp;
+                <div>
+                  <button type="button" id="cancel"  class="passwordSetupBtn" (click)="close()">
+                    {{'common.buttons.cancel' | translate}}
+                  </button>
+                </div>
+              </p-toolbar>
+            </div>
+         </div>
+        </div>
+       </p-footer>
+</div>

@@ -1,0 +1,101 @@
+/* ------------------------------------------------------------------------ */
+/* Copyright © Siemens AG 2021-2021. All rights reserved. Confidential.     */
+/* ------------------------------------------------------------------------ */
+@import 'variables';
+nav.settings {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 100%;
+    display: inline-block;
+    background-color: #111;
+    z-index: 1;
+    // margin-right: 10rem;
+    transition: all 0.5s;
+    .title {
+      display: inline-block;
+      font-size: 1.6rem;
+    }
+    a {
+      display: block;
+      font-size: 2rem;
+      color: $color-bg-white;
+      padding: 1rem;
+    }
+
+    .closebtn {
+      display: inline-block;
+      text-align: right;
+      font-size: 4rem;
+      margin-left: 4rem;
+      padding: 0;
+      color: #818181;
+      &:hover {
+        color: #f1f1f1;
+      }
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 6rem;
+      height: 3rem;
+      margin-left: 2rem;
+    }
+
+    /* Hide default HTML checkbox */
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    /* The slider */
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: 0.4s;
+      transition: 0.4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 2.4rem;
+      width: 2.4rem;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: 0.4s;
+      transition: 0.4s;
+    }
+
+    input:checked + .slider {
+      background-color: #2196f3;
+    }
+
+    input:focus + .slider {
+      box-shadow: 0 0 1px #2196f3;
+    }
+
+    input:checked + .slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 3rem;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+  }

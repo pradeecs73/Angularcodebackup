@@ -1,0 +1,75 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+<div class="open-project__container" *ngIf="showPanel">
+    <p-card styleClass="card" [class]="project.name===facadeService.commonService.selectedProject?'selected':''">
+      <p-header>
+        <div class="card__header">
+          <span class="card__header--icon fas fa-cube"></span>
+          <span class="span card__header--title">{{project.name}}</span>
+          <div class="card__header--controls">
+            <span class="pen">
+              <em id="editButton"
+               class="fas fa-pen"
+                title="{{'home.titles.editProject' | translate}}" 
+                [disableIfUnauthorized]="accessControl.CAN_PROJECT_UPDATE"
+                (click)="editProject()" onkeypress="editProject()"></em>
+            </span>
+            <span id="dotButton" class="dot">
+              <em class="fas fa-ellipsis-h"  onkeypress="menu.toggle($event)" (click)="menu.toggle($event)"></em>
+              <span class="menu-class">
+                <p-menu #menu [popup]="true" [model]="items" class="open-project-context" ></p-menu>
+              </span>
+              <a id="place-holder" class="download-icon" #download ></a>
+
+            </span>
+          </div>
+        </div>
+      </p-header>
+      <app-form-dialog *ngIf="editprojectModalDisplay" [show]="editprojectModalDisplay" [inputs]="editProjectInput"
+      [data]="project"
+       (onHide)="editprojectModalDisplay=false" 
+       [component]="'create-edit'"></app-form-dialog>
+      <app-form-dialog 
+      *ngIf="saveasprojectModalDisplay"
+       [show]="saveasprojectModalDisplay"
+        [inputs]="saveasProjectInput"
+      [data]="project" (onHide)="saveasprojectModalDisplay=false" [component]="'create-edit'"></app-form-dialog>
+      <div class="card__body" [class]="project.isProtected ? 'protected':''">
+        <ul>
+          <li>
+            <p class="created-time card-item">
+              <span class="label">{{'home.projectData.creationTime' | translate}}</span>
+              <span class="value">
+                {{project.created  | formatDate : facadeService.translateService.currentLang}},
+                 {{project.created | date : 'shortTime'}}</span>
+            </p>
+          </li>
+          <li>
+            <p class="last-changed card-item">
+              <span class="label">{{'home.projectData.lastChanged' | translate}}</span>
+              <span class="value">
+                {{project.modified  | formatDate : facadeService.translateService.currentLang}}, 
+                {{project.modified | date : 'shortTime'}}</span>
+            </p>
+          </li>
+          <li>
+            <p class="author card-item">
+              <span class="label">{{'home.projectData.author' | translate}}</span>
+              <span id="author" class="value">{{project.author}}</span>
+            </p>
+          </li>
+        </ul>
+      </div>
+
+      <p-footer>
+        <div class="card__footer" [ngClass]="{'disabled-save-button' : facadeService.commonService.isOnline}">
+          <a href="" class="outline-btn save__project"
+           (click)="saveProject($event)"
+             [disableIfUnauthorized]="accessControl.CAN_PROJECT_UPDATE">
+            <span class="icon save-project"></span>
+            <span class="text">{{'home.titles.saveProject' | translate}}</span>
+          </a>
+        </div>
+      </p-footer>
+
+    </p-card>
+</div>

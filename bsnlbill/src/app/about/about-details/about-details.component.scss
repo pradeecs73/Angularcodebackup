@@ -1,0 +1,39 @@
+/* ------------------------------------------------------------------------ */
+/* Copyright © Siemens AG 2021-2021. All rights reserved. Confidential.     */
+/* ------------------------------------------------------------------------ */
+@import 'variables';
+.details{
+    background-color: #fff;
+    height:100vh;
+    .grid{
+        width: auto;
+        padding: 40px 0 0 20px;
+        .col-1{
+            .logo{
+                width: 100px;
+                height: 100px;
+            }
+        }
+        .col-11{
+            .product_name{
+                font-size: 14px;
+                .heading{
+                    font-weight: bold;
+                }
+            }
+            .title{
+                margin-top: 10px;
+                font-size: 14px;
+                .heading{
+                    font-weight: bold;
+                } 
+                .content{
+                    padding-top:20px;
+                    .document_link{
+                        color:$color-nav-background;
+                    }
+                }
+            }
+        }
+    }
+}

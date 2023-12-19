@@ -1,0 +1,49 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+    <!-- Shows always in offline and shows device available in online -->
+    <div class="panel--body" *ngIf="!showDeviceUnavailable">
+        <div class="panel--content" id="propertypanel" data-test="panel-accordian">
+            <!-- Panel accordion data -->
+            <div class="panel--content_data">
+                <p-accordion [multiple]="true"
+                (onOpen)="expandAndCollapseAccordion($event,true)"
+                (onClose)="expandAndCollapseAccordion($event,false)"
+                [activeIndex]="accordionIndex">
+                    <ng-container *ngFor="let parentItem of treeData">
+                        <p-accordionTab [header]="parentItem.name">
+                            <p-treeTable [value]="parentItem.children" [columns]="cols" [scrollable]="true"
+                            [scrollHeight]="innerHeight +'px'" [resizableColumns]="true" sortField="name"
+                            (onNodeExpand)="onNodeExpand($event, parentItem.name)"
+                             (onNodeCollapse)="onNodeCollapse($event, parentItem.name)">
+                                <ng-template pTemplate="colgroup" let-columns>
+                                    <!-- Column Headers -->
+                                    <colgroup>
+                                        <col *ngFor="let col of columns" [style.width]="col.width">
+                                    </colgroup>
+                                </ng-template>
+                                <!-- Collapsible Header -->
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr>
+                                        <th *ngFor="let col of columns" id="header" ttResizableColumn
+                                            [ttSortableColumn]="col.field">
+                                            <span title="{{col.header}}">{{col.header}}</span>
+                                            <p-treeTableSortIcon [field]="col.field"></p-treeTableSortIcon>
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <!-- Accordions Body with treeData -->
+                                <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+                                    <tr>
+                                        <td *ngFor="let col of columns; let i = index">
+                                            <p-treeTableToggler [rowNode]="rowNode" *ngIf="i == 0 ">
+                                            </p-treeTableToggler>
+                                            <span title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-treeTable>
+                        </p-accordionTab>
+                    </ng-container>
+                </p-accordion>
+            </div>
+        </div>
+    </div>

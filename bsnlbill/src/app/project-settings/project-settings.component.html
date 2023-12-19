@@ -1,0 +1,25 @@
+<div class="security-select-tab">
+
+    <div class="breadcrumb-container">
+        <p-breadcrumb styleClass="breadcrumb-container-box" [model]="items"></p-breadcrumb>
+   </div>
+
+
+   <div class="saveicon">
+    <em
+      class="fas fa-save enable-save"
+      (click)="saveWritePassword()"
+      [disableIfUnauthorized]="accessControl.CAN_PROJECT_UPDATE"
+      onkeydown=""
+    ></em>
+  </div>
+
+   <div>
+    <p-tabView>
+        <p-tabPanel header="{{'setting.tabs.securitySettings' | translate}}">
+            <app-security-settings (passwordFromPopup)="setWritePassword($event)"></app-security-settings>
+        </p-tabPanel>
+    </p-tabView>
+   </div>
+
+</div>

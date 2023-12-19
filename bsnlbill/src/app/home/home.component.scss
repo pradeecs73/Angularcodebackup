@@ -1,0 +1,289 @@
+/* ------------------------------------------------------------------------ */
+/* Copyright © Siemens AG 2021-2021. All rights reserved. Confidential.     */
+/* ------------------------------------------------------------------------ */
+@import "variables";
+
+$table-box-color: #cde6f769;
+$table-grid-color: #a9b3b9ce;
+
+.home {
+  background-color: #fff;
+  height:100%;
+
+  .header {
+    padding: 1.5rem 4rem;
+
+    &--text {}
+  }
+
+  .controls {
+    padding: 1.5rem 4rem;
+
+    &--button {
+      text-decoration: none;
+      color: #2387aa;
+      margin-right: 1.5rem;
+      cursor: pointer;
+
+      img
+      {
+        height: 2.4rem;
+        vertical-align: bottom;
+        filter: invert(40%) sepia(90%) saturate(528%) hue-rotate(151deg) brightness(92%) contrast(76%);
+      }
+    }
+  }
+
+  .opened-project {
+    .open-project-container {
+      padding: 2rem;
+      border: solid 1px #9ec4dd;
+    }
+
+    .no-project-container {
+      width: fit-content;
+      display: flex;
+      border: solid 1px #e1e3e4;
+      font-size: small;
+      background-color: #edf7fd;
+      box-shadow: 1px 1px 1px 1px #acc6d3;
+      border-left: #eef1f3 solid 2px;
+
+
+      .bulb-icon {
+        margin: 20px;
+        padding: 10px;
+        color: #555f69;
+      }
+
+      .no-project-opened {
+        padding: 10px;
+        border-left: rgb(238, 241, 243) solid 2px;
+        padding-right: 8rem;
+
+      }
+    }
+  }
+
+  .recently-used-project {
+    .recent-proj-controls {
+      display: flex;
+
+      .controls-right {
+        display: inline-block;
+        margin-left: auto;
+      }
+
+      a {
+        text-decoration: none;
+        padding: .5rem;
+        margin-left: 1rem;
+      //  background-color: $color-colarea3;
+        border-radius: 5%;
+        font-size: 1.6rem;
+        color: #E8ECF1;
+        height: 1.6rem;
+
+      }
+
+      a:hover {
+        //background-color: #a0bbd6c2;
+          cursor: pointer;
+        }
+
+        a:active {
+
+      }
+ }
+    .open-column-width{
+      flex: 0 0 120px;
+    }
+
+    .key-column-width{
+      flex: 0 0 40px;
+    }
+
+    .text-content-width{
+      flex: 0 0 180px;
+    }
+    .p-datatable{
+      margin-top: 15px;
+      border: $color-table-border-top;
+    }
+    .p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-thead{
+      background-color: $color-header-table;
+      padding : 0px;
+    }
+    .p-datatable-scrollable .p-datatable-thead {
+      font-weight: 700;
+      padding: 1rem;
+      border-bottom: $color-table-border;
+      font-size: 1.6rem;
+    }
+    .p-datatable .p-datatable-thead > tr >th{
+      padding-left : 8px;
+      height : 32px;
+    }
+
+    .p-datatable .p-datatable-thead > tr >th:not(:first-child){
+      border-left: solid 2px $color-bg-white;
+    }
+    .p-datatable .p-datatable-thead > tr >th:not(:last-child){
+      border-right: solid 2px $color-bg-white;
+    }
+
+    .p-datatable-scrollable .p-datatable-tbody>tr {
+      background-color: $color-bg-white;
+      font-size: 1.6rem;
+      height : 32px;
+    
+    }
+    .p-datatable-scrollable .p-datatable-tbody>tr:hover {
+      background-color: $color-table-hover;
+      cursor: pointer;
+    }
+    .p-datatable-scrollable .p-datatable-tbody>tr.project-selected {
+      background-color :$color-open-button;
+      color : $color-bg-white;
+      .protected-key {
+          filter: $color-white-seletcted;   
+      }
+    }
+      
+    .p-datatable .p-datatable-tbody > tr > td{
+      border-top: 0px;
+      border-right: 0px;
+      border-left:0px;
+      border-bottom: $color-table-border;
+    }
+  }
+
+
+}
+
+
+.p-accordion-header-text{
+  font-size: 14px;
+}
+
+//overwrite primeng accordion style
+
+body .p-accordion .p-accordion-header:not(.p-disabled).p-highlight .p-accordion-header-link{
+  //background-color: #cdd9e1;
+  background-color: #cdd9e169;
+  color: #000;
+  border: solid 1px #cdd9e1;
+}
+
+//accordion header hover
+body .p-accordion .p-accordion-header:not(.p-disabled).p-highlight:hover .p-accordion-header-link {
+  background-color: #cdd9e1;
+  color: #000;
+  border: solid 1px #cdd9e1;
+
+}
+
+//accordion header focus
+body .p-accordion .p-accordion-header:not(.p-disabled).p-highlight .p-accordion-header-link:focus {
+  border: solid 1px #cdd9e1;
+  box-shadow: none;
+}
+
+body .p-accordion .p-accordion-header a:focus {
+  box-shadow: none;
+}
+
+// carret icon on hover
+body .p-accordion .p-accordion-header:not(.p-disabled).p-highlight:hover a .-accordion-toggle-icon {
+  color: #000;
+}
+
+// carret icon
+body .p-accordion .p-accordion-header:not(.p-disabled).p-highlight a .p-accordion-toggle-icon {
+  color: #000;
+}
+.table-item:hover{
+
+  background-color: #a9b3b991;
+  cursor: pointer;
+}
+.Asterisk{
+  font-size: xx-small;
+}
+
+.protected-key{
+  content: url("../../assets/icons/difa_functionRights.svg");
+}
+
+body .p-dialog .p-dialog-titlebar,
+body .p-dialog .p-dialog-footer {
+    background: $color-colarea1-gray;
+}
+
+body .p-dialog .p-dialog-content {
+    i {
+        color: $color-warning;
+    }
+}
+
+body .p-dialog .p-dialog-footer {
+    .p-confirmdialog-rejectbutton,
+    .p-confirmdialog-acceptbutton {
+        background: $color-interaction-blue;
+        color: #fff;
+
+        &:hover {
+            background: $color-interaction-blue-hover;
+            color: #fff;
+        }
+
+        &:focus {
+            box-shadow: none;
+        }
+    }
+}
+
+.project-enable{
+
+  background-color : $color-open-button;
+
+}
+
+.project-disable{
+  background-color :$color-colarea3;
+
+}
+.project-deselected{
+  background-color :'';
+}
+
+.project-selected{
+  background-color :$color-open-button;
+  color : $color-bg-white;
+  .protected-key {
+     
+      filter: $color-white-seletcted;
+      
+  }
+}
+
+.opened{
+  background-color: #A7AF27;
+  text-align: center;
+  border: 2px solid $color-bg-white;
+  color: $color-bg-white;
+  padding: 0 15px
+}
+
+#passwordValidationModal{
+  .form-box-2 {
+      .p-card {
+        width: 520px !important;
+
+        .p-card-content{
+          padding:0px;
+        }
+      }
+    
+    }
+}

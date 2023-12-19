@@ -1,0 +1,137 @@
+/* ------------------------------------------------------------------------ */
+/* Copyright © Siemens AG 2021-2021. All rights reserved. Confidential.     */
+/* ------------------------------------------------------------------------ */
+@import 'variables';
+/*overlay styles*/
+$default-font-size: 1.6rem;
+$color-font-dark: #555;
+
+
+//spinner var
+$speed: 1;
+$circleSize: 6;
+$circleUnits: 'px';
+$circleColor: $color-interaction-blue;
+$containerSize: 30px;
+
+
+@mixin absCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+
+#overlay {
+    position: fixed; /* Sit on top of the page content */
+    display: block; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.9); /* Black background with opacity */
+    z-index: 6; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: default; /* Add a pointer on hover */
+    text-align: center;
+    // position: relative;
+
+    .container {
+      @include absCenter();
+      visibility: visible;
+      width: 40rem;
+      height: 3rem;
+      // top: 55%;
+      top: 35%;
+      left: 50%;
+    }
+    .msg-container {
+      @include absCenter();
+      top: 40%;
+      width: 50rem;
+      height: 10rem;
+      text-align: center;
+      border-radius: 2rem;
+      background-color: $color-bg-white;
+      color: $color-font-dark;
+      font-size: 2.7rem;
+      padding: 2rem;
+      // text-transform: uppercase;
+    }
+    .loading-message {
+      color: #e7e3e3;
+      font-size: 1.3em;
+    }
+
+    .loading-description {
+      color: #666666;
+      font-size: 1em;
+    }
+    // .spinner {
+    //   margin: 0 auto;
+    //   height: 64px;
+    //   width: 64px;
+    //   animation: rotate 0.8s infinite linear;
+    //   border: 5px solid #e7e3e3;
+    //   border-right-color: transparent;
+    //   border-radius: 50%;
+    // }
+
+
+    #spinner {
+      margin: 0 auto;
+      position: relative;
+      width: #{$containerSize};
+      height: #{$containerSize};
+
+      .circle-container {
+        position: absolute;
+        width: #{$circleSize}#{$circleUnits};
+        height: 100%;
+        left: 50%;
+        margin-left: -#{$circleSize / 2}#{$circleUnits};
+
+        .circle {
+          width: #{$circleSize}#{$circleUnits};
+          height: #{$circleSize}#{$circleUnits};
+          background-color: #{$circleColor};
+          border-radius: #{$circleSize}#{$circleUnits};
+        }
+      }
+
+      @for $i from 1 through 8 {
+        .circle-container:nth-child(#{$i}) {
+          transform: rotate(-#{$i * 360 / 8}deg);
+          opacity: #{($i - 1) / 7};
+          animation: spin#{$i} 1s infinite;
+          animation-fill-mode: forwards;
+          animation-timing-function: steps(8, end)
+        }
+
+        @keyframes spin#{$i} {
+          @for $q from 0 through 7 {
+            #{12.5 * $q}% {
+              opacity: #{(($i - 1) / 7 + $q / 7) % 1.000001};
+            }
+          }
+        }
+      }
+
+    }
+
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  // @keyframes rotate {
+//   0% {
+//     transform: rotate(0deg);
+//   }
+//   100% {
+//     transform: rotate(360deg);
+//   }
+// }

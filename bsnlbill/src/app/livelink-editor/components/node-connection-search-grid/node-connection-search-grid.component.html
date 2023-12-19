@@ -1,0 +1,79 @@
+<div class="ui-g-12">
+  <div class="device-grid-header">
+    <div class="header-text">
+      <ng-container *ngIf="!showSearch">
+        {{headerAreaHierarchy$ | async}}
+      </ng-container>
+      <ng-container *ngIf="showSearch">
+        <label for="SearchInterface"></label>
+        <input
+          id="SearchInterface"
+          placeholder="{{'common.words.search' | translate}}"
+          (keyup)="onSearch($event)"
+          class="grid-menu-inputbox"
+          type="text"
+          name="SearchInterface"
+          [(ngModel)]="searchText"
+        />
+      </ng-container>
+      <span class="search-icon">
+        <i
+          class="fas fa fa-times"
+          *ngIf="showSearch"
+          aria-hidden="true"
+          onKeyPress="toggleSearchIcon()"
+          (click)="toggleSearchIcon()"
+        ></i>
+        <i
+          aria-hidden="true"
+          *ngIf="!showSearch"
+          class="fas fa fa-search"
+          (click)="toggleSearchIcon()"
+          onKeyPress="toggleSearchIcon()"
+        ></i>
+      </span>
+    </div>
+  </div>
+  <!-- subConnectionMatchingInterfaces -->
+  <div *ngIf="filteredDevicesAddedToGrid.length === 0" class="device-grid-body">
+    <div class="grid-container-device">
+      <div class="grid-item-device-icon">{{'editor.messages.noCompatibleDevices' | translate}}</div>
+    </div>
+  </div>
+
+  <div
+    *ngFor="let device of filteredDevicesAddedToGrid;let i = index"
+    class="device-grid-body"
+  >
+    <div class="grid-container-device">
+      <div class="grid-item-device-icon"></div>
+      <div class="grid-item-device">
+        <ng-container
+          *ngIf="i === 0 && !filteredDevicesAddedToGrid[0].displayName"
+        >
+        {{'editor.messages.noCompatibleInterface' | translate}}
+        </ng-container>
+        <ng-container *ngIf="!device.hideCheckBox">
+          <label for="interface-selection"></label>
+          <input
+            (change)="radioButtonChecked($event,device)"
+            (click)="$event.stopPropagation()"
+            id="interface-selection"
+            label="interface selection checkbox"
+            class="grid-menu-checkbox"
+            [value]="device"
+            type="radio"
+            name="interface-selection"
+            [(ngModel)]="interfaceSelected"
+            onKeyPress="$event.stopPropagation()"
+          />
+        </ng-container>
+
+        <span class="tooltip">
+          <span class="tooltiptext">{{device.hoverDisplayName }}</span>
+          <span class="device-name">{{device.displayName }}</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

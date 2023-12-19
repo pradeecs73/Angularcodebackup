@@ -1,0 +1,22 @@
+<div class="general-settings-main"> 
+    <div class="outerdivsettings">
+      <div class="grid">
+
+           <div class="col-12 pageheader">
+              <span>{{'setting.globalGeneralSettings.titles.languageSelection' | translate}}</span>
+            </div>
+            <div class="col-4">
+              <span class="select-langugage">
+                {{'setting.globalGeneralSettings.titles.selectLanguage' | translate}}
+              </span>
+            </div> 
+            <div class="col-8 pb-5">
+                <p-dropdown 
+                [options]="languages"
+                 [(ngModel)]="selectedLanguage" 
+                 (ngModelChange)="languageChanged($event)" 
+                 optionLabel="key"></p-dropdown>
+             </div>
+    </div>
+</div>
+</div>

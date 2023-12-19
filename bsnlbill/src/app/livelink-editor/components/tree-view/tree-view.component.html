@@ -1,0 +1,45 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+
+<ul class="tree" class="device-tree-list-icon">
+    <li class="tree_elem" [disableIfUnauthorized]="accessControl.CAN_ADD_MOVE_AC" 
+    (mousedown)="assignObject($event, automationComponent)">
+        <input type="checkbox" [(ngModel)]="isShow" class="tree__parent-checkbox" [id]="automationComponent.id"
+            name="'node_'+i" aria-label="node" />
+        <label [for]="automationComponent.id" class="tree__parent-label" 
+        [disableIfUnauthorized]="accessControl.CAN_ADD_MOVE_AC">
+            <app-node  [isShow]="isShow" [text]="automationComponent.name"></app-node>
+
+            <div class="child" *ngIf="isShow">
+
+                <div>
+                    <input type="checkbox" [(ngModel)]="showCInf" class="tree__parent-checkbox"
+                        [id]=" 'cinf' + automationComponent.id" name=" 'cinf' + automationComponent.id" />
+                    <label [for]="'cinf' + automationComponent.id" class="interface">
+
+                        <ul *ngIf="showCInf" >
+                            <li *ngFor="let interface of automationComponent.clientInterfaces">
+                                <i aria-hidden="true" class="lastinterface"></i>  {{interface.name}}
+                            </li>
+                        </ul>
+                    </label>
+                </div>
+
+                <div>
+
+                    <input type="checkbox" [(ngModel)]="showSInf" class="tree__parent-checkbox" 
+                        [id]=" 'sinf' + automationComponent.id" name=" 'sinf' + automationComponent.id" />
+                    <label [for]="'sinf' + automationComponent.id" class="interface">
+
+                        <ul *ngIf="showSInf" >
+                            <li *ngFor="let interface of automationComponent.serverInterfaces">
+                               <i aria-hidden="true" class="lastinterface"></i> {{interface.name}}
+                            </li>
+                        </ul>
+                    </label>
+                </div>
+
+            </div>
+
+        </label>
+    </li>
+</ul>

@@ -1,0 +1,19 @@
+@import "variables";
+@import "../../../../styles/partials/ptab.scss";
+
+.browse-select-tab {
+    p-tabview {
+        @include p-tab;
+
+        .p-tabview-panels {
+            height: 37vh !important;
+        }
+    }
+}
+
+.add-string{
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 0px 0px 3px 9px;
+}

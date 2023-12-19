@@ -1,0 +1,159 @@
+/* ------------------------------------------------------------------------ */
+/* Copyright © Siemens AG 2021-2021. All rights reserved. Confidential.     */
+/* ------------------------------------------------------------------------ */
+@import 'variables';
+
+.outerdiv
+{
+    text-align: left;
+    padding-left: 1rem;
+    padding-right: 1.5rem;
+
+    .form-control
+    {
+        width: -webkit-fill-available;
+    }
+    label{
+        font-weight: bold;
+        font-size: 13px;
+    }
+    input
+    {
+        &.ng-invalid .ng-touched
+        {
+            background-color:  $color-cell-error;
+            color: white;
+            border-color: $color-cell-error;
+        }
+    }
+    .textInput
+    {
+        border: $color-interaction-blue 1.5px solid;
+        border-radius: 1.4px;
+        outline: none;
+        &:disabled
+        {
+            background-color: $color-colarea5;
+            border-color: $color-col-accent1b;
+        }
+    }
+    textarea
+    {
+    height: 90px;
+    overflow-y: auto;
+    resize: none;
+    margin-bottom: 2.5px;
+    }
+    .err-span
+    {
+        border: 1px solid $color-cell-error;
+        background-color: $color-cell-error2;
+        width: max-content;
+        display: inline-flex;
+        padding: 5px;
+        padding-left: 10px;
+        padding-right: 14px;
+        font-size: 13px;
+        border-radius: 5px;
+        margin-top: 3px;
+        span
+        {
+            &:first-child
+            {
+                line-height: 3;
+                i{
+                    color: $color-cell-error;
+                    font-size: 15px;
+                }
+            }
+            &:nth-child(2)
+            {
+                padding-left: 10px;
+                p {
+                    &:first-child
+                    {
+                        font-weight: bold;
+                    }
+                    &:nth-child(2)
+                    {
+                        font-weight: 400;
+                    }
+                }
+            }
+            &:nth-child(3)
+            {
+                float: right;
+                &:hover
+                {
+                    cursor: pointer;
+                }
+                i {
+                    font-size: 14px;
+                }
+            }
+        }
+
+    }
+    .error-cursor
+    {
+        cursor :not-allowed;
+    }
+    .ui-g-7{
+        position: relative;
+    }
+
+    .err-span{
+
+        right: 66px;
+       /*  position: absolute; */
+        margin-left: 5px;
+        left:0px;
+        z-index: 10000;
+        top: 27px;
+    }
+
+
+
+
+
+}
+
+.btn{
+
+    &:disabled
+    {
+        background-color:  $color-colarea3;
+    }
+}
+.footer-toolbar  {
+    .footer,  .p-toolbar
+    {
+        background-color: $color-colarea5 !important;
+        padding-right: 2.5rem;
+        justify-content:  flex-end;
+        .btn{
+            background-color: $color-interaction-blue;
+            line-height: 1.8;
+            // padding: 5px;
+            color: white;
+            width: auto !important;
+            margin-left: 5px !important;
+            border-radius: 4px;
+            padding : 0 7px 0 7px;
+            cursor: pointer;
+            float: right;
+            &:disabled
+            {
+                background-color:  $color-colarea3;
+            }
+
+            &:second-child
+            {
+                background-color: white;
+                color: $color-interaction-blue;
+                border: $color-interaction-blue 1.3px solid;
+                width: 70px !important;
+            }
+        }
+    }
+}

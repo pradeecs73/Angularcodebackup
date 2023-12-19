@@ -1,0 +1,59 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+<div class="ui-g outerdiv">
+  <div class="ui-g-12" [ngSwitch]="tabView">
+    <div class="add" *ngSwitchCase="'add'">
+      <device-add-mechanism-selector (onNextPage)="loadOnlineBrowsePage($event)"></device-add-mechanism-selector>
+    </div>
+    <div class="add" *ngSwitchCase="'back'">
+      <device-add-mechanism-selector (onNextPage)="loadOnlineBrowsePage($event)"></device-add-mechanism-selector>
+    </div>
+    <div class="detail" *ngSwitchCase="'browseOnline'">
+      <app-device-browse-selector (onScannedDeviceAdded)="onScannedDevicesAdded($event)"
+        (onDeviceAltered)="addDeviceToList($event)" (onPreviousPage)="loadAddSelectionPage($event)"
+        [devicesAddedToGrid]="addedDeviceList"></app-device-browse-selector>
+    </div>
+    <div class="import-from-file" *ngSwitchCase="'importFromFile'">
+      <app-devices-import-from-file-modal [uploadFileTableColumns]="uploadFileTableColumns" [tabView]="tabView"
+        [showNoDeviceData]="showNoDeviceData" [deviceListInGrid]="importedDeviceList"
+        (deleteFromGrid)="deleteFileByDeviceName($event)"
+        (customValidationForDeviceAddress)="customValidationForAddress($event)"
+        (onPreviousPage)="loadAddSelectionPage($event)" (onNextPage)="addNodeSetFilesToList($event)">
+      </app-devices-import-from-file-modal>
+    </div>
+    <div class="add" *ngSwitchDefault>
+      <app-device-browse-selector (onScannedDeviceAdded)="onScannedDevicesAdded($event)"></app-device-browse-selector>
+    </div>
+  </div>
+</div>
+<p-footer>
+  <div class="footer-toolbar">
+
+    <ng-container *ngIf="tabView === 'add' || tabView === 'back'">
+      <p-toolbar styleClass="footer">
+        <button aria-label="add_button" type="submit" id="Create" class="button-next" disabled>
+          &lt;&lt; {{'common.buttons.back' | translate}}
+        </button>
+        <button aria-label="next_button"
+        type="button" id="next" class="button-next" 
+        (click)="next()">{{'common.buttons.next' | translate}} >></button>
+      </p-toolbar>
+    </ng-container>
+
+    <ng-container *ngIf="tabView === 'browseOnline' || tabView === 'importFromFile'">
+      <p-toolbar styleClass="footer">
+
+        <button aria-label="back_button" type="submit" id="Create" class="button-next"
+          (click)="loadAddSelectionPage('back')">
+          &lt;&lt; {{'common.buttons.back' | translate}}
+        </button>
+
+        <button aria-label="add_device_button" type="button" id="addDevice" class="button-next"
+        [disabled]="addButtonDisabled()" 
+        (click)="onFinalDeviceAdd()">
+        {{'devices.buttons.addDevices' | translate}}</button>
+
+      </p-toolbar>
+    </ng-container>
+
+  </div>
+</p-footer>

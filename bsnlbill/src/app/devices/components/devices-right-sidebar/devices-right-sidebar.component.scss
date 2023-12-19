@@ -1,0 +1,145 @@
+/* ------------------------------------------------------------------------ */
+/* Copyright © Siemens AG 2021-2021. All rights reserved. Confidential.     */
+/* ------------------------------------------------------------------------ */
+@import "variables";
+@import "../../../../styles/partials/ptab.scss";
+$font-size: 1.2rem;
+
+
+
+.right-sidebar {
+    // min-height: 100vh;
+    height: 100%;
+    background-color: white;
+   // background: white;
+    //width: 22.5rem;
+    .toolbar {
+        border-radius: 0;
+        background: $color-colarea5;
+        font-size: 1em;
+        display: block;
+        height: 44.15px;
+        border-bottom: 1px solid $color-colarea2;
+        // border:none;
+        span > i {
+            color: $color-interaction-blue;
+            // flex:1;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        span.header-text {
+            // flex:12;
+            color: $color-collight2-gray;
+            vertical-align: super;
+            width: auto;
+        }
+
+        span.header-icon {
+            margin-left: 3.7rem;
+            font-size: 1.2rem;
+            vertical-align: text-top;
+        }
+    }
+
+    @include p-tab;
+
+    .collapsed {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        background-color: #cedae1;
+        height:100%;
+        &-icon {
+            padding: 0.5rem;
+            color: $color-interaction-blue; //#5dbcd2;
+            font-size: $font-size;
+            width: 2.4rem;
+            height: 2.4rem;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        &-text {
+            width: 2.4rem;
+            overflow: hidden;
+            // background-color: green;
+            font-size: 1.4rem;
+
+            div {
+                width: 20rem;
+                transform: rotate(-90deg);
+                transform-origin: top left;
+                margin-top: 47rem;
+            }
+        }
+    }
+    span {
+        white-space:pre;
+    }
+
+    //This style defines the width of the "right side bar when expanded
+    .properties-table-expand{
+        min-width: 23vw;
+    }
+    //This style defines the width of the "right side bar when collapsed
+    .properties-table-collapsed{
+        width: 2.5rem;
+    }
+
+    .p-tabview{
+        font-size: 14px;
+
+        &.p-tabview-top{
+            .p-tabview-nav{
+                li:not(.p-highlight):not(.p-disabled):hover{
+                    background: $color-bg-white;
+                    border-bottom:1px solid $color-colarea2;
+                }
+            }
+        }
+
+        .p-tabview-nav{
+            background: $color-bg-white;
+            border-radius: 0;
+            width: 99.4%;
+            margin-left: 1px;
+             li {
+                flex: 1;
+
+                &.p-highlight{
+                    .p-tabview-nav-link{
+                        background: $color-bg-white;
+                        border-bottom:1px solid $color-colarea2;
+                    }
+                }
+
+                &.p-highlight:hover{
+                    .p-tabview-nav-link{
+                        color:$color-interaction-blue-hover;
+                    }
+                }
+
+                &.p-highlight{
+                    .p-tabview-nav-link:focus{
+                        outline: 0 none;
+                        outline-offset: 0;
+                        box-shadow: none;
+                    }
+                }
+            }     
+        }
+    }
+
+ .p-disabled,.p-widget:disabled {
+    cursor: not-allowed;
+  }
+}
+
+
+td[data-indent="1"] {
+    padding-left: 23px !important;
+}

@@ -1,0 +1,29 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+<nav class="menu" tabindex="0">
+    <div class="smartphone-menu-trigger"></div>
+    <div class="plant-tree">
+        <div *ngIf="!devices" class="no-devices">
+            <p class="data-message">{{'editor.messages.noDevicesAvailable.title' | translate}} </p>
+            <p class="data-info">{{'editor.messages.noDevicesAvailable.content' | translate}}</p>
+        </div>
+
+        <!--  This HTML code renders the device nodes in the "right side bar" of the editor page -->
+        <div class="device-node" *ngFor="let device of devices">
+            <!--  This HTML code renders the device to expand/collapse in the "right side bar" of the editor page -->
+            <div class="collapsible" (click)=toggleExpandState(device.name)  
+            title="{{device.name}}" onkeydown="toggleExpandState(device.name)">
+                + <em class="plcDeviceIcon"></em> {{device.name | ellipsis : 25}} <span hidden>{{device.name}}</span>
+            </div>
+            <!--  This HTML code renders the "automation components"
+              of the expanded device in the "right side bar" of the editor page -->
+            <div class="content" *ngIf="isEligibleToExpand(device.name)">
+                <div class="tree__root" *ngFor="let automationComponent of device.automationComponents">
+                    <tree-view [data]="automationComponent" [adapterType]="device.adapterType" [key]="key"
+                        *ngIf="automationComponent" isRoot="true"></tree-view>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</nav>

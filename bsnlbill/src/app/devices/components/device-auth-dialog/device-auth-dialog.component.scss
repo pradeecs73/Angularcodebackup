@@ -1,0 +1,68 @@
+@import "variables";
+#device-login-auth {
+    .p-10 {
+        padding: 10px;
+    }
+    .info-label {
+        font-weight: bold;
+        font-size: 13px;
+        padding-bottom: 10px
+    }
+    .footer-buttons{
+        float: right;
+    }
+    .btn{
+        border: #2782a1;
+        background-color: #2782a1;
+        width: 100px;
+        height: 30px;
+        text-align: center;
+        color: white;
+        border-radius: 2.5px;
+        cursor: pointer;
+        &.login{
+            margin-left: 10px
+        }
+    }
+    .btn-cancel {
+        background: #fff;
+        color: #3296b9;
+        border: 1px solid #3296b9;
+        border-radius: 3px;
+        width: 80px;
+        height: 25px;
+        cursor: pointer;
+    }
+
+    .login-disabled{
+        background-color :$color-colarea3;
+    }
+
+    .p-20{
+        padding: 20px;
+    }
+
+    .icon-info {
+        margin-top: 15px;
+    }
+
+    .info-content {
+        content: url("../../../../assets/icons/Info_16er.svg");
+        filter: invert(33%) sepia(100%) saturate(607%) hue-rotate(155deg) brightness(92%) contrast(10%);
+    }
+
+    .h-30 {
+        height: 30px;
+    }
+
+    .sub-info {
+        font-weight: 600;
+        font-size: 12px;
+        padding-bottom: 15px;
+        padding-top: 10px;
+    }
+
+    .sub-info-1 {
+        font-size: 12px;
+    }
+}

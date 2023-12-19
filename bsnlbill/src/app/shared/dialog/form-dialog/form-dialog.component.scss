@@ -1,0 +1,20 @@
+/* ------------------------------------------------------------------------ */
+/* Copyright © Siemens AG 2021-2021. All rights reserved. Confidential.     */
+/* ------------------------------------------------------------------------ */
+@import 'variables';
+@import 'overlay';
+
+
+#overlay {
+  @include overlay();
+}
+
+.form-box-2 {
+  @include box-2();
+  .p-card {
+    width: 550px !important;
+  }
+
+}
+
+

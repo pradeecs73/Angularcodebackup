@@ -1,0 +1,204 @@
+/* ------------------------------------------------------------------------ */
+/* Copyright © Siemens AG 2021-2021. All rights reserved. Confidential.     */
+/* ------------------------------------------------------------------------ */
+@import 'variables';
+@import 'icon';
+
+//Styling for the devices side bar
+body .devices-sidebar {
+  height: 100%;
+
+  //Styling fo the devices menu view
+  .devices-menu-view {
+    height: 100%;
+    background-color: white;
+
+    //Styling for the menu in full view
+    &--full {
+      height: inherit;
+      min-width: 16vw;
+
+      .devices-fillingLine-container {
+        position: relative;
+      }
+
+      .devices-view-header {
+        padding: 1rem;
+        display: flex;
+        font-weight: 400;
+        background-color: $color-colarea5;
+        height: 44.15px;
+        border: 1px solid $color-colarea2;
+        margin-right: -0.8%;
+        margin-bottom: 1px;
+
+        .devices-header-text {
+          flex: 12;
+          color: $color-collight2-gray;
+          margin-left: 2%;
+        }
+
+        .devices-header-icon {
+          flex: 1;
+          color: $color-interaction-blue;
+          font-size: 1.2rem;
+          margin-top: 7px;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    //Styling for the menu in collapsed view
+    &--collapsed {
+      height: inherit;
+      text-align: center;
+      background-color: $color-bg-default;
+
+      .devices-collapsed {
+        &-icon {
+          padding: 0.5rem;
+          color: $color-interaction-blue;
+          font-size: 1.2rem;
+          width: 2.4rem;
+          height: 2.4rem;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+
+        &-text {
+          width: 2.4rem;
+          overflow: hidden;
+          height: 20rem;
+          margin-top: 30rem;
+          font-size: 1.2rem;
+
+          & > div {
+            width: 20rem;
+            transform: rotate(90deg);
+            transform-origin: top left;
+            margin-left: 2.4rem;
+            padding: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+//Overriding the styles of panel menu prime-ng control
+//In order to override the styles, 'encapsulation: ViewEncapsulation.None' should be written inside the component class
+body .devices-menu-view {
+  & .p-panelmenu {
+    font-size: 14px;
+    //Styling panel menu header
+    & .p-panelmenu-header {
+      display: inline-flex;
+      width: -webkit-fill-available;
+      font-size: 14px;
+
+      .p-menuitem-icon {
+        margin-left: 0.5rem;
+        margin-top: 4px;
+      }
+
+      .p-menuitem-text {
+        margin-left: 0.5rem;
+        //overflow-x: hidden;
+        text-overflow: ellipsis;
+        width: 72%;
+        font-weight: normal;
+      }
+
+      a {
+        border: none;
+        display: inline-flex;
+        overflow: hidden;
+        width: 100%;
+        background-color: white;
+
+        .p-panelmenu-icon {
+          font-size: 12px;
+          margin-top: 5px;
+        }
+      }
+
+      &.p-highlight > a {
+        background-color: $color-interaction-blue-hover;
+        border-radius: 0px;
+      }
+    }
+
+    .p-panelmenu-header > a:focus {
+      box-shadow: none;
+    }
+
+    .p-panelmenu-header.p-highlight > a:hover,
+    .p-panelmenu-header:not(.p-highlight) > a:hover {
+      border: 0px;
+      background-color: #3296b9;
+    }
+
+    //Styling panel menu content
+    .p-panelmenu-content {
+      border: none;
+
+      .p-menuitem {
+        border-radius: 0px;
+
+        .p-menuitem-link {
+          &.p-highlight {
+            border: none;
+          }
+        }
+
+        .p-menuitem-link {
+          &.device-active {
+            background-color: $color-interaction-blue-hover;
+            border: none;
+
+            .p-menuitem-text {
+              color: #f4f4f4 !important;
+            }
+          }
+        }
+      }
+    }
+
+    .p-menuitem-icon {
+      margin-left: 4.5rem;
+    }
+
+    .p-menuitem-text {
+      margin-left: 0.5rem;
+    }
+
+    .p-panelmenu-content .p-menuitem .p-menuitem-link:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+//Styling for the device icon displayed for each device in the panel menu
+.deviceicon {
+  &::before {
+    content: url('/../../../assets/icons/PLC_16er.svg');
+    vertical-align: middle;
+  }
+}
+
+//Styling for the device save icon
+.devices-save-icon {
+  @include panel-icon-div;
+  .disabled{
+    @include disabled-save-icon;
+  }
+}
+
+.disabled-save-icon {
+  @include disabled-save-icon;
+}

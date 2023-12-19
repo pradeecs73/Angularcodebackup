@@ -1,0 +1,207 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+<div class="editor-main-container">
+  <div [ngClass]="{'breadcrumb-container-main-online' :
+   facadeService.commonService.isOnline,'breadcrumb-container-main-offline' :
+    !facadeService.commonService.isOnline}">
+    <div class="breadcrumb-container-main-online-icon" *ngIf="facadeService.commonService.isOnline">
+      <img width="" height="" src="../assets/icons/GoOnline_16er.svg" alt="">
+    </div>
+    <p-breadcrumb styleClass="{{facadeService.commonService.isOnline === true ?
+         'breadcrumb-container-main-online-box' : 'breadcrumb-container-main-offline-box'}}" [model]="items">
+    </p-breadcrumb>
+  </div>
+  <div class="buttonList-container">
+    <p-toolbar styleClass="buttonList-toolbar">
+      <!-- proposeonicon disable check: common.editorHasNoDevice || (common.noOfNodesInEditor<2) -->
+
+    <span class="p-buttonset">
+      <button
+        [disabled]="disableEstablishConnectionBtn"
+        id="Establish_connectionButton" label="{{establishConnectionlabel | translate}}" iconPos="left"
+        icon="establishicon"
+        pButton pRipple
+        (click)="establishCon()"
+        [disableIfUnauthorized]="accessControl.CAN_ESTABLISH_CONNECTION">
+      </button>
+      <p-button
+      styleClass="v-ellipsis"
+      class="p-mr-2"
+      type="button"
+      icon="pi pi-ellipsis-v"
+      (click)="showEstablishConnectionOption($event)"
+      onkeypress="showEstablishConnectionOption($event)"></p-button>
+      <div class="establishConnectOption-content" [ngClass]="showEstablishConnectionOptionValue ? 'open' : 'close'">
+        <a
+        *ngFor="let establistConnection of establishConnectionMenus"
+        (click)="updateConnectionSelection(establistConnection)">{{establistConnection.id | translate}}</a>
+      </div>
+    </span>
+
+      <button pButton pRipple id="goOnlineButton"
+      label="{{'editor.menuOptions.goOnline' | translate}}" (click)="goOnline()" iconPos="left" icon="onlineicon"
+      [disabled]="facadeService.commonService.isOnline ||
+        disableOnlineButton ">
+      </button>
+      <p-button
+      id="goOfflineButton"
+      label="{{'editor.menuOptions.goOffline' | translate}}"
+      (onClick)="goOffline()" iconPos="left" icon="offlineicon"
+        [disabled]="!facadeService.commonService.isOnline ||
+        disableOnlineButton ">
+      </p-button>
+
+      <!-- upload disabled check: !common.isOnline || common.editorHasNoDevice
+        || (common.noOfNodesInEditor<2) || isOtherButtonsEnabled -->
+
+      <span class="status"
+        [ngClass]="{'online':facadeService.commonService.isOnline, 'offline':!facadeService.commonService.isOnline}">
+        {{'editor.menuOptions.status' | translate}}
+      </span>
+
+    </p-toolbar>
+
+    <div *ngIf="showDeleteACButton" class="action-bar" id="deviceActionBtnList">
+      <button
+      class="btn"
+      title="{{'devices.titles.deleteDevice' | translate}}"
+      (click)="deleteEditorNode()"
+      [disableIfUnauthorized]="accessControl.CAN_DELETE_AREA_NODE">
+        <i aria-hidden="true" class="fas fa-trash delete-btn"></i>
+      </button>
+    </div>
+
+    <div class="action-bar" *ngIf="showDeleteConnectionButton" id="actionBtnList">
+      <button
+      class="btn"
+      title="{{'editor.menuOptions.deleteConnection' | translate}}"
+      (click)="deleteConnection()"
+      [disableIfUnauthorized]="accessControl.CAN_CONNECTION_DELETE_OFFLINE">
+        <i aria-hidden="true" class="fas fa-trash delete-btn"></i></button>
+    </div>
+  </div>
+
+  <main id="main">
+    <div class="" id="node-connection-search-menu" *ngIf="adjustContextPosition()">
+      <div *ngIf="triggerContextPositionCalc() && !facadeService.commonService.isOnline" >
+        <app-node-connection-search-grid [connectionSearchContextMenu]="(connectionSearchContextMenu$ | async)">
+        </app-node-connection-search-grid>
+      </div>
+    </div>
+
+    <div class="connection-contextmenu" id="onlineDelteContextmenu" *ngIf="showDeleteContextMenu()">
+      <ul class="contextmenu">
+
+        <li class="contextmenu_item" *ngIf="connectionState == 'ONLINE'">
+          <a class="contextmenu_item_text" onKeyPress="addConnectionToProject()"
+          [disableIfUnauthorized]="accessControl.CAN_CONNECTION_OFFLINE"
+          (click)="addConnectionToProject()">
+            <span class="fas fa-plus-circle"></span>
+            {{'editor.menuOptions.addConnectionToProject' | translate}}
+          </a>
+        </li>
+        <li class="contextmenu_item" [ngClass]="!connectionAvailable?'disable_menuitem':null">
+          <a class="contextmenu_item_text" onKeyPress="deleteConnectionOnline('deleteconnectiononline')"
+            [disableIfUnauthorized]="accessControl.CAN_CONNECTION_DELETE_ONLINE"
+            (click)="deleteConnectionOnline('deleteconnectiononline')">
+            <span class="remove_online">
+              {{'editor.menuOptions.removeConnectionOnline' | translate}}
+            </span>
+          </a>
+        </li>
+        <li class="contextmenu_item" [ngClass]="connectionState == 'ONLINE'?'disable_menuitem':null">
+          <a class="contextmenu_item_text" onKeyPress="deleteConnectionOnline('deleteconnectiononlineandproject')"
+          [disableIfUnauthorized]="accessControl.CAN_CONNECTION_DELETE_OFFLINE"
+            (click)="deleteConnectionOnline('deleteconnectiononlineandproject')">
+            <span class="delete_icon"> {{'editor.menuOptions.removeConnectionOnlineAndProject' | translate}}</span>
+          </a>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="d-row">
+      <div
+      *ngIf="showSidePanels"
+      class="d-col-panel"
+      id="device__left__side"
+       [ngStyle]="{'transform': transformStyle}">
+        <app-interface-exposed-area
+        [style.transform]="scaleXY"
+        [label]="'Client Interface'"
+        (removeElementWidth)="removeElementWidth($event)">
+
+        </app-interface-exposed-area>
+      </div>
+      <div *ngIf="showSidePanels" class="resizer" appResizable data-direction="horizontal" data-id="area"
+        id="device__resize__left">
+      </div>
+      <div class="d-col-content" id="device__middle__side">
+        <div
+        id="myCanvas"
+        id="myCanvas"
+        [ngClass]="zoomPercent <= 0.5 ?'scaledScrollbar':'defaultScrollBar'"
+        (mouseup)="mouseUp($event)"
+        (mousedown)="mouseDown($event)"
+          (mousemove)="mouseMove($event)"></div>
+      </div>
+      <div *ngIf="showSidePanels" class="resizer" appResizable data-direction="horizontal" data-id="area"
+        id="device__resize__right">
+      </div>
+      <div
+      *ngIf="showSidePanels"
+      class="d-col-panel" id="device__right__side"  [ngStyle]="{'transform': transformStyle}">
+        <app-interface-exposed-area [label]="'Server Interface'" (removeElementWidth)="removeElementWidth($event)">
+        </app-interface-exposed-area>
+      </div>
+    </div>
+    <div class="resizer" appResizable data-direction="vertical"></div>
+    <div class="container__bottom">
+      <div>
+        <div class="zoom__container">
+          <a class="zoom__in" (click)="zoomIn()">+</a>
+          <a class="zoom__out" (click)="zoomOut()">-</a>
+        </div>
+        <div class="zoomcontrols">
+          <span title="{{'editor.menuOptions.exportSVG' | translate}}" (click)="export()" (keydown)="export()">
+            <i aria-hidden="true" class="export-svg"></i>
+          </span>
+          <span title="{{'editor.menuOptions.zoomIn' | translate}}" (click)="zoomIn()" onKeyDown="zoomIn()">
+            <i aria-hidden="true" class="fas fa-search-plus"></i>
+          </span>
+          <span title="{{'editor.menuOptions.zoomOut' | translate}}" (click)="zoomOut()" onKeyDown="zoomOut()">
+            <i aria-hidden="true" class="fas fa-search-minus"></i>
+          </span>
+          <div class="percentage-select">
+            <select aria-label="zoom" id="zoom" [(ngModel)]="facadeService.zoomOperationsService.selectedZoomPercent"
+              (change)="onChangePercentage()">
+              <option value="25">25%</option>
+              <option value="50">50%</option>
+              <option value="75">75%</option>
+              <option value="100">100%</option>
+              <option value="200">200%</option>
+              <option value="400">400%</option>
+              <option value="500">500%</option>
+              <option value="1">{{'editor.titles.fitToScreen' | translate}}</option>
+              <option value="3">{{'editor.titles.fitToWidth' | translate}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <app-form-dialog
+    *ngIf="showDeviceLoginModel"
+    [component]="'device-login-auth'"
+    (onHide)="showDeviceLoginModel = false;onCancel()"
+    (onCustomEvent)="skipDevice($event)"
+    (onEventSucess)="authenticationSuccessful($event)">
+  </app-form-dialog>
+  <app-form-dialog
+    *ngIf="(showProjectProtectionModal$ | async) && !isCurrentProjectProtected"
+    id="project-protect-dialog"
+    [component]="'add-project-protection'"
+    (onHide)="hideProjectProtectionModal()"
+    (onEventSucess)="onSubmitProjectProtection($event)">
+  </app-form-dialog>
+
+</div>

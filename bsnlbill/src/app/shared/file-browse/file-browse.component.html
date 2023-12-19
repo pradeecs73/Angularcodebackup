@@ -1,0 +1,23 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+<div
+  class="file-browse-container"
+  #fileBrowse
+  (click)="onClick()"
+  onKeyDown="onClick()"
+>
+  <div>
+    <input
+      id="fileSelect"
+      aria-label="fileSelect"
+      #fileName
+      placeholder="{{'devices.titles.selectFileToImport' | translate}}"
+      tabindex="-1"
+      accept = ".yaml"
+      class="textInput form-control"
+      readonly
+      type="text"
+    />
+    <!-- Hamburger button  -->
+    <button class="browse-btn" (click)="onFileValueChange()" tabindex="-1" type="button">{{button}}</button>
+  </div>
+</div>

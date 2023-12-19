@@ -1,0 +1,43 @@
+/* ------------------------------------------------------------------------ */
+/* Copyright © Siemens AG 2021-2021. All rights reserved. Confidential.     */
+/* ------------------------------------------------------------------------ */
+.pv-g {
+    display: flex;
+    &-12 {
+      width: 100vw;
+    }
+
+    &-8 {
+      /**
+      *as a Fix of RQ : 392 : Scroll Bar Misplaced Issue,
+      'myCanvas' div fixed width has been removed and parent div with class 'pv-g-8' has been added with 'flex' css-layout property.
+      to handle  the div width with right and left pane expanded, relative width percentage has been added wrt to entire screen.*/
+      width: 75%;
+      //flex: 100%;
+      min-width: 33vw;
+    }
+  }
+
+
+.iFrame-content{
+  display: none;
+}
+.resizer[data-direction='horizontal'] {
+  background-color: #cedae1;
+  cursor:col-resize;
+  width:0.5rem;
+}
+
+.container__left{
+  min-width: 16vw;
+  max-width: 44vw;
+}
+.container__right {
+  flex: 1 1 0%;
+}
+.min__width__right {
+  min-width: 18.5vw;
+}
+.flex {
+  display: flex;
+}

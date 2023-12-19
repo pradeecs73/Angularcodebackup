@@ -1,0 +1,111 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+<div class="add-details-string mt-1">
+    <p>{{'devices.messages.enterAddress' | translate}}</p>
+</div>
+ <!--
+        -This form group is having two control for address and name
+ -->
+<form [formGroup]="addDetailsForm" (submit)="connect()" >
+        <div class="outerdiv grid">
+            <div class="col-12">
+              <div class="grid mt-5 ml-3">
+                <label class="col-5" for="address"> {{'devices.titles.deviceAddress' | translate}}</label>
+                <div class="col-7">
+                    <input [readonly]="deviceNameField" class="textInput form-control" formControlName="address"
+                    id="address" type="text" name="address">
+                    <!--
+                                    -This will show error for device url in case of duplication and disconnected device
+                                -->
+                    <span class="err-span" *ngIf="addDeviceError">
+                        <span><i aria-hidden="true" class="fas fa-times-circle"></i></span>
+                        <span>
+                            <p>{{addDeviceErrorMessage}}</p>
+                            <p>{{addDeviceErrorSolution}}</p>
+                        </span>
+                        <span (click)="hideError()" (keypress)="handleKeyPressEnter($event, hideError)">
+                            <i aria-hidden="true" class="fa fa-times"></i>
+                        </span>
+                    </span>
+                    <!--
+                                    -This will show error for device url if it don't matches with regex expression
+                                -->
+                    <span class="err-span" *ngIf="deviceUrlError()">
+                        <span><i aria-hidden="true" class="fas fa-times-circle"></i></span>
+                        <span>
+                            <p>{{'devices.error.invalidDeviceUrl.errorMessage' | translate}}</p>
+                            <p>{{'devices.error.invalidDeviceUrl.errorSolution' | translate}}</p>
+                        </span>
+                    </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-12" *ngIf="deviceNameField">
+                <label class="col-5" for="name"> {{'devices.titles.deviceName' | translate}}</label>
+                <div class="col-7">
+                    <input  class="textInput form-control" formControlName="name" id="name" type="text" name="name">
+                    <!--
+                        -This will show error if device name field is left blank
+                    -->
+                    <span class="err-span" *ngIf="deviceNameError()">
+                        <span ><i aria-hidden="true" class="fas fa-times-circle" ></i></span>
+                        <span>
+                            <p>{{'devices.error.deviceUrlRequired.errorMessage' | translate}}</p>
+                            <p>{{'devices.error.deviceUrlRequired.errorSolution' | translate}}</p>
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="button-inline-display">
+              <!--
+             -This class contains back and next button , on click of back device add method is loaded
+             -on click of next device data is added to grid
+              -->
+                <!--
+                   -Next button will be enable only when device add details form is valid
+                -->
+                <div>
+
+                </div>
+               <div class="button-next-container grid">
+                 <div class="col-12 button-next" tabindex="0"
+                     [ngClass]="{'button-disable':!checkAddDetailsFormValidation()}"
+                     (click)="connect()" (keypress)="handleKeyPressEnter($event, connect)">
+                     {{'common.buttons.connect' | translate}}
+                 </div>
+               </div>
+           </div>
+        </div>
+</form>
+
+<div class="col-12">
+    <div class="device-grid-header">
+      <div class="grid-item-device-name">
+        {{'devices.titles.deviceName' | translate}}
+      </div>
+    </div>
+    <div *ngFor="let device of devicesAddedToGrid" class="device-grid-body" 
+    title = "{{!showNoDeviceData  ? showToolTip(device): ''}}">
+      <div class="grid-container-device">
+        <div class="grid-item-device-icon" 
+          [ngClass]="(device && device.isProtected === true && device.isDeviceAuthRequired === true) 
+              ? 'padding-0': ''">
+          <i aria-hidden="true" 
+          *ngIf="device != null && !showNoDeviceData" 
+          [ngClass]="(device.isValidAddressModel=== false || device.isSecurityPolicyValid === false) ? 'disabled-row':
+          (device.isProtected === true && device.isDeviceAuthRequired === true) ?'locked':
+          'fa fa-check-circle device-grid-circle'">
+          </i>
+        </div>
+        <div class="grid-item-device">
+        {{getDeviceName(device) === 'No devices selected' ?
+         ('devices.messages.noDevicesSelected' | translate) : getDeviceName(device)}}</div>
+        <div class="grid-item-device-delete">
+          <i aria-hidden="true" *ngIf="device != null && !showNoDeviceData"
+            class="fas fa-trash-alt device-grid-delete-icon" (click)="deleteDeviceFromGrid(device)"
+            onKeyDown="deleteDeviceFromGrid(device)">
+          </i>
+        </div>
+      </div>
+    </div>
+  </div>

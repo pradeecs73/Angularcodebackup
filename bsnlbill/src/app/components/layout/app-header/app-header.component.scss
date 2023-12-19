@@ -1,0 +1,106 @@
+/* ------------------------------------------------------------------------ */
+/* Copyright © Siemens AG 2021-2021. All rights reserved. Confidential.     */
+/* ------------------------------------------------------------------------ */
+@import 'variables';
+
+$color-helper: #006487;
+
+.menu-bar {
+  position: relative;
+  background: $color-bg-white;
+  color: $color-helper;
+  font-weight: bold;
+  align-items: center;
+  height: 44px;
+  border-bottom: solid 1px rgba(68, 68, 68, 0.678);
+
+  &--logo {
+    margin: 2.1rem 0;
+
+    &__image {
+      height: 4rem;
+      margin-left: 13%;
+      vertical-align: middle;
+    }
+  }
+
+  &--title {
+    margin: 0 auto;
+    color: $color-bg-light-gray;
+    font-size: x-large;
+    font-weight: normal;
+  }
+
+  .menus {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .popover-container {
+    position: relative;
+  }
+
+  .header-icon {
+    color: $color-interaction-blue;
+    font-size: 1.5em;
+    vertical-align: middle;
+    margin-left: -39%;
+    cursor: pointer;
+    padding: 2px;
+
+    &:hover {
+      background-color: $color-colarea1-gray;
+      color: $color-interaction-blue-hover;
+    }
+  }
+  .show{
+    &--error, &--info, &--warning{
+      z-index: 9;
+      background-color: $color-nav-background;
+      .error-count,.info-count,.warning-count{
+        color: $color-bg-white !important;
+      }
+    }
+  
+  }
+
+  .notification-icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .warning,.info, .error{
+      height: 60%;
+      margin-right: 0.5rem;
+      margin-top: 1.5rem;
+      cursor: pointer;
+      padding: 2px;
+
+      .warning-content {
+        content: url("/../../../assets/icons/Warning_16er.svg");
+        filter: invert(70%) sepia(85%) saturate(1869%) hue-rotate(0deg) brightness(104%) contrast(105%);
+      }
+
+      .info-content {
+            content: url("/../../../assets/icons/Info_16er.svg");
+            filter: invert(33%) sepia(100%) saturate(607%) hue-rotate(155deg) brightness(92%) contrast(89%);
+          }
+
+      .warning-icon,.error-icon,.info-icon  {
+        background-color: $color-bg-white;
+        border-radius: 100%;
+        color: $color-fault;
+        font-size: 1.6rem;
+      }
+
+      .warning-count,.error-count,.info-count {
+        color:$color-nav-background;
+        font-size: 1.6rem;
+        font-weight: normal;
+        margin-left: 4px;
+      }
+    }
+  }
+
+}

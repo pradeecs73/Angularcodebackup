@@ -1,0 +1,146 @@
+@import "variables";
+
+.device-grid-body {
+  //Styling for the grid where the device data will be displayed (Address, Name, Vendor)
+  .grid-container-device {
+    display: grid;
+    grid-template-rows: 25px;
+    grid-template-columns: 7.14% 85.72% 7.14%;
+    background-color: white;
+  }
+
+  //Styling for the device description
+  .device-description {
+    padding-bottom: 10px;
+  }
+
+  .grid-item-device {
+    border-bottom: 2px solid rgb(228, 228, 235);
+    //padding-bottom: 20px;
+    align-items: center;
+    align-content: center;
+    padding-top: 8px;
+    font-size: 11px;
+  }
+
+  .grid-item-device-icon {
+    border-bottom: 2px solid rgb(228, 228, 235);
+    border-left: 2px solid rgb(228, 228, 235);
+    padding-left: 5px;
+    padding-top: 7px;
+    font-size: 12px;
+  }
+
+  .grid-item-device-delete {
+    border-bottom: 2px solid rgb(228, 228, 235);
+    border-right: 2px solid rgb(228, 228, 235);
+    padding-left: 5px;
+    padding-top: 8px;
+    font-size: 11px;
+  }
+
+  .grid-item-device-delete:hover {
+    cursor: pointer;
+  }
+}
+
+.device-grid-header {
+  background-color: #e8f1f1;
+  width: 100%;
+  border: 1px solid rgb(228, 228, 235);
+  height: 25px;
+  padding-top: 5px;
+  font-weight: bold;
+  border-bottom: 1px solid #0f789b;
+
+  .search-icon {
+    float: right;
+  }
+
+  input {
+    border: none;
+    width: 96%;
+    padding: 0px;
+    margin: 0px;
+  }
+}
+
+.device-grid-circle {
+  color: $color-success;
+}
+
+.device-grid-delete-icon {
+  color: $color-trash;
+}
+
+.hide-grid {
+  visibility: hidden;
+}
+
+.header-text {
+  color: #0f789b;
+  font-size: 11px;
+}
+
+.ui-g-12 {
+  padding: 0em;
+  border: 1px solid #ebf0f5;
+}
+
+.p-tooltip {
+  // width: 200px;
+  .p-tooltip-arrow {
+    bottom: 0;
+    left: 50%;
+    margin-left: -5px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #fff !important;
+  }
+  .p-tooltip-text.p-shadow.p-corner-all {
+    width: 300px;
+    background-color: #fff;
+    color: #000;
+  }
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+.tooltip .device-name {
+  font-family: "SiemensSans-Roman, Siemens Sans";
+  font-size: 12px;
+  padding-left: 8px;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 240px;
+  background-color: #ffffff;
+  color: #000000;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #000000 transparent transparent transparent;
+  font-size: 8px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}

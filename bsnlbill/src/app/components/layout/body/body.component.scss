@@ -1,0 +1,23 @@
+/* ------------------------------------------------------------------------ */
+/* Copyright © Siemens AG 2021-2021. All rights reserved. Confidential.     */
+/* ------------------------------------------------------------------------ */
+.pv-g {
+    display: flex;
+    &-12 {
+      width: 100vw;
+    }
+
+    &-8 {
+      width: 100%;
+      // z-index:-1;
+    }
+  }
+
+
+.iFrame-content{
+  display: none;
+}
+
+.right-bar{
+  // z-index:5;
+}

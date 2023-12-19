@@ -1,0 +1,123 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+<div class="connection-list-container">
+  <p-accordion styleClass="connection-list-header" collapseIcon="fas fa-chevron-down" expandIcon=" fas fa-chevron-up">
+    <p-accordionTab header="{{'editor.titles.connections' | translate}}" [selected]="expandAccordionTab">
+
+      <div *ngIf="!connectionList?.length" class="no-data">
+        {{'editor.messages.noConnectionAvailable' | translate}}
+      </div>
+
+      <div class="connection-list-container" *ngIf="connectionList?.length">
+
+        <div class="action-container">
+          <div class="wrapper">
+            <span class="legend-list" [pTooltip]="showList()" [escape]="false" tooltipPosition="top"
+              tooltipStyleClass="myTooltip">
+              {{'common.words.legends' | translate}} <i aria-hidden="true" class="fas fa-info-circle info"></i>
+            </span>
+            <button pButton type="button" icon="far fa-check-circle"
+              [disabled]="facadeService.commonService.isActualConnectionMode || !isValidSelection" label="Apply changes"
+              class="action-keep-btn" (click)="onApply($event)"></button>
+          </div>
+
+        </div>
+
+        <p-table [value]="connectionList" styleClass="connection-list" [scrollable]="true" scrollHeight="200px">
+          <ng-template pTemplate="header" let-columns>
+            <tr class="header-row">
+              <th id="ClientInterface" pSortableColumn="toDeviceName">{{'editor.titles.clientInterface' | translate}}
+                <p-sortIcon field="toDeviceName"></p-sortIcon>
+              </th>
+
+              <th id="Connect" 
+              *ngIf="!facadeService.commonService.isActualConnectionMode">
+              {{'common.buttons.connect' | translate}}</th>
+
+              <th id="ServerInterface" pSortableColumn="fromDeviceName">{{'editor.titles.serverInterface' | translate}}
+                <p-sortIcon field="fromDeviceName"></p-sortIcon>
+
+              </th>
+              <th id="InterfaceType">{{'editor.titles.interfaceType' | translate}}</th>
+              <th id="Version">{{'common.words.version' | translate}}</th>
+              <th 
+              id="Status" 
+              *ngIf="facadeService.commonService.isActualConnectionMode">
+              {{'editor.menuOptions.status' | translate}}</th>
+              <th 
+              id="Delete" 
+              *ngIf="facadeService.commonService.manualConnectionList?.length > 0 
+              || facadeService.commonService.isActualConnectionMode">
+                {{'common.buttons.delete' | translate}}
+              </th>
+              <!-- CHECK if there are any manual connections then only show this
+                               or else, in actual mode only -->
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-obj>
+            <tr id={{CONNECTIONLISTROWID}}
+              [ngClass]="{'row-highlight': obj.isRowSelected === true || obj.isActualConRowSelected === true}">
+              <td>
+                <span>
+                  <!-- {{obj.toDeviceName}} -->
+                  {{obj.clientInterfaceName}}
+                </span>
+              </td>
+              <td *ngIf="!facadeService.commonService.isActualConnectionMode">
+
+                <label 
+                class="fancy-checkbox" 
+                *ngIf="!facadeService.commonService.isActualConnectionMode && !obj.isCreatedManually">
+                  <input type="checkbox" [(ngModel)]="obj.isSelected" 
+                    [disabled]="facadeService.commonService.isActualConnectionMode" />
+                  <i aria-hidden="true" class="selected-connection checked" title="Selected"></i>
+                  <i aria-hidden="true" class="notselected-connection unchecked" title="Not Selected"></i>
+
+                </label>
+                <label 
+                *ngIf="obj.isCreatedManually && !facadeService.commonService.isActualConnectionMode" 
+                class="actual-connect-icon">
+                  <i aria-hidden="true" class="actual-connection" title="Connected"></i>
+                </label>
+              </td>
+              <td>
+                <span>
+                  <!-- {{obj.fromDeviceName}} -->
+                  {{obj.serverInterfaceName}}
+
+                </span>
+              </td>
+
+              <td>
+                <span>{{obj.interfaceType}}</span>
+              </td>
+              <td>
+                <span>{{obj.version}}</span>
+              </td>
+              <td *ngIf="facadeService.commonService.isActualConnectionMode">
+                <span class="status">
+                  <i aria-hidden="true" *ngIf="obj.status" class="fas fa-check-circle success" title="online"></i>
+                  <i aria-hidden="true" *ngIf="!obj.status" class="fas fa-exclamation-triangle warning"
+                    title="offline"></i>
+                </span>
+              </td>
+              <td 
+              *ngIf="facadeService.commonService.manualConnectionList?.length > 0 
+              || facadeService.commonService.isActualConnectionMode">
+              <span 
+              *ngIf="obj.isCreatedManually || facadeService.commonService.isActualConnectionMode" 
+              (click)="confirm(obj)"
+                  onKeyDown="confirm(obj)" title="{{'editor.menuOptions.deleteConnection' | translate}}">
+                  <i aria-hidden="true" [ngClass]="{'delete-active': obj.isActualConRowSelected != true,
+                                    'delete-row-selected': obj.isActualConRowSelected == true}"></i>
+                </span>
+                <span *ngIf="!obj.isCreatedManually && !facadeService.commonService.isActualConnectionMode">
+                  <i aria-hidden="true" class="delete-disabled"></i></span>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </p-accordionTab>
+
+  </p-accordion>
+</div>

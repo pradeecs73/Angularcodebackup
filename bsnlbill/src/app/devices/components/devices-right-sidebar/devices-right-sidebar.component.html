@@ -1,0 +1,51 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+<div class="right-sidebar" [ngSwitch]="viewType">
+    <div class="full" *ngSwitchCase="'full'">
+        <div class="properties-table-expand">
+            <p-toolbar styleClass="toolbar">
+                <span class="header-text">{{'devices.titles.deviceProperties' | translate}}</span>
+                <span class="header-icon" (click)="removeWidth('collapsed')" onkeydown="removeWidth('collapsed')">
+                    <i aria-hidden="true" class="fas fa-chevron-right"></i></span>
+            </p-toolbar>
+            <p-tabView>
+                <p-tabPanel header="{{'devices.titles.properties' | translate}}">
+                    <div>
+                        <device-properties-panel [selectedDeviceData]="selectedDeviceData"></device-properties-panel>
+                    </div>
+                </p-tabPanel>
+
+            </p-tabView>
+        </div>
+
+    </div>
+
+    <div class="collapsed" *ngSwitchCase="'collapsed'">
+      <div class="properties-table-collapsed">
+        <span
+          class="collapsed-icon fas fa-chevron-left"
+          (click)="removeWidth('full')"
+          onkeydown="viewType='full';"
+        ></span>
+        <div class="collapsed-text">
+          <div>{{'devices.titles.projectDeviceProperties' | translate}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="full" *ngSwitchDefault>
+        <p-toolbar styleClass="toolbar">
+            <span class="header-icon" (click)="removeWidth('collapsed')" onkeydown="viewType='collapsed';">
+                <i aria-hidden="true" class="fas fa-chevron-right"></i></span>
+            <span class="header-text">{{'devices.titles.properties' | translate}}</span>
+        </p-toolbar>
+
+        <p-tabView>
+            <p-tabPanel header="Properties">
+                <div>
+                    <device-properties-panel></device-properties-panel>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+    </div>
+</div>

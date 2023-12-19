@@ -1,0 +1,170 @@
+/* ------------------------------------------------------------------------ */
+/* Copyright © Siemens AG 2021-2021. All rights reserved. Confidential.     */
+/* ------------------------------------------------------------------------ */
+
+@import "variables";
+$font-size: 1.2rem;
+
+.p-g-12 {
+  padding: 0px;
+}
+
+
+.grid-table::ng-deep tr td {
+  border: 0;
+  height: 30px !important;
+}
+
+table tr td:first-child::after {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.custom-grid {
+  border-bottom: 2px solid #e4e4eb !important;
+  padding: 0% 0% 0% 0% !important;
+  font-family: "Siemens Sans Global";
+  font-size: 16px;
+  min-height: 10%;
+}
+
+.bg-grey{
+  background-color: #ebf0f5!important;
+  width: 84%;
+  text-overflow: ellipsis;
+}
+.bg-white{
+  background-color: white!important;
+  width: 100% !important;
+  font-size: 13.5px;
+}
+
+.interface-label {
+  display: inline-block;
+  font-size: 0.9em;
+  padding-top: 5px;
+  width: 84%;
+  white-space: nowrap;
+  overflow: hidden;
+
+  &-client {
+    float: right;
+    border-right: 5px solid white;
+  }
+
+  &-server {
+    float: left;
+    border-left: 5px solid white;
+  }
+}
+
+.interface-server {
+  text-align: start;
+}
+
+.interface-client {
+  text-align: end;
+}
+
+.interface-grid-body {
+  .grid-container-interface {
+    display: grid;
+    grid-template-rows: 30px;
+    grid-template-columns: 100%;
+    background-color: white;
+    border-bottom: 2px solid #e4e4eb;
+    align-items: center;
+    align-content: center;
+  }
+
+  .grid-item-interface {
+    &.disabled{
+      pointer-events: none;
+    }
+    font-size: 12px;
+    height: 100%;
+  }
+}
+
+.interface-panel-sidebar {
+  .p-datatable .p-datatable-tbody > tr {
+    pointer-events: none;
+  }
+  height: 100%;
+
+  .interface-panel {
+    height: 100%;
+    background-color: white;
+
+    //Styling for the menu in full view
+    &--full {
+      height: inherit;
+      min-width: 16vw;
+
+      .interface-view-header {
+        padding: 1rem;
+        display: flex;
+        font-weight: 400;
+        background-color: $color-colarea5;
+        height: 44.15px;
+        border: 1px solid $color-colarea2;
+        margin-right: -0.8%;
+        margin-bottom: 1px;
+
+        .interface-header-text {
+          flex: 12;
+          color: $color-collight2-gray;
+          margin-left: 2%;
+        }
+
+        .interface-header-icon {
+          flex: 1;
+          color: $color-interaction-blue;
+          font-size: 1.2rem;
+          margin-top: 7px;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    //Styling for the menu in collapsed view
+    &--collapsed {
+      height: inherit;
+      text-align: center;
+      background-color: $color-bg-default;
+
+      .interface-panel-collapsed {
+        &-icon {
+          padding: 0.5rem;
+          color: $color-interaction-blue;
+          font-size: 1.2rem;
+          width: 2.4rem;
+          height: 2.4rem;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+
+        &-text {
+          width: 2.4rem;
+          overflow: hidden;
+          height: 20rem;
+          margin-top: 18rem;
+          font-size: 1.2rem;
+
+          &>div {
+            width: 20rem;
+            transform: rotate(90deg);
+            transform-origin: top left;
+            margin-left: 2.4rem;
+            padding: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+}

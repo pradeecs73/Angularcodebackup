@@ -1,0 +1,145 @@
+<div class="scan-container inline-display">
+  <div class="button-scan-settings-add-container">
+    <a id="scan-settings" class="scan-settings" (click)="addSettings.toggle($event)">
+      <img width="" height="" src="../assets/icons/Settings.svg" alt="">
+      <img width="" height="" src="../assets/icons/Arrowhead-down.svg" alt="">
+    </a>
+    <div class="settings-overlay" #overlaydiv>
+      <p-overlayPanel #addSettings appendTo="overlaydiv" styleClass="overlay-panel">
+        <ng-template pTemplate>
+          <form [formGroup]="scanSettingForm">
+            <div class="settings-div">
+              <div>{{'devices.titles.opcUAPort' | translate}}</div>
+              <div><input type="text" aria-label="port" class="no-outline textInput port" formControlName="port" />
+              </div>
+              <div class="err-span-div">
+                <span class="err-span" *ngIf="devicePortError()">
+                  <span><i aria-hidden="true" class="fas fa-times-circle"></i></span>
+                  <span>
+                    <p>{{'devices.error.deviceIpErrorMessage.portErrorMsg' | translate}}</p>
+                  </span>
+                </span>
+              </div>
+              <div>{{'devices.titles.ipRange' | translate}}</div>
+              <div class="settings-div-ip-range inline-display">
+                <input
+                  type="text"
+                  aria-label="from-address"
+                  class="no-outline textInput"
+                  formControlName="fromIPAddress"
+                  (focusout)="onFocusOutEvent($event)"
+                />
+                <span>-</span>
+                <input
+                  type="text"
+                  aria-label="to-address"
+                  class="no-outline textInput"
+                  formControlName="toIPAddress"
+                />
+              </div>
+
+              <div class="err-span-div">
+                <span class="err-span err-span-fromip"
+                  *ngIf="fromIPError() || ipRangeError() || toIpAddressGreaterThanFromAddress()">
+                  <span><i aria-hidden="true" class="fas fa-times-circle"></i></span>
+                  <span>
+                    <p *ngIf="fromIPError()">{{'devices.error.deviceIpErrorMessage.ipErrorMsg' | translate}}</p>
+                    <p *ngIf="ipRangeError()">{{'devices.error.deviceIpErrorMessage.ipRangeErrorMsg' | translate}}</p>
+                    <p *ngIf="toIpAddressGreaterThanFromAddress()">
+                      {{'devices.error.deviceIpErrorMessage.toAddressLessThanFromErrorMsg' | translate}}</p>
+                  </span>
+                </span>
+                <span class="err-span err-span-toip" *ngIf="toIPError()">
+                  <span><i aria-hidden="true" class="fas fa-times-circle"></i></span>
+                  <span>
+                    <p>{{'devices.error.deviceIpErrorMessage.ipErrorMsg' | translate}}</p>
+                  </span>
+                </span>
+              </div>
+            </div>
+          </form>
+        </ng-template>
+      </p-overlayPanel>
+    </div>
+
+
+  </div>
+  <!--
+       -Scan button will be enable only when scan settings is present
+    -->
+  <div class="button-start-scan-container">
+    <div class="button-scan" tabindex="0"
+    (click)="startScan($event)" onKeyPress="startScan()">
+    {{'devices.titles.startScan' | translate}}</div>
+  </div>
+  <div class="ui-g-12 table-wrapper">
+    <table aria-describedby="scannedDeviceList" class="custom-table" >
+      <colgroup>
+        <col class="checkbox-col">
+        <col class="device-name-col">
+        <col class="address-col">
+        <col class="status-col">
+      </colgroup>
+
+      <thead class="device-grid-header">
+        <!-- List of table cols -->
+        <ng-container *ngFor="let col of scanTableColumns;let i = index">
+          <ng-container *ngIf="i === 0 && !showNoDeviceData">
+            <label for="deviceHeaderCheckbox"></label>
+            <input
+              id="deviceHeaderCheckbox"
+              [checked]="deviceHeaderCheckbox"
+              type="checkbox"
+              data-toggle="toggle"
+              (change)="toggleDevicesSelection($event)"
+              [(ngModel)]="deviceHeaderCheckbox"
+            />
+          </ng-container>
+          <ng-container *ngIf="i !== 0 || showNoDeviceData">
+            <th scope="col">{{col | translate}}</th>
+          </ng-container>
+
+        </ng-container>
+      </thead>
+      <tbody>
+      <tr *ngFor="let device of deviceListInGrid;let i = index;"
+           class="device-grid-body" 
+           title = "{{!showNoDeviceData  ? showToolTip(device): ''}}">
+
+        <!-- Show if deviceList is empty with entire cols -->
+        <ng-container *ngIf="showNoDeviceData">
+          <td class="center" colspan="5">{{ i === 0 ? ('devices.messages.startScan' | translate) : ''}}</td>
+        </ng-container>
+
+        <!-- Show if deviceList is having data -->
+        <ng-container *ngIf="!showNoDeviceData" >
+          <td>
+            <label for="toggleCheckbox"></label>
+            <input
+              id="toggleCheckbox"
+              [checked]="device.isSelected"
+              [disabled]="device && (device.isValidAddressModel=== false || device.isSecurityPolicyValid === false)"
+              type="checkbox"
+              data-toggle="toggle"
+              onKeyPress="addSelectedDevice(i)"
+              (click)="addSelectedDevice(i)"
+            />
+          </td>
+
+          <!-- deviceName -->
+          <td>{{device?.deviceName}}</td>
+          <!-- device address -->
+          <td>{{device?.address}}</td>
+          <td>
+            <i aria-hidden="true" *ngIf="device != null && !showNoDeviceData"
+            [ngClass]="(device.isValidAddressModel=== false || device.isSecurityPolicyValid === false) ? 
+            'invalid_device-warning': (device.isProtected === true && device.isDeviceAuthRequired === true) ?
+            'locked':'fa fa-check-circle device-grid-circle device-grid-circle-scan'">
+            </i>
+          </td>
+        </ng-container>
+      </tr>
+    </tbody>
+    </table>
+  </div>
+</div>

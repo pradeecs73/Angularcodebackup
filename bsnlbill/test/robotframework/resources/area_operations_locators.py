@@ -1,0 +1,7 @@
+newarea_create_icon = "css:app-left-sidebar #left-menu-content .new-area-icon"
+area_names_on_canvas = "css:#myCanvas #Node .head-text"
+leftmenu_nodelabel = "css:app-left-sidebar #left-menu-content ul li .node-label"
+leftmenu_children = "css:app-left-sidebar #left-menu-content ul p-treenode"
+newarea_create_icon_nested = "css:.new-area-icon.hide-icon"
+deletearea_icon_nested = "css:.delete-btn.hide-icon"
+ungroup_icon_nested="css:.ungroup-area-icon.hide-icon"

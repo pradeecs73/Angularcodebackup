@@ -1,0 +1,165 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+<div class="device-main-container">
+  <div class="breadcrumb-container">
+    <p-breadcrumb styleClass="breadcrumb-container-box" [model]="items"></p-breadcrumb>
+  </div>
+  <div class="controls">
+    <a id="addButton" class="controls--button" [disableIfUnauthorized]="accessControl.CAN_DEVICE_ADD"
+      (click)="handleAddingDevices()" [ngClass]="{'disabled':showDeviceDetails}" (onKeyDown)="handleAddingDevices()">
+      <span class="fas fa-plus-circle"></span>
+      <span class="text--font">{{'devices.titles.addNewDevice' | translate}}</span>
+    </a>
+    <div class="action-bar" id="deletedeviceActionBtnList" *ngIf="showDeleteDeviceIcon">
+      <button id="deleteIcon" class="btn" title="{{'devices.titles.deleteDevice' | translate}}"
+        [disableIfUnauthorized]="accessControl.CAN_DEVICE_DELETE" (click)="deleteDeviceFromView()">
+        <i aria-hidden="true" class="fas fa-trash delete-btn"></i>
+      </button>
+    </div>
+  </div>
+
+
+  <!--
+  -This class holds the complete responsibility of displaying the no-device container data
+  -Displays the message along with the Icon indicating that no devices were added in the list
+  -->
+  <div *ngIf="deviceTreeStoreData.length==0" class="no-device-container">
+    <div class="no-device-bulb-icon"><i aria-hidden="true" class="fas fa-lightbulb"></i></div>
+    <div class="no-device-exists">
+      <p>
+        <strong> {{'devices.messages.noDevices.title' | translate}}</strong>
+      </p>
+      <p> {{'devices.messages.noDevices.content' | translate}}</p>
+    </div>
+  </div>
+
+  <!--
+  -This class holds the complete responsibility of displaying the device container data
+  -Device container data includes the device-card which has header, body and footer
+  -Header contains the icons along with the name of the device
+  -Body contains the details of the device: Address, Vendor, device type and description
+  -->
+  <div *ngIf="!showDeviceDetails" #deviceExist>
+    <span *ngFor="let device of deviceTreeStoreData;let i = index" class="device-inline-display">
+      <div class="device-container">
+
+        <!--
+        -This class holds the complete responsibility of displaying the device status on top of device
+        -If the device is newly added, it display "NEW" on top of the device
+        -Else, An empty/ no text will be shown on top of the device
+        -->
+        <div class="device-status">
+          <span id="new" *ngIf="device.isNew" class="device-status-text">
+            {{'common.words.new' | translate}}
+          </span>
+          <span *ngIf="device.isUpdated" class="device-status-text">
+            {{'common.words.updated' | translate}}
+          </span>
+          <span *ngIf="!device.deviceStatus" class="device-status-empty-text">
+            This text won't be displayed in the UI as empty text styling was applied in css
+          </span>
+        </div>
+
+        <!--
+        -This class holds the complete responsibility of displaying the card with complete device data
+        -device-card contains the header, body and footer to be displayed
+        -->
+        <div id="selectDevice"
+        class="device-card"
+        (click)="selectDevice(device,$event);"
+        [ngClass]="{'device-card-border': (device.isNew || device.isUpdated),
+                  'device-box-shadow':device.isSelected,'device-default-box-shadow':!device.isSelected}"
+          (click)="handleDeviceSelected($event,device)" (keypress)="selectDevice(device,$event);">
+
+          <!--
+                  -This class holds the complete responsibility of displaying the device-card header data
+                  -device-card-header contains the icons along with the name of the device
+                  -->
+          <div class="device-card-header">
+            <span class="device-card-header-icon"></span>
+            <span class="device-card-header--title">
+              <input type="text" aria-label="deviceName" class="no-outline" *ngIf="device?.partialSelected"
+                [disableIfUnauthorized]="accessControl.CAN_DEVICE_UPDATE" [ngModel]="device?.name"
+                (click)="preventClickEvent($event)" (keypress)="preventClickEvent($event)"
+                title="{{'devices.titles.editDeviceName' | translate}}"
+                (blur)="updateDeviceProperty($event.target.value,i,'name',device)" maxlength="100" 
+                (ngModelChange)="deviceNameLengthCheck($event,device)"/>
+              <span title="{{device?.name}}" *ngIf="!device.partialSelected" (click)="editableMode(device)"
+                (keydown)="editableMode(device)" class="deviceName">{{truncateName(device?.name)}}</span>
+              <span class="err-span" *ngIf="device.error.deviceNameLengthError">
+                  <span><i aria-hidden="true" class="fas fa-times-circle"></i></span>
+                  <span>
+                    <p>{{'devices.error.deviceNameLength' | translate}}</p>
+                  </span>
+                  <span onkeypress="hideError(device,'deviceNameLengthError')" 
+                  (click)="hideError(device,'deviceNameLengthError')"><i aria-hidden="true"
+                      class="fa fa-times"></i></span>
+                </span>
+            </span>
+            <span class="device-card-header-sync" [disableIfUnauthorized]="accessControl.CAN_DEVICE_UPDATE">
+              <i aria-hidden="true" (keypress)="update(device)" title="{{'devices.titles.updateDevice' | translate}}"
+                class="fas fa-sync" (click)="update(device)"></i>
+            </span>
+          </div>
+
+          <!--
+          -This class holds the complete responsibility of displaying the device-card body
+          -Body contains the details of the device: Address, Vendor, device type and description
+          -->
+          <div class="device-card-body">
+            <div class="grid-container">
+              <div class="grid-item">Address:</div>
+              <div class="grid-item">
+                <input type="text" aria-label="deviceAddress" [disableIfUnauthorized]="accessControl.CAN_DEVICE_UPDATE"
+                  class="no-outline color-white" [ngModel]="device?.address | defaultAddressPipe"
+                  (click)="preventClickEvent($event)" (keypress)="preventClickEvent($event)"
+                  title="{{'devices.titles.editIPAddress' | translate}}"
+                  (blur)="updateDeviceProperty($event.target.value,i,'address',device)"
+                  (ngModelChange)="checkDeviceExists($event,device)" />
+                <span class="err-span" *ngIf="device?.error?.ipAddressUniqueError">
+                  <span><i aria-hidden="true" class="fas fa-times-circle"></i></span>
+                  <span>
+                    <p>{{'devices.error.ipAddressNotUnique' | translate}}</p>
+                  </span>
+                  <span onkeypress="hideError(device,'ipAddressUniqueError')" 
+                  (click)="hideError(device,'ipAddressUniqueError')"><i aria-hidden="true"
+                      class="fa fa-times"></i></span>
+                </span>
+              </div>
+              <div class="grid-item">Manufacturer:</div>
+              <div class="grid-item">
+                {{ device?.deviceSet| filterBySubstring:modelValueSubstring:deviceSets.MANUFACTURER}}
+              </div>
+              <div class="grid-item">Model:</div>
+              <div class="grid-item">
+                {{ device?.deviceSet | filterBySubstring:modelValueSubstring:deviceSets.MODEL }}
+              </div>
+            </div>
+          </div>
+
+          <!--
+          -This class holds the complete responsibility of displaying the device-card footer
+          -No functionality has been implemented in the footer except some styling and background colors
+          -->
+          <div class="device-card-footer">
+          </div>
+
+        </div>
+      </div>
+    </span>
+  </div>
+  <app-form-dialog *ngIf="addDeviceModalDisplay" (onHide)="addDeviceModalDisplay=false"
+    [component]="'devices-add-dialog'" (onEventSucess)="addDeviceModalDisplay=false; addDevices($event)">
+  </app-form-dialog>
+  <device-details-view #deviceDetails></device-details-view>
+  <!-- login auth modal -->
+  <app-form-dialog *ngIf="showDeviceLoginModel" [component]="'device-login-auth'"
+    (onHide)="showDeviceLoginModel = false" (onCustomEvent)="skipDevice()"
+    (onEventSucess)="browseFailure ? authenticationSuccessful($event) : addCredentials($event)">
+  </app-form-dialog>
+
+  <!-- Add Project protection modal  -->
+  <app-form-dialog *ngIf="showProjectProtectionModel" id="project-protect-dialog" [component]="'add-project-protection'"
+    (onHide)="showProjectProtectionModel = false" (onEventSucess)="onSubmitProjectProtection($event)">
+  </app-form-dialog>
+
+</div>

@@ -1,0 +1,119 @@
+/* ------------------------------------------------------------------------ */
+/* Copyright © Siemens AG 2021-2021. All rights reserved. Confidential.     */
+/* ------------------------------------------------------------------------ */
+@import 'variables';
+
+.tree {
+  padding: 0rem 1rem;
+
+  .tree_elem {
+    &.disabled {
+      cursor: not-allowed;
+    }
+  }
+ 
+  // overflow: hidden;
+  display: block;
+  width: 100%;
+  position: relative;
+
+  &__parent-checkbox{
+    display: none;
+    white-space: nowrap;
+    position: absolute;
+    top: 3px;
+    left: 0;
+  }
+
+  &__parent-label{
+    white-space: nowrap;
+    display: inline-block;
+    width: 100%;
+    overflow: hidden !important;
+    &.disabled{
+    pointer-events: none;
+    }
+    // text-overflow: ellipsis;
+  }
+
+  &__elem {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+    touch-action: none;
+    padding: .2rem 0;
+    // position: relative;
+    .caret {
+      padding-right: 0.5rem;
+      color:$color-interaction-blue;
+      font-size: 12px;
+      margin-right: 1%;
+    }
+  }
+
+  //.interface{
+   // padding-left: 3rem;
+    // ul{
+      // padding-left: 7.5rem;
+      // li{
+  //       list-style: square;
+  //     }
+  //   }
+  // }
+
+ // .child{
+
+ // }
+
+
+  // &__elem:hover, &__elem label {
+  //   cursor: pointer;
+  // }
+
+  &__leaf, &__leaf label{
+    display: block;
+    // position: absolute;
+    cursor: move;
+  }
+}
+
+.parent-position{
+  position: relative;
+  // overflow: visible;
+}
+
+.clone-position{
+  position: absolute;
+}
+
+.isdroppable{
+  cursor: move;
+}
+
+.folder-icon{
+  color: #647887;//#99a4ac;
+  margin-right: 1%;
+}
+
+
+.lastinterface{
+  &::before {
+    // content: url("/../../../assets/icons/plc.svg");
+    content: url("/../../../assets/icons/PlantObjects_16er.svg");
+    vertical-align: sub;
+  }
+}
+.device-tree-list-icon{
+  list-style: none;
+
+}
+// .plc{
+//   &::before {
+//     // content: url("/../../../assets/icons/plc.svg");
+//     content: url("/../../../assets/icons/PLC_16er.svg");
+//     vertical-align: sub;
+//   }
+// }

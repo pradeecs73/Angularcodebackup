@@ -1,0 +1,114 @@
+@import 'variables';
+@import '../../styles/partials/ptab.scss';
+@import 'icon';
+
+.security-select-tab {
+
+    .saveicon{
+       padding:10px 0px 20px 20px;
+       background-color: $color-bg-white;
+    }
+
+    .enable-save{
+      filter: $color-save-enable;
+      cursor: pointer;
+    }
+    .fa-save {
+      &.disabled {
+          @include disabled-save-icon;
+      }
+    }
+
+    .disable-save{
+       pointer-events: none;
+       filter: $color-save-disable;
+    }
+
+    .header-container {
+        width: 100.124%;
+    
+        &-box {
+          background: $color-colarea5  !important;
+          border: 1px solid $color-colarea2;
+          border-radius: 0;
+          height: 44.15px;
+          line-height: 2;
+          padding: 0 0 0 15px;
+    
+          ul {
+            display: block;
+    
+            li {
+              display: inline-block;
+              vertical-align: middle;
+              font-size: 16px;
+
+              &:first-child a {
+                color: $color-interaction-blue;
+    
+                &:hover {
+                  color: $color-interaction-blue-hover;
+                  cursor: default;
+                }
+              }
+    
+              .p-menuitem-link {
+                color: $color-collight2-gray;
+                cursor: default;
+    
+                &:focus {
+                  box-shadow: none;
+                }
+              }
+    
+              &.p-breadcrumb-chevron {
+                color: $color-interaction-blue;
+                font-size: small;
+              }
+              
+            }
+          }
+        }
+      }
+      
+    p-tabview {
+        @include p-tab;
+
+        .p-tabview-panels {
+            height: 100vh !important;
+            overflow: auto;
+            
+        }
+        & .p-tabview {
+            padding-left: 20px;
+            background-color: $color-bg-white;
+
+            & .p-tabview-nav-container {
+              border-bottom: 1px solid $color-colarea2;
+
+            }
+
+            
+
+            &.p-component{
+              font-size: 14px !important;
+              font-weight:normal !important;
+            }
+        
+
+            & .p-tabview-nav {
+                background: $color-bg-white;
+                border: 0 none;
+                border-width: 1px;
+            & li {
+                flex:none;
+                background: $color-bg-white !important;
+                border-radius: 0;
+                margin-left: 1px;
+                font-size: 12px !important;
+             }
+          } 
+        }
+    }
+}
+

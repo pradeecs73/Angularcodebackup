@@ -1,0 +1,73 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+<form [formGroup]="importForm" (submit)="importProject()">
+    <div class="grid outerdiv">
+        <!-- Source Path section -->
+        <div class="col-12">
+            <div class="grid pb-4">
+                <label class="col-5" for="name">{{'home.projectData.sourcePath' | translate}}</label>
+                <div class="col-7">
+                    <file-browse class="form-control" name="sourcePath" formControlName="sourcePath"
+                        [(c)]="importForm.controls.sourcePath" [fileFilter]="'.yaml'" [buttonText]="" ngDefaultControl
+                        [fileFormat]="fileFormat">
+                    </file-browse>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Name section -->
+        <div class="col-12">
+            <div class="grid pb-4">
+                <label class="col-5" for="name">{{'home.projectData.projectName' | translate}}</label>
+                <div class="col-7">
+                    <input class="textInput form-control" formControlName="name"
+                        [title]="projectError() ? this.invalidProjectMsg : ''"
+                        [ngClass]="{'error-cursor': projectError()}" id="name" type="text" name="name">
+                    <span class="err-span" *ngIf="error">
+                        <span><i aria-hidden="true" class="fas fa-times-circle"></i></span>
+                        <span>
+                            <p id="duplicateNameerror">{{errorMessage}}</p>
+                            <p>{{errorSolution}}</p>
+                        </span>
+                        <span (click)="hideError()" onkeydown="hideError()">
+                            <i aria-hidden="true" class="fa fa-times"></i></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comment section -->
+        <div class="col-12">
+            <div class="grid pb-4">
+                <label class="col-5" for="comment">{{'home.projectData.comment' | translate}}</label>
+                <div class="col-7">
+                    <textarea class="textInput form-control" formControlName="comment" id="comment"
+                        name="comment"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Author section -->
+        <div class="col-12">
+            <div class="grid pb-4">
+                <label class="col-5" for="author">{{'home.projectData.author' | translate}}</label>
+                <div class="col-7">
+                    <input class="textInput form-control" formControlName="author" id="author" type="text"
+                        name="author">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Footer section  -->
+    <p-footer>
+        <div class="footer-toolbar">
+            <p-toolbar styleClass="footer">
+                <button type="submit" [disabled]="!importForm.valid || !(importForm.valid && validateProjectData())"
+                id="ok" class="btn">{{'common.buttons.ok' | translate}}</button>
+                <button type="button" 
+                id="cancel" (click)="cancel()" 
+                class="btn">{{'common.buttons.cancel' | translate}}</button>
+            </p-toolbar>
+        </div>
+    </p-footer>
+</form>

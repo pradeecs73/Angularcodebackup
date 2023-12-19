@@ -1,0 +1,112 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+<div id="overlay">
+    <div>
+        <div class="box-2">
+            <p-card>
+                <p-header>
+                    <div class="header-toolbar">
+                        <p-toolbar styleClass="header">
+                            <span class="header-text">
+                                {{header}}
+                            </span>
+                            <span *ngIf="type !== 'loader' && type !== 'information' && enableCloseButton"
+                            class="close-dialog" (click)="closeDialog()"
+                            onKeyDown="closeDialog()">
+                                <i aria-hidden="true" class="fas fa-times"></i>
+                            </span>
+                        </p-toolbar>
+                    </div>
+                </p-header>
+
+                <div class="dialog-content">
+                        <div class="dialog-content-heading">
+                            <div *ngIf="type === 'loader'" id="spinner"  >
+                                <div class="circle-container">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-container">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-container">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-container">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-container">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-container">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-container">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-container">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                            <span *ngIf="type === 'success'" class="success-icon">
+                                <i aria-hidden="true" class="fas fa-check-circle"></i>
+                            </span>
+                            <span *ngIf="type === 'error'" class="error-icon">
+                                <i aria-hidden="true" class="fas fa-times-circle"></i>
+                            </span>
+                            <span *ngIf="type === 'warning'" class="warning-icon">
+                                <i aria-hidden="true" class="warning-triangle"></i></span>
+                            <span *ngIf="type === 'confirm'" class="confirm-icon">
+                                <i aria-hidden="true" class="pi pi-exclamation-triangle"></i>
+                            </span>
+                        </div>
+                        <div class="dialog-content-message" [ngClass]="type == 'error' ? 'error' : ''"
+                          [ngClass]="{'prolonged-text':prolongedText}">
+                          <span *ngIf="message && message.title" class="dialog-content-message-title"
+                            [ngClass]="{'prolonged-text-title':prolongedText}">
+                            {{message.title}}<span *ngIf="type === 'loader'">...</span>
+                          </span>
+                          <span
+                          class="dialog-content-message-description"
+                          *ngIf="message && message.content"
+                          [ngClass]=
+                          "{'confirm-message' : type === 'confirm','prolonged-text-description':prolongedText}">
+                          <div
+                            *ngFor="let message of message.content"
+                            [ngClass]="{'prolonged-text-content':prolongedText}"
+                          >
+                            {{message}}
+                          </div>
+                        </span>
+                        </div>
+                   </div>
+                <p-footer>
+                    <div class="footer-toolbar">
+                        <p-toolbar styleClass="footer">
+
+                            <p-button label="Cancel"
+                                styleClass="btn-cancel disabled-btn"
+                                *ngIf="type === 'loader' && !enableCancelButton">
+                            </p-button>
+                                           <button id="ok" #ok
+                                class="btn-action"
+                                (click)="successCallBack()"
+                                aria-label="OK"
+                                *ngIf="type !== 'loader' && successLabel">{{successLabel}}</button>
+                            <button id="cancel"
+                                class="btn-cancel-label"
+                                (click)="cancelCallBackHandler()" aria-label="Cancel"
+                                *ngIf="(type !== 'loader' || enableCancelButton) && cancelLabel">
+                                {{cancelLabel}}
+                            </button>
+                            <button id="optional" class="btn-optional-label"
+                                (click)="optionalCallBackHandler()" aria-label="Cancel"
+                                *ngIf="type !== 'loader' && optionalLabel">
+                                {{optionalLabel}}
+                            </button>
+
+                        </p-toolbar>
+                    </div>
+                </p-footer>
+            </p-card>
+        </div>
+    </div>
+</div>

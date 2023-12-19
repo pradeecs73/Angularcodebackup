@@ -1,0 +1,388 @@
+/* ------------------------------------------------------------------------ */
+/* Copyright © Siemens AG 2021-2021. All rights reserved. Confidential.     */
+/* ------------------------------------------------------------------------ */
+@import "variables";
+@import 'icon';
+
+.device-main-container {
+  min-height: 100%;
+  height: auto;
+  background-color: #ffffff;
+
+  main {
+    height: 76.5vh; //70vh;
+    display: inline-block;
+    width: 100%;
+    background-color: $color-bg-white;
+    position: relative;
+  }
+
+  .breadcrumb-container {
+    width: 100.124%;
+
+    &-box {
+      background: $color-colarea5  !important;
+      border: 1px solid $color-colarea2;
+      border-radius: 0;
+      height: 44.15px;
+
+      ul {
+        display: block;
+
+        li {
+          display: inline-block;
+          vertical-align: middle;
+          font-size: 16px;
+
+          &:first-child a {
+            color: $color-interaction-blue;
+
+            &:hover {
+              color: $color-interaction-blue-hover;
+              cursor: default;
+            }
+          }
+
+          .p-menuitem-link {
+            color: $color-collight2-gray;
+            cursor: default;
+
+            &:focus {
+              box-shadow: none;
+            }
+          }
+
+          &.p-breadcrumb-chevron {
+            color: $color-interaction-blue;
+            font-size: small;
+          }
+        }
+      }
+    }
+  }
+
+  .controls {
+    padding: 1.5rem 1.5rem;
+    position: relative;
+
+    & .controls--button.disabled{
+        @include disabled-access;
+      }
+
+    .action-bar {
+      display: inline-block;
+      position: absolute;
+      right: 2rem;
+
+      .btn {
+        &.disabled{
+          @include disabled-access;
+          i{
+            color:$color-col-disable2;
+          }
+        }
+        border-top-left-radius: 2px;
+        border-bottom-left-radius: 2px;
+        border-right: 1px solid rgba(10, 10, 10, 0.05);
+        font-size: 1rem;
+        padding: 8px 10px;
+        margin: 0;
+        border: none;
+        background: $color-colarea1-gray;
+        border-radius: 0;
+        outline: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        cursor: pointer;
+        box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2), 0 0 2px rgba(10, 10, 10, 0.2);
+        font-size: 12px;
+
+        &:hover {
+          background: #fff;
+        }
+
+        i {
+          color: $color-interaction-blue;
+          display: inline-block;
+
+          &:hover {
+            color: $color-interaction-blue-hover;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    &--button {
+      text-decoration: none;
+      color: #2387aa;
+      margin-right: 1.5rem;
+      cursor: pointer;
+      position: relative;
+
+      img {
+        height: 2.4rem;
+        vertical-align: bottom;
+        filter: invert(40%) sepia(90%) saturate(528%) hue-rotate(151deg) brightness(92%) contrast(76%);
+      }
+
+      .text--font {
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: bold;
+        position: absolute;
+        width: 200px;
+        bottom: 2px;
+        padding-left: 10px;
+      }
+    }
+  }
+
+  //Styling to display no device container
+  .no-device-container {
+    width: fit-content;
+    display: flex;
+    border: solid 1px #e1e3e4;
+    font-size: small;
+    background-color: #edf7fd;
+    box-shadow: 1px 1px 1px 1px #acc6d3;
+    border-left: #eef1f3 solid 2px;
+    margin-left: 20px;
+
+    //Styling to display the bulb icon
+    .no-device-bulb-icon {
+      margin: 20px;
+      padding: 10px;
+      color: #555f69;
+    }
+
+    //Styling to display no devices exists
+    .no-device-exists {
+      padding: 20px;
+      border-left: rgb(238, 241, 243) solid 2px;
+      padding-right: 8rem;
+    }
+  }
+
+  //Styling to display the device tiles inline
+  .device-inline-display {
+    display: inline-table;
+    overflow: scroll;
+
+    //Styling for the whole device container data
+    .device-container {
+      padding: 1.5rem;
+      width: 38ch;
+
+      //Styling for the device status display on the border
+      .device-status {
+        padding-left: 10px;
+        color: white;
+        position: relative;
+        z-index: 1000;
+      }
+
+      //Styling for the device status text on the border if the device is newly added
+      .device-status-text {
+        background-color: orange;
+        font-size: 1.4rem;
+      }
+
+      //Empty styling for the text not to get displayed in the UI
+      .device-status-empty-text {
+        font-size: 0rem;
+      }
+
+      //Styling for the card border if the device is newly added
+      .device-card-border {
+        border-top: 2px solid orange;
+      }
+
+      .device-box-shadow {
+        box-shadow: 0 0 5px 2px $color-nav-background;
+      }
+
+      .device-default-box-shadow {
+        box-shadow: 0 1px 3px 0 rgb(166, 175, 182), 0 1px 3px 0 rgb(166, 175, 182), 0 1px 3px 0 rgb(166, 175, 182);
+      }
+
+      //Styling for the device-card
+      .device-card {
+        margin-top: -10px;
+
+        input {
+          border-top-style: hidden;
+          border-right-style: hidden;
+          border-left-style: hidden;
+          border-bottom-style: hidden;
+          background: transparent;
+          &.disabled{
+            pointer-events: none;
+          }
+        }
+
+        .color-white {
+          color: white;
+          width: 100%;
+        }
+
+        input:focus {
+          outline: none;
+          background-color: white;
+          color: black;
+          width: 80%
+        }
+
+        //Styling for device-card header
+        .device-card-header {
+          font-size: 1.6rem;
+          display: flex;
+          padding: 1.5rem;
+          background-color: white;
+          color: black;
+          position : relative;
+          .deviceName{
+            font-size: 1.4rem;
+          }
+          .err-span {
+            right: 66px;
+            position: absolute;
+            left: 40px;
+            top: 40px;
+          }
+          //Styling to load the device header icons
+          .device-card-header-icon {
+            content: url("/../../../assets/icons/PLC_16er.svg");
+            padding-right: 10px;
+          }
+
+          .device-card-header-sync {
+            color: $color-interaction-blue-hover;
+            display: inline-block;
+            margin-left: auto;
+            &.disabled{
+              @include disabled-access;
+            }
+
+            i {
+              &:hover {
+                cursor: pointer;
+              }
+            }
+
+            &:hover {
+              cursor: pointer;
+            }
+          }
+
+          .device-card-header-dot {
+            color: $color-interaction-blue-hover;
+            padding-left: 10px;
+          }
+        }
+
+        //Styling for device-card body
+        .device-card-body {
+          background-color: #009999;
+          color: white;
+          font-size: 1.4rem;
+          padding: 1.5rem;
+
+          //Styling for the grid where the device data will be displayed (Address, Name, Vendor)
+          .grid-container {
+            display: grid;
+            grid-template-rows: 20px 20px 20px;
+            grid-template-columns: 100px 300px;
+            background-color: #009999;
+          }
+
+          //Styling for the device description
+          .device-description {
+            padding-bottom: 10px;
+          }
+        }
+
+        //Styling for device-card footer
+        .device-card-footer {
+          padding-bottom: 40px;
+          background-color: white;
+        }
+      }
+    }
+  }
+
+  .error-icon {
+    background-color: white;
+    border-radius: 100%;
+    color: $color-fault;
+    font-size: 1.6rem;
+  }
+
+  .err-span {
+    border: 1px solid $color-cell-error;
+    background-color: $color-cell-error2;
+    width: max-content;
+    display: inline-flex;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 14px;
+    font-size: 13px;
+    border-radius: 5px;
+    margin-top: 3px;
+
+    span {
+      &:first-child {
+        line-height: 1;
+        i {
+          color: $color-cell-error;
+          font-size: 15px;
+        }
+      }
+
+      &:nth-child(2) {
+        padding: 0px 10px;
+        p {
+          &:first-child {
+            font-weight: bold;
+          }
+
+          &:nth-child(2) {
+            font-weight: 400;
+          }
+        }
+      }
+
+      &:nth-child(3) {
+        float: right;
+        &:hover {
+          cursor: pointer;
+        }
+        i {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  .err-span {
+    right: 66px;
+    position: relative;
+    margin-left: 5px;
+    left: 0px;
+    z-index: 10000;
+    top: 0px;
+  }
+}
+
+#project-protect-dialog {
+  .form-box-2 {
+    .p-card {
+      width: 625px !important;
+
+      .p-card-content {
+        padding: 0px;
+      }
+    }
+
+  }
+}

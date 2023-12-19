@@ -1,0 +1,57 @@
+/* ------------------------------------------------------------------------ */
+/* Copyright © Siemens AG 2021-2021. All rights reserved. Confidential.     */
+/* ------------------------------------------------------------------------ */
+@import 'variables';
+
+$color-primary: #72b5b7;
+$color-primary-light: #90e1e4;
+$color-primary-dark: #426768;
+$color-secandory: #40e0d0;
+$color-tertiary: #633a82;
+$color-font-dark: #555;
+$color-font-light: #888;
+
+$default-font-size: 1.6rem;
+$color-helper: #006487;
+@mixin absCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.custom-toast{
+  position: fixed;
+  top: 28%;
+  left: 84%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+}
+
+.pv-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.pv-g {
+  display: flex;
+
+  &-12 {
+    width: 100%;
+  }
+
+  &-1 {
+    width: calc(100%/39);
+    min-height:97.3vh;
+    min-width : 35px;
+  }
+
+  &-38 {
+    width: calc(38*(100%/39));
+  }
+}
+
+.main{
+  height:auto;
+}

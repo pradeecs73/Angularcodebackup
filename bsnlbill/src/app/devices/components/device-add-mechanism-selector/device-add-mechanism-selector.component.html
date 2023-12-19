@@ -1,0 +1,21 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+
+ <!--
+        -This form group is having two radio button for browse and import devices
+        -On import , next button will be disabled as of now
+ -->
+<form [formGroup]="addMethodForm">
+  <div class="add-string">
+    <p> {{'devices.messages.addDevice' | translate}}</p>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="radio pl-2" *ngFor="let addMethod of addMethods">
+        <label>
+          <input type="radio" formControlName="addMethod" [value]="addMethod.value">
+          {{ addMethod.key | translate  }}
+        </label>
+      </div>
+    </div>
+  </div>
+</form>

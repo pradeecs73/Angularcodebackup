@@ -1,0 +1,130 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+<div class="home">
+  <div class="header">
+    <span class="header--text">{{'home.heading' | translate}}</span>
+  </div>
+  <!-- Create and import project button -->
+  <div class="controls">
+    <a id="CreateButton" class="controls--button" (click)="createProject()">
+      <span class="fas fa-plus-circle"></span>
+      {{'home.titles.createNewProject' | translate}}
+    </a>
+    <a id="Importbutton" class="controls--button" (click)="importProject()">
+      <img src="../assets/ImportProject_24er.svg" alt="" width="" height="">
+      {{'home.titles.importProject' | translate}}
+    </a>
+  </div>
+  <!-- Open project card -->
+  <div class="opened-project">
+    <p-accordion>
+      <p-accordionTab header="{{'home.titles.openProject' | translate}}" [selected]="true">
+        <div *ngIf="openedProject else noproject" class="open-project-container">
+          <open-project [projectData]="openedProject" (onClosedProject)="onProjectClosed()"
+            (onProjectEdit)="edittoExistingProject($event)"></open-project>
+        </div>
+        <!-- When there is no project -->
+        <ng-template #noproject>
+          <div class="no-project-container">
+            <div class="bulb-icon"><em class="fas fa-lightbulb"></em></div>
+            <div class="no-project-opened">
+              <p><strong>{{'home.messages.noProjectOpened.title' | translate}}</strong></p>
+              <p>{{'home.messages.noProjectOpened.content' | translate}}</p>
+            </div>
+          </div>
+        </ng-template>
+      </p-accordionTab>
+    </p-accordion>
+
+  </div>
+  <!-- Create project popup -->
+  <app-form-dialog *ngIf="createprojectModalDisplay" [show]="createprojectModalDisplay" [inputs]="createProjectInput"
+    (onHide)="createprojectModalDisplay=false" [component]="'create-edit'"
+    (onEventSucess)="createprojectModalDisplay=false;addtoExistingProjectList($event, true)"></app-form-dialog>
+  <!-- Project authentication popup -->
+  <app-form-dialog *ngIf="passwordValidationModalDisplay" id="passwordValidationModal"
+    [show]="passwordValidationModalDisplay" (onHide)="onCancel();passwordValidationModalDisplay = false"
+    [component]="'password-validation'" (onEventSucess)="passwordValidationModalDisplay = false"
+    (onCustomEvent)="verifyProtectedProject($event)" [inputs]="openProtectedProjectInput"></app-form-dialog>
+  <!-- Import project popup -->
+  <app-form-dialog *ngIf="importprojectModalDisplay" [show]="importprojectModalDisplay" (onHide)="close()"
+    [component]="'import'" (onEventSucess)="close();addtoExistingProjectList($event , false)"></app-form-dialog>
+  <!-- Recently used project list -->
+  <div class="recently-used-project">
+    <p-accordion>
+      <p-accordionTab header="{{'home.titles.projectList' | translate}}" [selected]="true">
+        <!-- Open and delete project buttons -->
+        <div class="recent-proj-controls">
+          <span class="controls-right pt-2">
+            <a id="OpenButton" [disableIfUnauthorized]="accessControl.CAN_PROJECT_UPDATE"
+              [ngClass]="!this.disabled?'project-enable':'project-disable'" (click)="openProject()"
+              class="open-project">
+
+              <i aria-hidden="true" class="fas fa-folder-open"></i>
+              {{'home.titles.openProject' | translate}}
+            </a>
+            <a id="DeleteButton" [ngClass]="!this.deleteDisabled?'project-enable':'project-disable'"
+              (click)="deleteProject()" class="delete-project">
+              <i aria-hidden="true" class="fas fa-trash-alt"></i>
+              {{'home.titles.deleteProject' | translate}}
+            </a>
+          </span>
+        </div>
+        <!-- Project list -->
+        <p-table [value]="projectList" [resizableColumns]="true" [scrollable]="true" scrollHeight="500px"
+          (onColResize)="columnsResized($event)">
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="key-column-width" id="key"></th>
+              <th pResizableColumn class="text-content-width" id="project_name">
+                {{'home.projectData.projectName' | translate}}
+              </th>
+              <th class="open-column-width" id="openButton"></th>
+              <th pResizableColumn id="author" class="text-content-width">{{'home.projectData.author' | translate}}</th>
+              <th pResizableColumn id="creation_time" class="text-content-width">
+                {{'home.projectData.creationTime' | translate}}</th>
+              <th pResizableColumn id="lastChanged" class="text-content-width">
+                {{'home.projectData.lastChanged' | translate}}</th>
+              <th pResizableColumn id="lastModified" class="text-content-width">
+                {{'home.projectData.lastModififedBy' | translate}}</th>
+              <th pResizableColumn id="comment">{{'home.projectData.comment' | translate}}</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-project>
+            <tr [ngClass]="project.isSelected?'project-selected':'project-deselected'" (click)="setSelection(project)"
+              onkeydown="setSelection(project)">
+              <td class="key-column-width">
+                <div class="bulb-icon" *ngIf="project.isProtected">
+                  <span class="protected-key"></span>
+                </div>
+              </td>
+              <td class="text-content-width" title="{{project.name }}">
+                {{project.name | ellipsis : ellipsisValue.projectName}}</td>
+              <td class="open-column-width">
+                <div class="opened" *ngIf="openedProject && project.name === openedProject.name">
+                  {{'home.button.opened' | translate}}</div>
+              </td>
+              <td class="text-content-width" title="{{project.author }}">
+                {{project.author | ellipsis :ellipsisValue.author}}</td>
+              <td class="text-content-width"
+                title="{{project.created | formatDate : facadeService.translateService.currentLang }},
+                          {{project.created | date : 'shortTime'}}">
+                {{formatDate(project.created) | ellipsis :ellipsisValue.creationTime}}
+              </td>
+              <td
+                class="text-content-width" id="lastChanged"
+                title="{{project.modified | formatDate : facadeService.translateService.currentLang}},
+                {{project.modified | date : 'shortTime'}}">
+                {{formatDate(project.modified) | ellipsis : ellipsisValue.lastChanged}}
+              </td>
+              <td class="text-content-width" title="{{project.modifiedby}}">
+                {{project.modifiedby | ellipsis : ellipsisValue.lastModifiedBy}}</td>
+              <td title="{{project.comment }}">{{project.comment | ellipsis : ellipsisValue.comment}}</td>
+
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-accordionTab>
+    </p-accordion>
+  </div>
+
+</div>

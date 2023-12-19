@@ -1,0 +1,71 @@
+<div id="left-menu-content">
+<p-tree [value]="items" selectionMode="multiple" [(selection)]="selectedItems" (onNodeSelect)="nodeSelect($event)"
+   (onNodeExpand)="onNodeExpand($event)" (onNodeCollapse)="onNodeCollapse($event)"
+    [virtualScroll]="true" [virtualNodeHeight]="33" scrollHeight="{{scrollHeight}}"
+   >
+    <ng-template let-node pTemplate="head">
+        <div class="header">
+            <span class="node-label" title="{{node.label}}">{{node.label | ellipsis: 20}}</span>
+            <span class="hide-id">{{node.key}}</span>
+            <div class="icon-div" 
+            [disableIfUnauthorized]="accessControl.CAN_CREATE_AREA||accessControl.CAN_PROJECT_UPDATE">
+                <span (click)="createNewArea($event,root)" [disableIfUnauthorized]="accessControl.CAN_CREATE_AREA" 
+                    class="new-area-icon"
+                    [ngClass]="facadeService.applicationStateService.isOnline() ? 'disabled' : ''"
+                    (keydown)="createNewArea($event,root)" 
+                    title="{{'editor.titles.createNewArea' | translate}}">
+                </span>
+                <span class="save-btn" [disableIfUnauthorized]="accessControl.CAN_PROJECT_UPDATE" 
+                    [ngClass]="{'disabled-save-icon' : facadeService.applicationStateService.isOnline()}"
+                    (click)="saveProject()" (keydown)="saveProject()" title="{{showToolTip()}}">
+                </span>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template let-node pTemplate="node">
+        <div class="menu-node">
+            <span class="node-label">{{node.label}}</span>
+            <span class="hide-id">{{node.key}}</span>
+        </div>
+    </ng-template>
+    <ng-template let-node pTemplate="area" >
+        <div class="menu-area">
+            <span class="hide-id">{{node.key}}</span>
+            <span class="node-label" title="{{node.label}}" *ngIf="!node.partialSelected" (click)="editableMode(node)"
+                (keydown)="editableMode(node)">{{truncateName(node.label)}}</span>
+            <span *ngIf="node.partialSelected"> 
+                <input type="text" aria-label="areaName" id="areaNameField"  
+                [disableIfUnauthorized]="accessControl.CAN_CREATE_AREA" class="no-outline"
+                    [ngModel]="node.label" (click)="preventDefault($event)" (keypress)="preventDefault($event)"
+                    (blur)="updateAreaName($event.target,node.key,node)" (dblclick)="preventDefault($event)" />
+            </span>
+            <div class="area-icons">
+                <div class="icon-div" 
+                [disableIfUnauthorized]="accessControl.CAN_CREATE_AREA 
+                || accessControl.CAN_UNGROUP_AREA ||accessControl.CAN_DELETE_AREA_NODE ">
+                    <span 
+                    (click)="createNewArea($event,node.key)" 
+                    [disableIfUnauthorized]="accessControl.CAN_CREATE_AREA" 
+                    class="new-area-icon hide-icon"
+                        [ngClass]="facadeService.applicationStateService.isOnline() ? 'disabled' : ''"
+                        (keydown)="createNewArea($event,node.key)" 
+                        title="{{'editor.titles.createNewArea' | translate}}">
+                    </span>
+                    <span (click)="unGroupAreaData($event, node)" 
+                    [disableIfUnauthorized]="accessControl.CAN_UNGROUP_AREA" class="ungroup-area-icon hide-icon"
+                        [ngClass]="facadeService.applicationStateService.isOnline() ? 'disabled' : ''"
+                        (keydown)="unGroupAreaData($event, node)" title="{{'editor.titles.ungroupArea' | translate}}">
+                    </span>
+                    <span class="delete-btn hide-icon" 
+                    (click)="deleteAreaDetails($event,node)" 
+                    [disableIfUnauthorized]="accessControl.CAN_DELETE_AREA_NODE"
+                    title="{{'editor.titles.deleteArea' | translate}}"
+                        [ngClass]="facadeService.applicationStateService.isOnline() ? 'disabled' : ''"
+                        (keydown)="deleteAreaDetails($event,node)">
+                    </span>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-tree>
+</div>

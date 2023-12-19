@@ -1,0 +1,925 @@
+project:
+  id: ljwsrzkl
+  sourcePath:
+    FileName: ProjectWithConnection.yaml
+    ContentString: |
+      project:
+        id: ljwm51hu
+        sourcePath:
+          FileName: projectWithConnections.yaml
+          ContentString: |
+            project:
+              id: ljpubp4a
+              name: Project With Connection
+              comment: ''
+              author: ''
+              created: 7/5/2023, 8:24:59 PM
+              modified: 7/7/2023, 4:38:37 PM
+              modifiedby: ''
+              isProtected: false
+              AppVersion: '1.0'
+            tree:
+              devices:
+                - name: BottleFilling
+                  uid: de88ed62-4ccb-49e8-9455-097341e93796
+                  address: opc.tcp://192.168.2.101:4840
+                  isDeviceAuthRequired: false
+                  isProtected: false
+                  automationComponents:
+                    - name: BottleFilling
+                      clientInterfaces:
+                        - name: FillingToMixing
+                          type: FillToMix_Type
+                          properties:
+                            - name: InputData
+                              type: ''
+                              children:
+                                - name: Start
+                                  type: Boolean
+                                - name: Stop
+                                  type: Boolean
+                                - name: Hold
+                                  type: Boolean
+                                - name: AmountLiquid
+                                  type: Double
+                                - name: Error
+                                  type: Boolean
+                                - name: Status
+                                  type: UInt16
+                            - name: OutputData
+                              type: ''
+                              children:
+                                - name: Running
+                                  type: Boolean
+                                - name: Stopped
+                                  type: Boolean
+                                - name: Held
+                                  type: Boolean
+                                - name: Error
+                                  type: Boolean
+                                - name: Status
+                                  type: UInt16
+                                - name: FaultyBottles
+                                  type: UInt32
+                          isClientInterface: true
+                          connectionEndPointDetails:
+                            detailStatus:
+                              name: DetailedStatus
+                              value:
+                                connect: 0
+                                readNamespaceList: 0
+                                readNodeIds: 0
+                                read: 0
+                                write: 0
+                                disconnect: 0
+                              type: ''
+                            relatedEndpoints:
+                              name: RelatedEndpoint
+                              value: ''
+                              type: ''
+                            status:
+                              name: Status
+                              value: false
+                              type: ''
+                          id: clientInf_ljpwzhyk
+                        - name: FillingToWashing2
+                          type: FillToWash2_Type
+                          properties:
+                            - name: InputData
+                              type: ''
+                              children:
+                                - name: Start
+                                  type: Boolean
+                                - name: Hold
+                                  type: Boolean
+                                - name: Stop
+                                  type: Boolean
+                                - name: Speed
+                                  type: UInt32
+                                - name: NumberBottles
+                                  type: UInt32
+                                - name: FaultyBottles
+                                  type: UInt32
+                                - name: Error
+                                  type: Boolean
+                                - name: Status
+                                  type: Boolean
+                            - name: OutputData
+                              type: ''
+                              children:
+                                - name: Running
+                                  type: Boolean
+                                - name: Stopped
+                                  type: Boolean
+                                - name: Held
+                                  type: Boolean
+                                - name: Error
+                                  type: Boolean
+                                - name: Status
+                                  type: UInt16
+                          isClientInterface: true
+                          connectionEndPointDetails:
+                            detailStatus:
+                              name: DetailedStatus
+                              value:
+                                connect: 2147811328
+                                readNamespaceList: 0
+                                readNodeIds: 0
+                                read: 0
+                                write: 0
+                                disconnect: 0
+                              type: ''
+                            relatedEndpoints:
+                              name: RelatedEndpoint
+                              value: ''
+                              type: ''
+                            status:
+                              name: Status
+                              value: false
+                              type: ''
+                          id: clientInf_ljpwzhym
+                      serverInterfaces: []
+                      address: opc.tcp://192.168.2.101:4840
+                      deviceId: de88ed62-4ccb-49e8-9455-097341e93796
+                      deviceName: BottleFilling
+                      id: de88ed62-4ccb-49e8-9455-097341e93796_Qm90dGxlRmlsbGluZw==
+                  deviceSet:
+                    - name: DeviceRevision
+                      type: String
+                      value: 6ES7 511-1AK02-0AB0  V02.09.00
+                    - name: EngineeringRevision
+                      type: String
+                      value: V17.0
+                    - name: HardwareRevision
+                      type: String
+                      value: '0'
+                    - name: Manufacturer
+                      type: LocalizedText
+                      value: locale=null text=Siemens AG
+                    - name: Model
+                      type: LocalizedText
+                      value: locale=null text=CPU 1511-1 PN
+                    - name: OrderNumber
+                      type: String
+                      value: '6ES7 511-1AK02-0AB0 '
+                    - name: RevisionCounter
+                      type: Int32
+                      value: -1
+                    - name: SerialNumber
+                      type: String
+                      value: 10S C-5ww2964hd5
+                  adapterType: Plant Object
+                  status: SUCCESS
+                - name: LiquidMixing
+                  uid: 7b15a85a-869a-496e-a0e1-50cc80e07625
+                  address: opc.tcp://192.168.2.102:4840
+                  isDeviceAuthRequired: false
+                  isProtected: false
+                  automationComponents:
+                    - name: LiquidMixing
+                      clientInterfaces: []
+                      serverInterfaces:
+                        - name: FillingToMixing
+                          type: FillToMix_Type
+                          properties:
+                            - name: InputData
+                              type: ''
+                              children:
+                                - name: Running
+                                  type: Boolean
+                                - name: Stopped
+                                  type: Boolean
+                                - name: Held
+                                  type: Boolean
+                                - name: Error
+                                  type: Boolean
+                                - name: Status
+                                  type: UInt16
+                                - name: FaultyBottles
+                                  type: UInt32
+                            - name: OutputData
+                              type: ''
+                              children:
+                                - name: Start
+                                  type: Boolean
+                                - name: Stop
+                                  type: Boolean
+                                - name: Hold
+                                  type: Boolean
+                                - name: AmountLiquid
+                                  type: Double
+                                - name: Error
+                                  type: Boolean
+                                - name: Status
+                                  type: UInt16
+                          isClientInterface: false
+                          id: serverInf_ljpwzhyn
+                        - name: Washing1ToMixing
+                          type: Wash1ToMix_Type
+                          properties:
+                            - name: InputData
+                              type: ''
+                              children:
+                                - name: Running
+                                  type: Boolean
+                                - name: Stopped
+                                  type: Boolean
+                                - name: Held
+                                  type: Boolean
+                                - name: Error
+                                  type: Boolean
+                                - name: Status
+                                  type: UInt16
+                            - name: OutputData
+                              type: ''
+                              children:
+                                - name: Start
+                                  type: Boolean
+                                - name: Stop
+                                  type: Boolean
+                                - name: Hold
+                                  type: Boolean
+                                - name: AmountBottles
+                                  type: UInt32
+                                - name: Error
+                                  type: Boolean
+                                - name: Status
+                                  type: UInt16
+                          isClientInterface: false
+                          id: serverInf_ljpwzhyo
+                      address: opc.tcp://192.168.2.102:4840
+                      deviceId: 7b15a85a-869a-496e-a0e1-50cc80e07625
+                      deviceName: LiquidMixing
+                      id: 7b15a85a-869a-496e-a0e1-50cc80e07625_TGlxdWlkTWl4aW5n
+                  deviceSet:
+                    - name: DeviceRevision
+                      type: String
+                      value: 6ES7 511-1AK02-0AB0  V02.09.00
+                    - name: EngineeringRevision
+                      type: String
+                      value: V17.0
+                    - name: HardwareRevision
+                      type: String
+                      value: '0'
+                    - name: Manufacturer
+                      type: LocalizedText
+                      value: locale=null text=Siemens AG
+                    - name: Model
+                      type: LocalizedText
+                      value: locale=null text=CPU 1511-1 PN
+                    - name: OrderNumber
+                      type: String
+                      value: '6ES7 511-1AK02-0AB0 '
+                    - name: RevisionCounter
+                      type: Int32
+                      value: -1
+                    - name: SerialNumber
+                      type: String
+                      value: 10S C-11836b5281
+                  adapterType: Plant Object
+                  status: SUCCESS
+            editor:
+              nodes:
+                - id: de88ed62-4ccb-49e8-9455-097341e93796_Qm90dGxlRmlsbGluZw==
+                  x: 132.91250610351562
+                  'y': 92.32502746582031
+                  address: opc.tcp://192.168.2.101:4840
+                  selected: true
+                  parent: ROOT
+                  deviceId: de88ed62-4ccb-49e8-9455-097341e93796
+                - id: 7b15a85a-869a-496e-a0e1-50cc80e07625_TGlxdWlkTWl4aW5n
+                  x: 202.88574001106872
+                  'y': 330.74831935677196
+                  address: opc.tcp://192.168.2.102:4840
+                  selected: true
+                  parent: ROOT
+                  deviceId: 7b15a85a-869a-496e-a0e1-50cc80e07625
+              connections:
+                - in: >-
+                    de88ed62-4ccb-49e8-9455-097341e93796__de88ed62-4ccb-49e8-9455-097341e93796_Qm90dGxlRmlsbGluZw==__clientInf_ljpwzhyk
+                  out: >-
+                    7b15a85a-869a-496e-a0e1-50cc80e07625__7b15a85a-869a-496e-a0e1-50cc80e07625_TGlxdWlkTWl4aW5n__serverInf_ljpwzhyn
+                  id: >-
+                    de88ed62-4ccb-49e8-9455-097341e93796_Qm90dGxlRmlsbGluZw==__7b15a85a-869a-496e-a0e1-50cc80e07625_TGlxdWlkTWl4aW5n__FillToMix_Type
+                  selected: false
+                  creationMode: Manual
+                  areaId: ROOT
+                  hasSubConnections: false
+                  acIds: >-
+                    de88ed62-4ccb-49e8-9455-097341e93796_Qm90dGxlRmlsbGluZw==__7b15a85a-869a-496e-a0e1-50cc80e07625_TGlxdWlkTWl4aW5n
+            scanSettings:
+              port: 4840
+              fromIPAddress: 192.168.2.101
+              toIPAddress: 192.168.2.110
+            zoomSettings:
+              zoomPercent: 100
+          Size: 10170
+          Content: null
+        name: Project With Connection
+        comment: ''
+        author: ''
+        created: 7/10/2023, 2:10:14 PM
+        modified: 7/10/2023, 2:11:01 PM
+        modifiedby: ''
+        isProtected: false
+        AppVersion: '1.0'
+      tree:
+        devices:
+          - name: BottleFilling
+            uid: de88ed62-4ccb-49e8-9455-097341e93796
+            address: opc.tcp://192.168.2.101:4840
+            isDeviceAuthRequired: false
+            isProtected: false
+            automationComponents:
+              - name: BottleFilling
+                clientInterfaces:
+                  - name: FillingToMixing
+                    type: FillToMix_Type
+                    properties:
+                      - name: InputData
+                        type: ''
+                        children:
+                          - name: Start
+                            type: Boolean
+                          - name: Stop
+                            type: Boolean
+                          - name: Hold
+                            type: Boolean
+                          - name: AmountLiquid
+                            type: Double
+                          - name: Error
+                            type: Boolean
+                          - name: Status
+                            type: UInt16
+                      - name: OutputData
+                        type: ''
+                        children:
+                          - name: Running
+                            type: Boolean
+                          - name: Stopped
+                            type: Boolean
+                          - name: Held
+                            type: Boolean
+                          - name: Error
+                            type: Boolean
+                          - name: Status
+                            type: UInt16
+                          - name: FaultyBottles
+                            type: UInt32
+                    isClientInterface: true
+                    connectionEndPointDetails:
+                      detailStatus:
+                        name: DetailedStatus
+                        value:
+                          connect: 0
+                          readNamespaceList: 0
+                          readNodeIds: 0
+                          read: 0
+                          write: 0
+                          disconnect: 0
+                        type: ''
+                      relatedEndpoints:
+                        name: RelatedEndpoint
+                        value: ''
+                        type: ''
+                      status:
+                        name: Status
+                        value: false
+                        type: ''
+                    id: clientInf_ljpwzhyk
+                  - name: FillingToWashing2
+                    type: FillToWash2_Type
+                    properties:
+                      - name: InputData
+                        type: ''
+                        children:
+                          - name: Start
+                            type: Boolean
+                          - name: Hold
+                            type: Boolean
+                          - name: Stop
+                            type: Boolean
+                          - name: Speed
+                            type: UInt32
+                          - name: NumberBottles
+                            type: UInt32
+                          - name: FaultyBottles
+                            type: UInt32
+                          - name: Error
+                            type: Boolean
+                          - name: Status
+                            type: Boolean
+                      - name: OutputData
+                        type: ''
+                        children:
+                          - name: Running
+                            type: Boolean
+                          - name: Stopped
+                            type: Boolean
+                          - name: Held
+                            type: Boolean
+                          - name: Error
+                            type: Boolean
+                          - name: Status
+                            type: UInt16
+                    isClientInterface: true
+                    connectionEndPointDetails:
+                      detailStatus:
+                        name: DetailedStatus
+                        value:
+                          connect: 2147811328
+                          readNamespaceList: 0
+                          readNodeIds: 0
+                          read: 0
+                          write: 0
+                          disconnect: 0
+                        type: ''
+                      relatedEndpoints:
+                        name: RelatedEndpoint
+                        value: ''
+                        type: ''
+                      status:
+                        name: Status
+                        value: false
+                        type: ''
+                    id: clientInf_ljpwzhym
+                serverInterfaces: []
+                address: opc.tcp://192.168.2.101:4840
+                deviceId: de88ed62-4ccb-49e8-9455-097341e93796
+                deviceName: BottleFilling
+                id: de88ed62-4ccb-49e8-9455-097341e93796_Qm90dGxlRmlsbGluZw==
+            deviceSet:
+              - name: DeviceRevision
+                type: String
+                value: 6ES7 511-1AK02-0AB0  V02.09.00
+              - name: EngineeringRevision
+                type: String
+                value: V17.0
+              - name: HardwareRevision
+                type: String
+                value: '0'
+              - name: Manufacturer
+                type: LocalizedText
+                value: locale=null text=Siemens AG
+              - name: Model
+                type: LocalizedText
+                value: locale=null text=CPU 1511-1 PN
+              - name: OrderNumber
+                type: String
+                value: '6ES7 511-1AK02-0AB0 '
+              - name: RevisionCounter
+                type: Int32
+                value: -1
+              - name: SerialNumber
+                type: String
+                value: 10S C-5ww2964hd5
+            adapterType: Plant Object
+            status: SUCCESS
+          - name: LiquidMixing
+            uid: 7b15a85a-869a-496e-a0e1-50cc80e07625
+            address: opc.tcp://192.168.2.102:4840
+            isDeviceAuthRequired: false
+            isProtected: false
+            automationComponents:
+              - name: LiquidMixing
+                clientInterfaces: []
+                serverInterfaces:
+                  - name: FillingToMixing
+                    type: FillToMix_Type
+                    properties:
+                      - name: InputData
+                        type: ''
+                        children:
+                          - name: Running
+                            type: Boolean
+                          - name: Stopped
+                            type: Boolean
+                          - name: Held
+                            type: Boolean
+                          - name: Error
+                            type: Boolean
+                          - name: Status
+                            type: UInt16
+                          - name: FaultyBottles
+                            type: UInt32
+                      - name: OutputData
+                        type: ''
+                        children:
+                          - name: Start
+                            type: Boolean
+                          - name: Stop
+                            type: Boolean
+                          - name: Hold
+                            type: Boolean
+                          - name: AmountLiquid
+                            type: Double
+                          - name: Error
+                            type: Boolean
+                          - name: Status
+                            type: UInt16
+                    isClientInterface: false
+                    id: serverInf_ljpwzhyn
+                  - name: Washing1ToMixing
+                    type: Wash1ToMix_Type
+                    properties:
+                      - name: InputData
+                        type: ''
+                        children:
+                          - name: Running
+                            type: Boolean
+                          - name: Stopped
+                            type: Boolean
+                          - name: Held
+                            type: Boolean
+                          - name: Error
+                            type: Boolean
+                          - name: Status
+                            type: UInt16
+                      - name: OutputData
+                        type: ''
+                        children:
+                          - name: Start
+                            type: Boolean
+                          - name: Stop
+                            type: Boolean
+                          - name: Hold
+                            type: Boolean
+                          - name: AmountBottles
+                            type: UInt32
+                          - name: Error
+                            type: Boolean
+                          - name: Status
+                            type: UInt16
+                    isClientInterface: false
+                    id: serverInf_ljpwzhyo
+                address: opc.tcp://192.168.2.102:4840
+                deviceId: 7b15a85a-869a-496e-a0e1-50cc80e07625
+                deviceName: LiquidMixing
+                id: 7b15a85a-869a-496e-a0e1-50cc80e07625_TGlxdWlkTWl4aW5n
+            deviceSet:
+              - name: DeviceRevision
+                type: String
+                value: 6ES7 511-1AK02-0AB0  V02.09.00
+              - name: EngineeringRevision
+                type: String
+                value: V17.0
+              - name: HardwareRevision
+                type: String
+                value: '0'
+              - name: Manufacturer
+                type: LocalizedText
+                value: locale=null text=Siemens AG
+              - name: Model
+                type: LocalizedText
+                value: locale=null text=CPU 1511-1 PN
+              - name: OrderNumber
+                type: String
+                value: '6ES7 511-1AK02-0AB0 '
+              - name: RevisionCounter
+                type: Int32
+                value: -1
+              - name: SerialNumber
+                type: String
+                value: 10S C-11836b5281
+            adapterType: Plant Object
+            status: SUCCESS
+      editor:
+        nodes:
+          - id: de88ed62-4ccb-49e8-9455-097341e93796_Qm90dGxlRmlsbGluZw==
+            x: 590.6903381347656
+            'y': 146.54722595214844
+            address: opc.tcp://192.168.2.101:4840
+            selected: true
+            parent: ROOT
+            deviceId: de88ed62-4ccb-49e8-9455-097341e93796
+          - id: 7b15a85a-869a-496e-a0e1-50cc80e07625_TGlxdWlkTWl4aW5n
+            x: 14.441312520834344
+            'y': 145.85931178841258
+            address: opc.tcp://192.168.2.102:4840
+            selected: false
+            parent: ROOT
+            deviceId: 7b15a85a-869a-496e-a0e1-50cc80e07625
+        connections:
+          - in: >-
+              de88ed62-4ccb-49e8-9455-097341e93796__de88ed62-4ccb-49e8-9455-097341e93796_Qm90dGxlRmlsbGluZw==__clientInf_ljpwzhyk
+            out: >-
+              7b15a85a-869a-496e-a0e1-50cc80e07625__7b15a85a-869a-496e-a0e1-50cc80e07625_TGlxdWlkTWl4aW5n__serverInf_ljpwzhyn
+            id: >-
+              de88ed62-4ccb-49e8-9455-097341e93796_Qm90dGxlRmlsbGluZw==__7b15a85a-869a-496e-a0e1-50cc80e07625_TGlxdWlkTWl4aW5n__FillToMix_Type
+            selected: false
+            creationMode: Manual
+            areaId: ROOT
+            hasSubConnections: false
+            acIds: >-
+              de88ed62-4ccb-49e8-9455-097341e93796_Qm90dGxlRmlsbGluZw==__7b15a85a-869a-496e-a0e1-50cc80e07625_TGlxdWlkTWl4aW5n
+      scanSettings:
+        port: 4840
+        fromIPAddress: 192.168.2.101
+        toIPAddress: 192.168.2.110
+      zoomSettings:
+        zoomPercent: 100
+    Size: 22284
+    Content: null
+  name: Project With Connection
+  comment: ''
+  author: ''
+  created: 7/10/2023, 5:16:03 PM
+  modified: 7/10/2023, 5:17:27 PM
+  modifiedby: ''
+  isProtected: false
+  AppVersion: '1.0'
+tree:
+  devices:
+    - name: BottleFilling
+      uid: de88ed62-4ccb-49e8-9455-097341e93796
+      address: opc.tcp://192.168.2.101:4840
+      isDeviceAuthRequired: false
+      isProtected: false
+      automationComponents:
+        - name: BottleFilling
+          clientInterfaces:
+            - name: FillingToMixing
+              type: FillToMix_Type
+              properties:
+                - name: InputData
+                  type: ''
+                  children:
+                    - name: Start
+                      type: Boolean
+                    - name: Stop
+                      type: Boolean
+                    - name: Hold
+                      type: Boolean
+                    - name: AmountLiquid
+                      type: Double
+                    - name: Error
+                      type: Boolean
+                    - name: Status
+                      type: UInt16
+                - name: OutputData
+                  type: ''
+                  children:
+                    - name: Running
+                      type: Boolean
+                    - name: Stopped
+                      type: Boolean
+                    - name: Held
+                      type: Boolean
+                    - name: Error
+                      type: Boolean
+                    - name: Status
+                      type: UInt16
+                    - name: FaultyBottles
+                      type: UInt32
+              isClientInterface: true
+              connectionEndPointDetails:
+                detailStatus:
+                  name: DetailedStatus
+                  value:
+                    connect: 0
+                    readNamespaceList: 0
+                    readNodeIds: 0
+                    read: 0
+                    write: 0
+                    disconnect: 0
+                  type: ''
+                relatedEndpoints:
+                  name: RelatedEndpoint
+                  value: ''
+                  type: ''
+                status:
+                  name: Status
+                  value: false
+                  type: ''
+              id: clientInf_ljpwzhyk
+            - name: FillingToWashing2
+              type: FillToWash2_Type
+              properties:
+                - name: InputData
+                  type: ''
+                  children:
+                    - name: Start
+                      type: Boolean
+                    - name: Hold
+                      type: Boolean
+                    - name: Stop
+                      type: Boolean
+                    - name: Speed
+                      type: UInt32
+                    - name: NumberBottles
+                      type: UInt32
+                    - name: FaultyBottles
+                      type: UInt32
+                    - name: Error
+                      type: Boolean
+                    - name: Status
+                      type: Boolean
+                - name: OutputData
+                  type: ''
+                  children:
+                    - name: Running
+                      type: Boolean
+                    - name: Stopped
+                      type: Boolean
+                    - name: Held
+                      type: Boolean
+                    - name: Error
+                      type: Boolean
+                    - name: Status
+                      type: UInt16
+              isClientInterface: true
+              connectionEndPointDetails:
+                detailStatus:
+                  name: DetailedStatus
+                  value:
+                    connect: 2147811328
+                    readNamespaceList: 0
+                    readNodeIds: 0
+                    read: 0
+                    write: 0
+                    disconnect: 0
+                  type: ''
+                relatedEndpoints:
+                  name: RelatedEndpoint
+                  value: ''
+                  type: ''
+                status:
+                  name: Status
+                  value: false
+                  type: ''
+              id: clientInf_ljpwzhym
+          serverInterfaces: []
+          address: opc.tcp://192.168.2.101:4840
+          deviceId: de88ed62-4ccb-49e8-9455-097341e93796
+          deviceName: BottleFilling
+          id: de88ed62-4ccb-49e8-9455-097341e93796_Qm90dGxlRmlsbGluZw==
+      deviceSet:
+        - name: DeviceRevision
+          type: String
+          value: 6ES7 511-1AK02-0AB0  V02.09.00
+        - name: EngineeringRevision
+          type: String
+          value: V17.0
+        - name: HardwareRevision
+          type: String
+          value: '0'
+        - name: Manufacturer
+          type: LocalizedText
+          value: locale=null text=Siemens AG
+        - name: Model
+          type: LocalizedText
+          value: locale=null text=CPU 1511-1 PN
+        - name: OrderNumber
+          type: String
+          value: '6ES7 511-1AK02-0AB0 '
+        - name: RevisionCounter
+          type: Int32
+          value: -1
+        - name: SerialNumber
+          type: String
+          value: 10S C-5ww2964hd5
+      adapterType: Plant Object
+      status: SUCCESS
+    - name: LiquidMixing
+      uid: 7b15a85a-869a-496e-a0e1-50cc80e07625
+      address: opc.tcp://192.168.2.102:4840
+      isDeviceAuthRequired: false
+      isProtected: false
+      automationComponents:
+        - name: LiquidMixing
+          clientInterfaces: []
+          serverInterfaces:
+            - name: FillingToMixing
+              type: FillToMix_Type
+              properties:
+                - name: InputData
+                  type: ''
+                  children:
+                    - name: Running
+                      type: Boolean
+                    - name: Stopped
+                      type: Boolean
+                    - name: Held
+                      type: Boolean
+                    - name: Error
+                      type: Boolean
+                    - name: Status
+                      type: UInt16
+                    - name: FaultyBottles
+                      type: UInt32
+                - name: OutputData
+                  type: ''
+                  children:
+                    - name: Start
+                      type: Boolean
+                    - name: Stop
+                      type: Boolean
+                    - name: Hold
+                      type: Boolean
+                    - name: AmountLiquid
+                      type: Double
+                    - name: Error
+                      type: Boolean
+                    - name: Status
+                      type: UInt16
+              isClientInterface: false
+              id: serverInf_ljpwzhyn
+            - name: Washing1ToMixing
+              type: Wash1ToMix_Type
+              properties:
+                - name: InputData
+                  type: ''
+                  children:
+                    - name: Running
+                      type: Boolean
+                    - name: Stopped
+                      type: Boolean
+                    - name: Held
+                      type: Boolean
+                    - name: Error
+                      type: Boolean
+                    - name: Status
+                      type: UInt16
+                - name: OutputData
+                  type: ''
+                  children:
+                    - name: Start
+                      type: Boolean
+                    - name: Stop
+                      type: Boolean
+                    - name: Hold
+                      type: Boolean
+                    - name: AmountBottles
+                      type: UInt32
+                    - name: Error
+                      type: Boolean
+                    - name: Status
+                      type: UInt16
+              isClientInterface: false
+              id: serverInf_ljpwzhyo
+          address: opc.tcp://192.168.2.102:4840
+          deviceId: 7b15a85a-869a-496e-a0e1-50cc80e07625
+          deviceName: LiquidMixing
+          id: 7b15a85a-869a-496e-a0e1-50cc80e07625_TGlxdWlkTWl4aW5n
+      deviceSet:
+        - name: DeviceRevision
+          type: String
+          value: 6ES7 511-1AK02-0AB0  V02.09.00
+        - name: EngineeringRevision
+          type: String
+          value: V17.0
+        - name: HardwareRevision
+          type: String
+          value: '0'
+        - name: Manufacturer
+          type: LocalizedText
+          value: locale=null text=Siemens AG
+        - name: Model
+          type: LocalizedText
+          value: locale=null text=CPU 1511-1 PN
+        - name: OrderNumber
+          type: String
+          value: '6ES7 511-1AK02-0AB0 '
+        - name: RevisionCounter
+          type: Int32
+          value: -1
+        - name: SerialNumber
+          type: String
+          value: 10S C-11836b5281
+      adapterType: Plant Object
+      status: SUCCESS
+editor:
+  nodes:
+    - id: de88ed62-4ccb-49e8-9455-097341e93796_Qm90dGxlRmlsbGluZw==
+      x: 513.3570251464844
+      'y': 144.7694549560547
+      address: opc.tcp://192.168.2.101:4840
+      selected: false
+      parent: ROOT
+      deviceId: de88ed62-4ccb-49e8-9455-097341e93796
+    - id: 7b15a85a-869a-496e-a0e1-50cc80e07625_TGlxdWlkTWl4aW5n
+      x: 29.552396505209344
+      'y': 144.08154079231883
+      address: opc.tcp://192.168.2.102:4840
+      selected: false
+      parent: ROOT
+      deviceId: 7b15a85a-869a-496e-a0e1-50cc80e07625
+  connections:
+    - in: >-
+        de88ed62-4ccb-49e8-9455-097341e93796__de88ed62-4ccb-49e8-9455-097341e93796_Qm90dGxlRmlsbGluZw==__clientInf_ljpwzhyk
+      out: >-
+        7b15a85a-869a-496e-a0e1-50cc80e07625__7b15a85a-869a-496e-a0e1-50cc80e07625_TGlxdWlkTWl4aW5n__serverInf_ljpwzhyn
+      id: >-
+        de88ed62-4ccb-49e8-9455-097341e93796_Qm90dGxlRmlsbGluZw==__7b15a85a-869a-496e-a0e1-50cc80e07625_TGlxdWlkTWl4aW5n__FillToMix_Type
+      selected: false
+      creationMode: Manual
+      areaId: ROOT
+      hasSubConnections: false
+      acIds: >-
+        de88ed62-4ccb-49e8-9455-097341e93796_Qm90dGxlRmlsbGluZw==__7b15a85a-869a-496e-a0e1-50cc80e07625_TGlxdWlkTWl4aW5n
+scanSettings:
+  port: 4840
+  fromIPAddress: 192.168.2.101
+  toIPAddress: 192.168.2.110
+zoomSettings:
+  zoomPercent: 100

@@ -1,0 +1,263 @@
+/* ------------------------------------------------------------------------ */
+/* Copyright © Siemens AG 2021-2021. All rights reserved. Confidential.     */
+/* ------------------------------------------------------------------------ */
+@import 'variables';
+@import 'icon';
+
+.sider-menu {
+  height: 100%;
+  background-color: $color-nav-background; // #4693b5;
+}
+
+// :host body
+body .sider-menu .p-menu {
+  width: 100%;
+  border: none;
+  background-color: $color-nav-background; //#4693b5; 
+  .p-menuitem:last-child{
+    position: fixed;
+    bottom : 0;
+    width: 2.6vw;
+  }
+  .p-menuitem:nth-last-child(2){
+    position: fixed;
+    bottom : 45px;
+    width: 2.6vw;
+  }
+  .p-menuitem:nth-last-child(3){
+    position: fixed;
+    bottom : 90px;
+    width: 2.6vw;
+  }
+  .p-menuitem-link {
+    height: 4.8rem;
+    pointer-events :all;
+    display: flex;
+    justify-content: center;
+    & .p-menuitem-icon {
+      color: $color-bg-white;
+      font-size: 2.4rem;
+      margin-right: 0px
+    }
+
+    &:focus,
+    &:active {
+      box-shadow: none;
+      .p-menuitem-icon {
+        color: $color-interaction-blue !important;
+        margin-right: 0px;
+      }
+    }
+
+    &:hover .p-menuitem-icon {
+      color: $color-bg-white;
+    }
+
+    &:hover {
+      background-color: $color-interaction-blue-hover;
+    }
+  }
+
+  .selected .p-menuitem-link {
+        background-color: $color-bg-white;
+        .p-menuitem-icon {
+          color: $color-interaction-blue !important;
+          margin-right: 0px;
+        }
+      }
+  }
+
+  .disabled .p-menuitem-link {
+      pointer-events:none !important;
+      filter: $color-col-nav-disabled;
+  }
+
+
+  @media only screen and (max-width: 1310px ) and  (min-width: 1100px ){
+    body .sider-menu .p-menu {
+      .p-menuitem:nth-last-child(-n+3){
+        width: 3vw;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 1100px ) and  (min-width: 975px ){
+    body .sider-menu .p-menu {
+      .p-menuitem:nth-last-child(-n+3){
+        width: 3.5vw;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 975px ) and  (min-width: 850px ){
+    body .sider-menu .p-menu {
+      .p-menuitem:nth-last-child(-n+3){
+        width: 4vw;
+      }
+    }
+  }
+  @media only screen and (max-width: 850px ) and  (min-width: 700px ){
+    body .sider-menu .p-menu {
+      .p-menuitem:nth-last-child(-n+3){
+        width: 4.5vw;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 700px ) and  (min-width: 548px ){
+    body .sider-menu .p-menu {
+      .p-menuitem:nth-last-child(-n+3){
+        width: 5vw;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 548px ) and  (min-width: 400px ){
+    body .sider-menu .p-menu {
+      .p-menuitem:nth-last-child(-n+3){
+        width: 5.5vw;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 400px ) and  (min-width: 200px ){
+    body .sider-menu .p-menu {
+      .p-menuitem:nth-last-child(-n+3){
+        width: 6vw;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 200px ) and  (min-width: 0px ){
+    body .sider-menu .p-menu {
+      .p-menuitem:nth-last-child(-n+3){
+        width: 6.5vw;
+      }
+    }
+  }
+
+.homeicon {
+  &::before {
+    content: url('/../../../assets/icons/Home_32er.svg');
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.configurationsettingsicon {
+  &::before {
+    content: url('/../../../assets/icons/Settings_16er.svg');
+    display: flex;
+    justify-content: center;
+    filter: $color-icon-inactive;
+    padding-left:2px;
+  }
+}
+
+.configurationsettingsicon-active {
+  &::before {
+    content: url('/../../../assets/icons/Settings_16er.svg');
+    display: flex;
+    justify-content: center;
+    filter: $color-icon-active;
+    padding-left:2px;
+  }
+  background: #fff;
+}
+
+.devicetreeicon {
+  &::before {
+    content: url('/../../../assets/icons/DeviceTree_32er.svg');
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.plantviewicon-active {
+  &::before {
+    content: url('/../../../assets/icons/PlantView_active_32er.svg');
+    display: flex;
+    justify-content: center;
+  }
+
+  background: #fff;
+}
+
+.plantviewicon {
+  &::before {
+    content: url('/../../../assets/icons/PlantView_32er.svg');
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.homeicon-active {
+  &::before {
+    content: url('/../../../assets/icons/Home_active_32er.svg');
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.devicetreeicon-active {
+  &::before {
+    content: url('/../../../assets/icons/DeviceTree_active_32er.svg');
+    display: flex;
+    justify-content: center;
+  }
+
+  background: #fff;
+}
+
+
+.settingsicon {
+  &::before {
+    content: url('/../../../assets/icons/SettingsProjects_16er.svg');
+    display: flex;
+    justify-content: center;
+    filter: $color-icon-inactive;
+    
+  }
+}
+
+.settingsicon-active {
+  &::before {
+    content: url('/../../../assets/icons/SettingsProjects_16er.svg');
+    display: flex;
+    justify-content: center;
+    filter: $color-icon-active;
+  }
+  background: #fff;
+}
+
+@mixin about-icon-style($color){
+  &::before {
+    content: url('/../../../assets/icons/about.svg');
+    display: flex;
+    justify-content: center;
+    filter: $color;
+  }
+}
+
+.abouticon {
+  @include about-icon-style($color-icon-inactive);
+}
+
+.abouticon-active {
+  @include about-icon-style($color-icon-active);
+  background: #fff;
+}
+
+
+.helpicon{
+  &::before {
+    content: url('/../../../assets/icons/question.svg');
+    display: flex;
+    justify-content: center;
+    filter: $color-icon-inactive;
+    
+  }
+}
+
+
+

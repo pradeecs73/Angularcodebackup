@@ -1,0 +1,23 @@
+/* ------------------------------------------------------------------------ */
+/* Copyright © Siemens AG 2021-2021. All rights reserved. Confidential.     */
+/* ------------------------------------------------------------------------ */
+@import 'variables';
+@import '../../styles/partials/ptab.scss';
+@import 'icon';
+
+.about {
+    .header-container {
+        width: 100.124%;
+        &-box {
+          background: $color-colarea5  !important;
+          border: 1px solid $color-colarea2;
+          border-radius: 0;
+          height: 44.15px;
+          line-height: 2;
+          padding: 0 0 0 15px;
+  
+        }
+      }
+
+}
+

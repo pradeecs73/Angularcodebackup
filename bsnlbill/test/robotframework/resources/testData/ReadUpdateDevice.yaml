@@ -1,0 +1,133 @@
+project:
+  id: lleq4wd0
+  name: ReadUpdateDevice
+  comment: ''
+  author: ''
+  created: 8/17/2023, 11:01:40 AM
+  modified: 8/17/2023, 11:06:44 AM
+  modifiedby: ''
+  isProtected: true
+  AppVersion: 1.0.1
+  projectVersion: '1'
+tree:
+  devices:
+    - name: LiquidMixing
+      uid: 10367e1b-179c-49ef-bf08-6930c5e12888
+      address: opc.tcp://192.168.2.102:4840
+      isDeviceAuthRequired: false
+      isProtected: false
+      automationComponents:
+        - name: LiquidMixing
+          clientInterfaces: []
+          serverInterfaces:
+            - name: FillingToMixing
+              type: FillToMix_Type
+              properties:
+                - name: InputData
+                  type: ''
+                  children:
+                    - name: Running
+                      type: Boolean
+                    - name: Stopped
+                      type: Boolean
+                    - name: Held
+                      type: Boolean
+                    - name: Error
+                      type: Boolean
+                    - name: Status
+                      type: UInt16
+                    - name: FaultyBottles
+                      type: UInt32
+                - name: OutputData
+                  type: ''
+                  children:
+                    - name: Start
+                      type: Boolean
+                    - name: Stop
+                      type: Boolean
+                    - name: Hold
+                      type: Boolean
+                    - name: AmountLiquid
+                      type: Double
+                    - name: Error
+                      type: Boolean
+                    - name: Status
+                      type: UInt16
+              isClientInterface: false
+              id: serverInf_lleqay6v
+            - name: Washing1ToMixing
+              type: Wash1ToMix_Type
+              properties:
+                - name: InputData
+                  type: ''
+                  children:
+                    - name: Running
+                      type: Boolean
+                    - name: Stopped
+                      type: Boolean
+                    - name: Held
+                      type: Boolean
+                    - name: Error
+                      type: Boolean
+                    - name: Status
+                      type: UInt16
+                - name: OutputData
+                  type: ''
+                  children:
+                    - name: Start
+                      type: Boolean
+                    - name: Stop
+                      type: Boolean
+                    - name: Hold
+                      type: Boolean
+                    - name: AmountBottles
+                      type: UInt32
+                    - name: Error
+                      type: Boolean
+                    - name: Status
+                      type: UInt16
+              isClientInterface: false
+              id: serverInf_lleqay6w
+          address: opc.tcp://192.168.2.102:4840
+          deviceId: 10367e1b-179c-49ef-bf08-6930c5e12888
+          deviceName: LiquidMixing
+          id: 10367e1b-179c-49ef-bf08-6930c5e12888_TGlxdWlkTWl4aW5n
+      deviceSet:
+        - name: DeviceRevision
+          type: String
+          value: 6ES7 511-1AK02-0AB0  V02.09.00
+        - name: EngineeringRevision
+          type: String
+          value: V17.0
+        - name: HardwareRevision
+          type: String
+          value: '0'
+        - name: Manufacturer
+          type: LocalizedText
+          value: locale=null text=Siemens AG
+        - name: Model
+          type: LocalizedText
+          value: locale=null text=CPU 1511-1 PN
+        - name: OrderNumber
+          type: String
+          value: '6ES7 511-1AK02-0AB0 '
+        - name: RevisionCounter
+          type: Int32
+          value: -1
+        - name: SerialNumber
+          type: String
+          value: 10S C-11836b5281
+      adapterType: Plant Object
+      status: SUCCESS
+editor: {}
+scanSettings:
+  port: 4840
+  fromIPAddress: 192.168.2.101
+  toIPAddress: 192.168.2.102
+zoomSettings:
+  zoomPercent: 100
+userPasswordDetails:
+  - password: $2a$10$refmJ1Xto4nBsD4WwhvSJe5a27j9UIByiivrY4kiEGggLvU8P66rq
+    accessType: write
+  - password: $2a$10$8CoN020h5/QCpjQ3dDNEZOsiwIETgZHJE08iZ030y73FzWeAUIyI.
+    accessType: read

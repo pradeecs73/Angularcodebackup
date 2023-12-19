@@ -1,0 +1,42 @@
+<!-- Copyright (C) Siemens AG 2020-2021 ALL RIGHTS RESERVED. -->
+<div class="panel">
+  <div class="panel--bar">
+    <!-- Properties Panel  -->
+    <span *ngIf="!(selectedConnection$ | async)">{{'editor.messages.noConnectionSelected' | translate}}</span>
+    <span
+    *ngIf="((selectedConnection$ | async) && (!isConnector || isConnectionNotOnline))">
+    {{'editor.messages.noConnectionProperties' | translate}} </span>
+  </div>
+  <!-- Shows when the device unavailable -->
+  <div class="no-Interface-container" *ngIf="showConnectionNotAvailable || !treeData">
+    <div class="bulb-icon"><em class="fas fa-lightbulb"></em></div>
+    <div class="no-device-available">
+      <p><strong>{{'editor.messages.deviceUnavailable' | translate}}</strong></p>
+      <p>{{'editor.messages.selectedConnectionUnavailable' | translate}}</p>
+    </div>
+  </div>
+  <div class="right-side-panel" *ngIf="showConnectionProperties">
+    <p class="panel-body-title right-side-panel">
+      {{'editor.titles.connectionDiagnosticProperties' | translate}}
+    </p>
+    <ng-container *ngIf="treeData">
+    <!-- Client Diagnostic data -->
+    <app-properties-panel
+      [panelType]="propertyPanelType"
+      [accordionIndex]="facadeService.commonService.connectionPropertyAccordion.clientIndex"
+      [cols]="cols"
+      [showDeviceUnavailable]="showConnectionNotAvailable"
+      [treeData]="clientDiagnosticData$ | async"
+    >
+    </app-properties-panel>
+    <!-- Server Diagnostic data -->
+    <app-properties-panel
+      [panelType]="propertyPanelType"
+      [accordionIndex]="facadeService.commonService.connectionPropertyAccordion.serverIndex"
+      [cols]="cols"
+      [showDeviceUnavailable]="showConnectionNotAvailable"
+      [treeData]="treeData"
+    ></app-properties-panel>
+  </ng-container>
+  </div>
+</div>
